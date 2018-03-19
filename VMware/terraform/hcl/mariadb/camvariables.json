@@ -332,17 +332,6 @@
       "group_name": "virtualmachine"
     },
     {
-      "name": "mariadb_vm_resource_pool",
-      "type": "string",
-      "description": "Target vSphere Resource Pool to host the virtual machine",
-      "hidden": false,
-      "label": "vSphere Resource Pool - mariadb_vm",
-      "secured": false,
-      "required": false,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
         "name": "ssh_user",
         "label": "SSH User",
         "description": "The user for ssh connection, which is default in template",
