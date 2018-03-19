@@ -33,10 +33,6 @@ data "vsphere_datastore" "mariadb_vm_datastore" {
   name = "${var.mariadb_vm_root_disk_datastore}"
   datacenter_id = "${data.vsphere_datacenter.mariadb_vm_datacenter.id}"
 }
-data "vsphere_resource_pool" "mariadb_vm_resource_pool" {
-  name = "${var.mariadb_vm_resource_pool}"
-  datacenter_id = "${data.vsphere_datacenter.mariadb_vm_datacenter.id}"
-}
 data "vsphere_network" "mariadb_vm_network" {
   name = "${var.mariadb_vm_network_interface_label}"
   datacenter_id = "${data.vsphere_datacenter.mariadb_vm_datacenter.id}"
@@ -95,9 +91,6 @@ variable "mariadb_vm_cluster" {
   description = "Target vSphere cluster to host the virtual machine"
 }
 
-variable "mariadb_vm_resource_pool" {
-  description = "Target vSphere Resource Pool to host the virtual machine"
-}
 
 variable "mariadb_vm_dns_suffixes" {
   type = "list"
@@ -167,7 +160,6 @@ resource "vsphere_virtual_machine" "mariadb_vm" {
   folder = "${var.mariadb_vm_folder}"
   num_cpus = "${var.mariadb_vm_number_of_vcpu}"
   memory = "${var.mariadb_vm_memory}"
-  resource_pool_id = "${data.vsphere_resource_pool.mariadb_vm_resource_pool.id}"
   datastore_id = "${data.vsphere_datastore.mariadb_vm_datastore.id}"
   guest_id = "${data.vsphere_virtual_machine.mariadb_vm_template.guest_id}"
   clone {
