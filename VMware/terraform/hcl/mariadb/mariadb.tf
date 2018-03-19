@@ -69,6 +69,11 @@ variable "ssh_user_password" {
   description = "The user password for ssh connection, which is default in template"
 }
 
+variable "mariadb_num_vms" {
+  description = "Number of VMs to create"
+}
+
+
 variable "mariadb_vm_folder" {
   description = "Target vSphere folder for virtual machine"
 }
@@ -163,7 +168,8 @@ variable "mariadb_vm-image" {
 
 # vsphere vm
 resource "vsphere_virtual_machine" "mariadb_vm" {
-  name = "${var.mariadb_vm-name}"
+	count  = "${var.mariadb_num_vms}"
+  name = "${var.mariadb_vm-name}-{format("%02d", count.index )}"
   folder = "${var.mariadb_vm_folder}"
   num_cpus = "${var.mariadb_vm_number_of_vcpu}"
   memory = "${var.mariadb_vm_memory}"
@@ -175,10 +181,10 @@ resource "vsphere_virtual_machine" "mariadb_vm" {
     customize {
       linux_options {
         domain = "${var.mariadb_vm_domain}"
-        host_name = "${var.mariadb_vm-name}"
+        host_name = "${var.mariadb_vm-name}-{format("%02d", count.index )}"
       }
     network_interface {
-      ipv4_address = "${var.mariadb_vm_ipv4_address}"
+      ipv4_address = "10.177.150.${150 + count.index )}"
       ipv4_netmask = "${var.mariadb_vm_ipv4_prefix_length}"
     }
     ipv4_gateway = "${var.mariadb_vm_ipv4_gateway}"

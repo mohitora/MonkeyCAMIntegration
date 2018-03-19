@@ -39,6 +39,17 @@
       "group_name": "cloud"
     },
     {
+      "name": "mariadb_num_vms",
+      "type": "string",
+      "description": "Number of VMs
+      "hidden": false,
+      "label": "Number of VMs to create",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "cloud"
+    },
+    {
       "name": "mariadb_vm-name",
       "type": "string",
       "description": "Short host name of mariadb vm",
