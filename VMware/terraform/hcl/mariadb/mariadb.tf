@@ -169,7 +169,7 @@ variable "mariadb_vm-image" {
 # vsphere vm
 resource "vsphere_virtual_machine" "mariadb_vm" {
 	count  = "${var.mariadb_num_vms}"
-  name = "${var.mariadb_vm-name}-{format("%02d", count.index )}"
+  name = "${var.mariadb_vm-name}-${ count.index }"
   folder = "${var.mariadb_vm_folder}"
   num_cpus = "${var.mariadb_vm_number_of_vcpu}"
   memory = "${var.mariadb_vm_memory}"
@@ -181,10 +181,10 @@ resource "vsphere_virtual_machine" "mariadb_vm" {
     customize {
       linux_options {
         domain = "${var.mariadb_vm_domain}"
-        host_name = "${var.mariadb_vm-name}-{format("%02d", count.index )}"
+        host_name = "${var.mariadb_vm-name}-${ count.index }"
       }
     network_interface {
-      ipv4_address = "10.177.150.${150 + count.index )}"
+      ipv4_address = "10.177.150.${ 150 + count.index }"
       ipv4_netmask = "${var.mariadb_vm_ipv4_prefix_length}"
     }
     ipv4_gateway = "${var.mariadb_vm_ipv4_gateway}"
