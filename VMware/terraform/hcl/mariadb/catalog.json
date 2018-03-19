@@ -1,12 +1,12 @@
 {
-   "name": "Monkey MariaDB on a Single VM",
+   "name": "MariaDB on a Single VM",
    "description": "MariaDB - An open-source cross-platform relational database.",
    "version": "2.0.0",
    "type": "prebuilt",
    "manifest": {
      "template_type": "Terraform",
      "template_format": "HCL",
-     "template_provider": "Monkey VMware vSphere",
+     "template_provider": "VMware vSphere",
      "template": {
        "templateData": "",
        "templateVariables": "",
