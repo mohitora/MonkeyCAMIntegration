@@ -169,7 +169,7 @@ variable "mariadb_vm-image" {
 # vsphere vm
 resource "vsphere_virtual_machine" "mariadb_vm" {
 	count  = "${var.mariadb_num_vms}"
-  name = "${var.mariadb_vm-name}-${ count.index }"
+  name = "${var.mariadb_vm-name}"
   folder = "${var.mariadb_vm_folder}"
   num_cpus = "${var.mariadb_vm_number_of_vcpu}"
   memory = "${var.mariadb_vm_memory}"
