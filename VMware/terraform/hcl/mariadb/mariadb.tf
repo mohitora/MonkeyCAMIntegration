@@ -183,10 +183,10 @@ resource "vsphere_virtual_machine" "mariadb_vm" {
         domain = "${var.mariadb_vm_domain}"
         host_name = "${var.mariadb_vm-name}-${ count.index }"
       }
-    network_interface {
-      ipv4_address = "10.177.150.${ 150 + count.index }"
-      ipv4_netmask = "${var.mariadb_vm_ipv4_prefix_length}"
-    }
+      network_interface {
+        ipv4_address = "10.177.150.${ 150 + count.index }"
+        ipv4_netmask = "${var.mariadb_vm_ipv4_prefix_length}"
+      }
     ipv4_gateway = "${var.mariadb_vm_ipv4_gateway}"
     dns_suffix_list = "${var.mariadb_vm_dns_suffixes}"
     dns_server_list = "${var.mariadb_vm_dns_servers}"
@@ -256,4 +256,29 @@ resource "vsphere_virtual_machine" "mariadb_vm" {
 #########################################################
 output "The IP address of the VM with MariaDB installed" {
   value = "${join(",", vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address)}"
+}
+
+
+
+resource "null_resource" "cluster" {
+  # Changes to any instance of the cluster requires re-provisioning
+  triggers {
+    cluster_instance_ips = "${join(",", vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address )}"
+  }
+
+  # Bootstrap script can run on any instance of the cluster
+  # So we just choose the first in this case
+  connection {
+    host = "${element(vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address, 0)}"
+    type     = "ssh"
+    user     = "root"
+    password = "${var.ssh_user_password}"
+  }
+
+  provisioner "remote-exec" {
+    # Bootstrap script called with private_ip of each node in the clutser
+    inline = [
+      "echo  ${join(",", vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address )} > /tmp/out.log",
+    ]
+  }
 }
