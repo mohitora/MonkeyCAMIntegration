@@ -255,7 +255,7 @@ resource "vsphere_virtual_machine" "mariadb_vm" {
 # Output
 #########################################################
 output "The IP addresses of the VM with MariaDB installed" {
-  depends_on = "vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address"
+  depends_on = "vsphere_virtual_machine.mariadb_vm.clone.0.customize.0.network_interface.0.ipv4_address"
   value = "${join(",", vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address)}"
 }
 
