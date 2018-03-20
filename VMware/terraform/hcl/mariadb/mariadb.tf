@@ -278,7 +278,7 @@ resource "null_resource" "cluster" {
     inline = [
       "echo  ${join(",",vsphere_virtual_machine.mariadb_vm.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
       "echo  ${join(",",vsphere_virtual_machine.mariadb_vm.*.name)} >> /tmp/out.log",
-      "echo  IP ADDRESSES=${var.ip_addresses} >> /tmp/out.log"
+      "echo  IP ADDRESSES=${ip_addresses} >> /tmp/out.log"
     ]
   }
 }
