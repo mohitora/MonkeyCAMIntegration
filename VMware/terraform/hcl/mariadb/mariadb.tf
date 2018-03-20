@@ -173,7 +173,7 @@ variable "mariadb_vm-image" {
 #}
 locals {
   mariadb_vm_ipv4_address_elements = "${split(".",var.mariadb_vm_ipv4_address)}"
-  mariadb_vm_ipv4_address_base = "${local.mariadb_vm_ipv4_address_elements[0]"."local.mariadb_vm_ipv4_address_elements[1]"."local.mariadb_vm_ipv4_address_elements[2])}"
+  mariadb_vm_ipv4_address_base = "${format("%s.%s.%s",local.mariadb_vm_ipv4_address_elements[0],local.mariadb_vm_ipv4_address_elements[1],local.mariadb_vm_ipv4_address_elements[2])}"
   mariadb_vm_ipv4_address_start= "${local.mariadb_vm_ipv4_address_elements[3]}"
 }
 
