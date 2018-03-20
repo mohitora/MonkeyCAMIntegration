@@ -270,7 +270,7 @@
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine",
-      "default": "26
+      "default": "26"
     },
     {
       "name": "mariadb_vm_number_of_vcpu",
