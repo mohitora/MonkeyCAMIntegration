@@ -166,6 +166,17 @@ variable "mariadb_vm-image" {
   description = "Operating system image id / template that should be used when creating the virtual image"
 }
 
+########
+# Isolate IP address components:
+#variable "mariadb_vm_ipv4_address" {
+#  description = "IPv4 address for vNIC configuration"
+#}
+variable "mariadb_vm_ipv4_address_elements" {
+  description = "IPv4 address elements"
+  default = "${split(".",var.mariadb_vm_ipv4_address)}"
+}
+
+
 # vsphere vm
 resource "vsphere_virtual_machine" "mariadb_vm" {
 	count  = "${var.mariadb_num_vms}"
