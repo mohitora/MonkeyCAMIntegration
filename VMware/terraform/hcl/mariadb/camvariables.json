@@ -377,5 +377,17 @@
         "group_name": "virtualmachine"
     }
   ],
-  "template_output_params": []
+  "template_output_params": [
+    {
+      "name": "ip_addresses",
+      "type": "string",
+      "description": "IP Addresses of new VMs",
+      "hidden": false,
+      "label": "IP Addresses of new VMs",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "cloud"
+    }
+    ]
 }
