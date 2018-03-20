@@ -64,14 +64,14 @@
     {
       "name": "mariadb_vm_dns_servers",
       "type": "list",
-      "description": "DNS servers for the virtual network adapter (NEW)",
+      "description": "YYDNS servers for the virtual network adapter (NEW)",
       "hidden": false,
-      "label": "DNS Servers - mariadb_vm",
+      "label": "YYDNS Servers - mariadb_vm",
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"false,
-      "default": "[10.0.80.11]"
+      "group_name": "virtualmachine",
+      "default": ["10.0.80.11"]
     },
     {
       "name": "mariadb_vm_dns_suffixes",
