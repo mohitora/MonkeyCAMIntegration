@@ -64,7 +64,7 @@
     {
       "name": "mariadb_vm_dns_servers",
       "type": "list",
-      "description": "DNS servers for the virtual network adapter",
+      "description": "DNS servers for the virtual network adapter (NEW)",
       "hidden": false,
       "label": "DNS Servers - mariadb_vm",
       "secured": false,
