@@ -263,11 +263,6 @@ output "The IP addresses of the VM with MariaDB installed" {
 resource "null_resource" "cluster" {
 
   depends_on = [ "vsphere_virtual_machine.mariadb_vm" ]
-  
-  # Changes to any instance of the cluster requires re-provisioning
-  triggers {
-    cluster_instance_ips = "vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address"
-  }
 
   # Bootstrap script can run on any instance of the cluster
   # So we just choose the first in this case
