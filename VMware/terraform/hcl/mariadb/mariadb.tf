@@ -267,7 +267,7 @@ resource "null_resource" "cluster" {
   # Bootstrap script can run on any instance of the cluster
   # So we just choose the first in this case
   connection {
-    host     = "${vsphere_virtual_machine.mariadb_vm.clone.1.customize.1.network_interface.1.ipv4_address}"
+    host     = "10.177.150.151"
     type     = "ssh"
     user     = "root"
     password = "${var.ssh_user_password}"
