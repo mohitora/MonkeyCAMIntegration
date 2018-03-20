@@ -255,7 +255,7 @@ resource "vsphere_virtual_machine" "mariadb_vm" {
 # Output
 #########################################################
 output "The IP address of the VM with MariaDB installed" {
-  value = "${join(",", vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address)}"
+  value = "${join(",", vsphere_virtual_machine.mariadb_vm.clone.0.customize.0.network_interface.0.ipv4_address)}"
 }
 
 
@@ -263,13 +263,13 @@ output "The IP address of the VM with MariaDB installed" {
 resource "null_resource" "cluster" {
   # Changes to any instance of the cluster requires re-provisioning
   triggers {
-    cluster_instance_ips = "${join(",", vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address )}"
+    cluster_instance_ips = "${join(",", vsphere_virtual_machine.mariadb_vm.clone.0.customize.0.network_interface.0.ipv4_address )}"
   }
 
   # Bootstrap script can run on any instance of the cluster
   # So we just choose the first in this case
   connection {
-    host = "${element(vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address, 0)}"
+    host = "${element(vsphere_virtual_machine.mariadb_vm.clone.0.customize.0.network_interface.0.ipv4_address, 0)}"
     type     = "ssh"
     user     = "root"
     password = "${var.ssh_user_password}"
@@ -278,7 +278,7 @@ resource "null_resource" "cluster" {
   provisioner "remote-exec" {
     # Bootstrap script called with private_ip of each node in the clutser
     inline = [
-      "echo  ${join(",", vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address )} > /tmp/out.log",
+      "echo  ${join(",", vsphere_virtual_machine.mariadb_vm.clone.0.customize.0.network_interface.0.ipv4_address )} > /tmp/out.log",
     ]
   }
 }
