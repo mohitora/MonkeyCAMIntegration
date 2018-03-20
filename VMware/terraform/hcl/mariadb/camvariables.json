@@ -41,7 +41,7 @@
     {
       "name": "mariadb_num_vms",
       "type": "string",
-      "description": "Number of VMs
+      "description": "Number of VMs",
       "hidden": false,
       "label": "Number of VMs to create",
       "secured": false,
