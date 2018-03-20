@@ -266,13 +266,13 @@ resource "null_resource" "cluster" {
   
   # Changes to any instance of the cluster requires re-provisioning
   triggers {
-    cluster_instance_ips = "${join(",", vsphere_virtual_machine.mariadb_vm.clone.0.customize.*.network_interface.0.ipv4_address )}"
+    cluster_instance_ips = "${join(",", vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address )}"
   }
 
   # Bootstrap script can run on any instance of the cluster
   # So we just choose the first in this case
   connection {
-    host = "${element(vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address, 0)}"
+    host = "${element(vsphere_virtual_machine.mariadb_vm.clone.0.customize.0.network_interface.0.ipv4_address, 0)}"
     type     = "ssh"
     user     = "root"
     password = "${var.ssh_user_password}"
