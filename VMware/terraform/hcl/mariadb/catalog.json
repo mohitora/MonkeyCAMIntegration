@@ -1,5 +1,5 @@
 {
-   "name": "MariaDB on a Single VM",
+   "name": "Monkey MariaDB",
    "description": "MariaDB - An open-source cross-platform relational database.",
    "version": "2.0.0",
    "type": "prebuilt",
@@ -20,7 +20,7 @@
      }
    },
    "metadata": {
-     "displayName": "MariaDB on a Single VM",
+     "displayName": "Monkey MariaDB",
      "longDescription": "Deploys a single node of MariaDB in VMware for development use, where MariaDB is an open-source cross-platform relational database.",
      "bullets": [
        {
@@ -37,7 +37,7 @@
        },
        {
          "title": "Topology",
-         "description": "VMware: 1 virtual machine: MariaDB"
+         "description": "Monkey MariaDB"
        },
        {
          "title": "Software deployed",
