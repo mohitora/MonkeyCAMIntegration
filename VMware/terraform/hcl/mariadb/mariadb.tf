@@ -276,7 +276,7 @@ resource "null_resource" "cluster" {
   provisioner "remote-exec" {
     # Bootstrap script called with private_ip of each node in the clutser
     inline = [
-      "echo  AAA > /tmp/out.log",
+      "echo  BBB > /tmp/out.log",
     ]
   }
 }
