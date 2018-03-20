@@ -196,7 +196,7 @@ resource "vsphere_virtual_machine" "mariadb_vm" {
         host_name = "${var.mariadb_vm-name}-${ count.index }"
       }
       network_interface {
-#        ipv4_address = "10.177.150.${ 150 + count.index }"
+#       ipv4_address = "10.177.150.${ 150 + count.index }"
         ipv4_address = "${local.mariadb_vm_ipv4_address_base }.${local.mariadb_vm_ipv4_address_start + count.index}"
         ipv4_netmask = "${ var.mariadb_vm_ipv4_prefix_length }"
       }
