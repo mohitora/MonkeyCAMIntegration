@@ -47,7 +47,8 @@
       "secured": false,
       "required": false,
       "immutable": false,
-      "group_name": "cloud"
+      "group_name": "cloud",
+      "default": "4"
     },
     {
       "name": "mariadb_vm-name",
@@ -64,9 +65,9 @@
     {
       "name": "mariadb_vm_dns_servers",
       "type": "list",
-      "description": "YYDNS servers for the virtual network adapter (NEW)",
+      "description": "DNS servers for the virtual network adapter (NEW)",
       "hidden": false,
-      "label": "YYDNS Servers - mariadb_vm",
+      "label": "DNS Servers - mariadb_vm",
       "secured": false,
       "required": true,
       "immutable": false,
@@ -82,7 +83,8 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "group_name": "virtualmachine",
+      "default": [ "jlerm.com" ]
     },
     {
       "name": "mariadb_vm_root_disk_keep_on_remove",
@@ -116,7 +118,8 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "group_name": "virtualmachine",
+      "default": "jlerm.com"
     },
     {
       "name": "mariadb_vm-image",
@@ -127,13 +130,14 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "group_name": "virtualmachine",
+      "default": "RHEL7-TEMPLATE"
     },
     {
       "name": "mariadb_vm_root_disk_size",
       "type": "string",
       "description": "Size of template disk volume. Should be equal to template's disk size",
-      "default": "25",
+      "default": "100",
       "hidden": false,
       "label": "Root Disk Size - mariadb_vm",
       "secured": false,
@@ -189,7 +193,8 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "group_name": "virtualmachine",
+      "default": "datastoreA"
     },
     {
       "name": "mariadb_vm_root_disk_type",
@@ -228,7 +233,8 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "group_name": "virtualmachine",
+      "default": "10.177.150.129"
     },
     {
       "name": "mariadb_vm_ipv4_address",
@@ -239,13 +245,14 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "group_name": "virtualmachine",
+      "default": "10.177.150.150"
     },
     {
       "name": "mariadb_vm_memory",
       "type": "string",
       "description": "Memory assigned to the virtual machine in megabytes. This value is required to be an increment of 1024",
-      "default": "1024",
+      "default": "8192",
       "hidden": false,
       "label": "Virtual Machine Memory - mariadb_vm",
       "secured": false,
@@ -262,13 +269,14 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "group_name": "virtualmachine",
+      "default": "26
     },
     {
       "name": "mariadb_vm_number_of_vcpu",
       "type": "string",
       "description": "Number of virtual CPU for the virtual machine, which is required to be a positive Integer",
-      "default": "1",
+      "default": "4",
       "hidden": false,
       "label": "Virtual Machine vCPUs - mariadb_vm",
       "secured": false,
@@ -285,7 +293,8 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "group_name": "virtualmachine",
+      "default": "VM Network"
     },
     {
       "name": "mariadb_vm_cluster",
@@ -296,7 +305,8 @@
       "secured": false,
       "required": false,
       "immutable": false,
-      "group_name": "cloud"
+      "group_name": "cloud",
+      "default": "c1"
     },
     {
       "name": "mariadb_vm_datacenter",
@@ -307,7 +317,8 @@
       "secured": false,
       "required": false,
       "immutable": false,
-      "group_name": "cloud"
+      "group_name": "cloud",
+      "default": "DAL10"
     },
     {
       "name": "mariadb_vm_folder",
@@ -318,7 +329,8 @@
       "secured": false,
       "required": false,
       "immutable": false,
-      "group_name": "cloud"
+      "group_name": "cloud",
+      "default": "f1"
     },
     {
       "name": "mariadb_vm_adapter_type",
@@ -352,7 +364,8 @@
       "secured": false,
       "required": false,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "group_name": "virtualmachine",
+      "default": "c1/Resources"
     },
     {
         "name": "ssh_user",
@@ -375,7 +388,8 @@
         "required": true,
         "secured": true,
         "type": "string",
-        "group_name": "virtualmachine"
+        "group_name": "virtualmachine",
+        "default": "password"
     }
   ],
   "template_output_params": [
