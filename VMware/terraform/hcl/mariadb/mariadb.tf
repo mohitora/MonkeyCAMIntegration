@@ -276,7 +276,8 @@ resource "null_resource" "cluster" {
   provisioner "remote-exec" {
     # Bootstrap script called with private_ip of each node in the clutser
     inline = [
-      "echo  ${join(",",vsphere_virtual_machine.mariadb_vm.*.clone.0.customize.0.network_interface.0.ipv4_address)} > /tmp/out.log",
+      "echo  ${join(",",vsphere_virtual_machine.mariadb_vm.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
+      "echo  ${join(",",vsphere_virtual_machine.mariadb_vm.*.name)} >> /tmp/out.log"
     ]
   }
 }
