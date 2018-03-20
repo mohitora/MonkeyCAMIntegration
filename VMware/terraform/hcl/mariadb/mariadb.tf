@@ -266,7 +266,7 @@ resource "null_resource" "cluster" {
   
   # Changes to any instance of the cluster requires re-provisioning
   triggers {
-    cluster_instance_ips = "${join(",", vsphere_virtual_machine.mariadb_vm.clone.*.customize.0.network_interface.0.ipv4_address )}"
+    cluster_instance_ips = "vsphere_virtual_machine.mariadb_vm"
   }
 
   # Bootstrap script can run on any instance of the cluster
