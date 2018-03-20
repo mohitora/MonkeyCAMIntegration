@@ -171,9 +171,8 @@ variable "mariadb_vm-image" {
 #variable "mariadb_vm_ipv4_address" {
 #  description = "IPv4 address for vNIC configuration"
 #}
-variable "mariadb_vm_ipv4_address_elements" {
-  description = "IPv4 address elements"
-  default = "${split(".",var.mariadb_vm_ipv4_address)}"
+locals {
+  mariadb_vm_ipv4_address_elements = "${split(".",var.mariadb_vm_ipv4_address)}"
 }
 
 
