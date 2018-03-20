@@ -70,8 +70,7 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "virtualmachine",
-      "default": "["10.0.80.11"]"
+      "group_name": "virtualmachine"
     },
     {
       "name": "mariadb_vm_dns_suffixes",
