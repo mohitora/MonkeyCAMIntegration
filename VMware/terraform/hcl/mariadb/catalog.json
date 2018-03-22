@@ -6,7 +6,7 @@
    "manifest": {
      "template_type": "Terraform",
      "template_format": "HCL",
-     "template_provider": "My Templates",
+     "template_provider": "VMware vSphere",
      "template": {
        "templateData": "",
        "templateVariables": "",
@@ -21,6 +21,7 @@
    },
    "metadata": {
      "displayName": "Monkey MariaDB",
+     "templateCategory": "My Templates",
      "longDescription": "Deploys a single node of MariaDB in VMware for development use, where MariaDB is an open-source cross-platform relational database.",
      "bullets": [
        {
