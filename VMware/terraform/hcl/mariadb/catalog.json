@@ -6,7 +6,8 @@
    "manifest": {
      "template_type": "Terraform",
      "template_format": "HCL",
-     "template_provider": "My Templates",
+     "template_provider": "VMWare vSphere",
+     "template_categoryTemplates",
      "template": {
        "templateData": "",
        "templateVariables": "",
