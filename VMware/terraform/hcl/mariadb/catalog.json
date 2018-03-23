@@ -2,7 +2,7 @@
    "name": "Monkey MariaDB",
    "description": "MariaDB - An open-source cross-platform relational database.",
    "version": "2.0.0",
-   "type": "prebuilt",
+   "type": "userCreated",
    "manifest": {
      "template_type": "Terraform",
      "template_format": "HCL",
