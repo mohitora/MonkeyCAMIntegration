@@ -172,7 +172,7 @@ variable "vm-image" {
 #  description = "IPv4 address for vNIC configuration"
 #}
 locals {
-  vm_ipv4_address_elements = "${split(".",var.vm_ipv4_address)}"
+  vm_ipv4_address_elements = "${split(".",var.vm_start_ipv4_address)}"
   vm_ipv4_address_base = "${format("%s.%s.%s",local.vm_ipv4_address_elements[0],local.vm_ipv4_address_elements[1],local.vm_ipv4_address_elements[2])}"
   vm_ipv4_address_start= "${local.vm_ipv4_address_elements[3] + 5}"
 }

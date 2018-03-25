@@ -237,11 +237,11 @@
       "default": "10.177.150.129"
     },
     {
-      "name": "vm_ipv4_address",
+      "name": "vm_start_ipv4_address",
       "type": "string",
-      "description": "IPv4 address for vNIC configuration",
+      "description": "Start IPv4 address for vNIC configuration",
       "hidden": false,
-      "label": "Virtual Machine IP Address",
+      "label": "Starting IP Address for VMs",
       "secured": false,
       "required": true,
       "immutable": false,
