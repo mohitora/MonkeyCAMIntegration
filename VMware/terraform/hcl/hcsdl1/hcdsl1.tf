@@ -69,6 +69,10 @@ variable "ssh_user_password" {
   description = "The user password for ssh connection, which is default in template"
 }
 
+variable "monkey_mirror" {
+  description = "Monkey Mirror IP or Hostname"
+}
+
 variable "num_datanodes" {
   description = "Number of HDP Datanodes to create"
 }
