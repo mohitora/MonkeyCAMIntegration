@@ -288,7 +288,7 @@ resource "vsphere_virtual_machine" "ishttp" {
 # IS WAS-ND
 resource "vsphere_virtual_machine" "iswasnd" {
   count="3"
-  name = "${var.vm-name}-iswasnd"
+  name = "${var.vm-name}-iswasnd-${ count.index }"
   folder = "${var.vm_folder}"
   num_cpus = "4"
   memory = "8192"
@@ -300,7 +300,7 @@ resource "vsphere_virtual_machine" "iswasnd" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-iswasnd"
+        host_name = "${var.vm-name}-iswasnd-${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 2 + count.index }"
@@ -336,7 +336,7 @@ resource "vsphere_virtual_machine" "iswasnd" {
 # IS DB2
 resource "vsphere_virtual_machine" "isdb2" {
   count="2"
-  name = "${var.vm-name}-isdb2"
+  name = "${var.vm-name}-isdb2-${ count.index }"
   folder = "${var.vm_folder}"
   num_cpus = "4"
   memory = "8192"
@@ -348,7 +348,7 @@ resource "vsphere_virtual_machine" "isdb2" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-isdb2"
+        host_name = "${var.vm-name}-isdb2-${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 5 + count.index }"
