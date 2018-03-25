@@ -224,6 +224,7 @@ resource "vsphere_virtual_machine" "datanodes" {
     size = "${var.vm_datanode_disk_size}"
     keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
     datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
+    unit_number = "1"
   }
   
   disk {
@@ -231,6 +232,7 @@ resource "vsphere_virtual_machine" "datanodes" {
     size = "${var.vm_datanode_disk_size}"
     keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
     datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
+    unit_number = "2"
   }
   
   disk {
@@ -238,6 +240,7 @@ resource "vsphere_virtual_machine" "datanodes" {
     size = "${var.vm_datanode_disk_size}"
     keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
     datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
+    unit_number = "3"
   }
   
   disk {
@@ -245,6 +248,7 @@ resource "vsphere_virtual_machine" "datanodes" {
     size = "${var.vm_datanode_disk_size}"
     keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
     datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
+    unit_number = "4"
   }
 
   connection {
