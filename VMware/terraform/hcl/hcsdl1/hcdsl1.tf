@@ -683,7 +683,7 @@ resource "null_resource" "cluster" {
     # Bootstrap script called with private_ip of each node in the clutser
     inline = [
       "echo  HDP-mgmtnodes-ip=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  HDP-mgmtnodes-name=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.name)} >> /tmp/out.log"
+      "echo  HDP-mgmtnodes-name=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.name)} >> /tmp/out.log",
       "echo  HDP-datanodes-ip=${join(",",vsphere_virtual_machine.hdp-datanodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
       "echo  HDP-datanodes-name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /tmp/out.log"
     ]
