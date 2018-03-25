@@ -39,11 +39,11 @@
       "group_name": "cloud"
     },
     {
-      "name": "num_vms",
+      "name": "num_datanodes",
       "type": "string",
-      "description": "Number of VMs",
+      "description": "Number of Data Nodes",
       "hidden": false,
-      "label": "Number of VMs to create",
+      "label": "Number of HDP Datanodes to create",
       "secured": false,
       "required": false,
       "immutable": false,

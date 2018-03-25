@@ -69,8 +69,8 @@ variable "ssh_user_password" {
   description = "The user password for ssh connection, which is default in template"
 }
 
-variable "num_vms" {
-  description = "Number of VMs to create"
+variable "num_datanodes" {
+  description = "Number of HDP Datanodes to create"
 }
 
 
@@ -306,7 +306,7 @@ resource "vsphere_virtual_machine" "hdp-mgmtnodes" {
 
 # HDP Datanodes
 resource "vsphere_virtual_machine" "hdp-datanodes" {
-	count  = "${var.num_vms}"
+	count  = "${var.num_datanodes}"
   name = "${var.vm-name}-dn-${ count.index }"
   folder = "${var.vm_folder}"
   num_cpus = "${var.vm_number_of_vcpu}"
