@@ -741,34 +741,37 @@ resource "null_resource" "cluster" {
     # Bootstrap script called with private_ip of each node in the clutser
     inline = [
     
-      "echo  monkeymirror=${var.monkey_mirror} >> /tmp/out.log",
+      "echo  monkeymirror=${var.monkey_mirror} >> /opt/monkey_cam_vars.txt",
     
-      "echo  driver-ip=${join(",",vsphere_virtual_machine.driver.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  driver-name=${join(",",vsphere_virtual_machine.driver.*.name)} >> /tmp/out.log",
+      "echo  driver-ip=${join(",",vsphere_virtual_machine.driver.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /opt/monkey_cam_vars.txt",
+      "echo  driver-name=${join(",",vsphere_virtual_machine.driver.*.name)} >> /opt/monkey_cam_vars.txt",
     
-      "echo  idm-ip=${join(",",vsphere_virtual_machine.idm.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  idm-name=${join(",",vsphere_virtual_machine.idm.*.name)} >> /tmp/out.log",
+      "echo  idm-ip=${join(",",vsphere_virtual_machine.idm.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /opt/monkey_cam_vars.txt",
+      "echo  idm-name=${join(",",vsphere_virtual_machine.idm.*.name)} >> /opt/monkey_cam_vars.txt",
     
-      "echo  ishttp-ip=${join(",",vsphere_virtual_machine.ishttp.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  ishttp-name=${join(",",vsphere_virtual_machine.ishttp.*.name)} >> /tmp/out.log",
+      "echo  ishttp-ip=${join(",",vsphere_virtual_machine.ishttp.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /opt/monkey_cam_vars.txt",
+      "echo  ishttp-name=${join(",",vsphere_virtual_machine.ishttp.*.name)} >> /opt/monkey_cam_vars.txt",
     
-      "echo  iswasnd-ip=${join(",",vsphere_virtual_machine.iswasnd.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  iswasnd-name=${join(",",vsphere_virtual_machine.iswasnd.*.name)} >> /tmp/out.log",
+      "echo  iswasnd-ip=${join(",",vsphere_virtual_machine.iswasnd.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /opt/monkey_cam_vars.txt",
+      "echo  iswasnd-name=${join(",",vsphere_virtual_machine.iswasnd.*.name)} >> /opt/monkey_cam_vars.txt",
     
-      "echo  isdb2-ip=${join(",",vsphere_virtual_machine.isdb2.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  isdb2-name=${join(",",vsphere_virtual_machine.isdb2.*.name)} >> /tmp/out.log",
+      "echo  isdb2-ip=${join(",",vsphere_virtual_machine.isdb2.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /opt/monkey_cam_vars.txt",
+      "echo  isdb2-name=${join(",",vsphere_virtual_machine.isdb2.*.name)} >> /opt/monkey_cam_vars.txt",
     
-      "echo  isds-ip=${join(",",vsphere_virtual_machine.isds.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  isds-name=${join(",",vsphere_virtual_machine.isds.*.name)} >> /tmp/out.log",
+      "echo  isds-ip=${join(",",vsphere_virtual_machine.isds.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /opt/monkey_cam_vars.txt",
+      "echo  isds-name=${join(",",vsphere_virtual_machine.isds.*.name)} >> /opt/monkey_cam_vars.txt",
     
-      "echo  haproxy-ip=${join(",",vsphere_virtual_machine.haproxy.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  haproxy-name=${join(",",vsphere_virtual_machine.haproxy.*.name)} >> /tmp/out.log",
+      "echo  haproxy-ip=${join(",",vsphere_virtual_machine.haproxy.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /opt/monkey_cam_vars.txt",
+      "echo  haproxy-name=${join(",",vsphere_virtual_machine.haproxy.*.name)} >> /opt/monkey_cam_vars.txt",
     
-      "echo  hdp-mgmtnodes-ip=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  hdp-mgmtnodes-name=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.name)} >> /tmp/out.log",
+      "echo  hdp-mgmtnodes-ip=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /opt/monkey_cam_vars.txt",
+      "echo  hdp-mgmtnodes-name=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.name)} >> /opt/monkey_cam_vars.txt",
       
-      "echo  hdp-datanodes-ip=${join(",",vsphere_virtual_machine.hdp-datanodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  hdp-datanodes-name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /tmp/out.log"
+      "echo  hdp-datanodes-ip=${join(",",vsphere_virtual_machine.hdp-datanodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /opt/monkey_cam_vars.txt",
+      "echo  hdp-datanodes-name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /opt/monkey_cam_vars.txt",
+      
+      
+      "mkdir -p /opt/cloud_install; cd /opt/cloud_install;. /opt/monkey_cam_vars.txt;wget http://\${monkeymirror}/cloud_install/cloud_install.tar;tar xf ./cloud_install"
     ]
   }
 }
