@@ -162,15 +162,17 @@ variable "vm_root_disk_size" {
   default = "25"
 }
 
+variable "vm_datanode_disk_size" {
+  description = "Datanode Data Disk Size"
+  default = "100"
+}
+
 variable "vm-image" {
   description = "Operating system image id / template that should be used when creating the virtual image"
 }
 
 ########
 # Isolate IP address components:
-#variable "vm_ipv4_address" {
-#  description = "IPv4 address for vNIC configuration"
-#}
 locals {
   vm_ipv4_address_elements = "${split(".",var.vm_start_ipv4_address)}"
   vm_ipv4_address_base = "${format("%s.%s.%s",local.vm_ipv4_address_elements[0],local.vm_ipv4_address_elements[1],local.vm_ipv4_address_elements[2])}"
@@ -196,7 +198,6 @@ resource "vsphere_virtual_machine" "datanodes" {
         host_name = "${var.vm-name}-${ count.index }"
       }
       network_interface {
-#       ipv4_address = "10.177.150.${ 150 + count.index }"
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index}"
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
@@ -214,6 +215,34 @@ resource "vsphere_virtual_machine" "datanodes" {
   disk {
     label = "${var.vm-name}0.vmdk"
     size = "${var.vm_root_disk_size}"
+    keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
+    datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
+  }
+  
+  disk {
+    label = "${var.vm-name}1.vmdk"
+    size = "${var.vm_datanode_disk_size}"
+    keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
+    datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
+  }
+  
+  disk {
+    label = "${var.vm-name}2.vmdk"
+    size = "${var.vm_datanode_disk_size}"
+    keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
+    datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
+  }
+  
+  disk {
+    label = "${var.vm-name}3.vmdk"
+    size = "${var.vm_datanode_disk_size}"
+    keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
+    datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
+  }
+  
+  disk {
+    label = "${var.vm-name}4.vmdk"
+    size = "${var.vm_datanode_disk_size}"
     keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
     datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
   }

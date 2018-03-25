@@ -225,6 +225,18 @@
       "group_name": "virtualmachine"
     },
     {
+      "name": "vm_datanode_disk_size",
+      "type": "string",
+      "description": "Size of data node data disks",
+      "default": "100",
+      "hidden": false,
+      "label": "Datanode Data Disk Size",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
       "name": "vm_ipv4_gateway",
       "type": "string",
       "description": "IPv4 gateway for vNIC configuration",
