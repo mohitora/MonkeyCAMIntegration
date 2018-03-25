@@ -122,8 +122,8 @@ variable "vm_ipv4_gateway" {
   description = "IPv4 gateway for vNIC configuration"
 }
 
-variable "vm_ipv4_address" {
-  description = "IPv4 address for vNIC configuration"
+variable "vm_start_ipv4_address" {
+  description = "Start IPv4 address for vNIC configuration"
 }
 
 variable "vm_ipv4_prefix_length" {
