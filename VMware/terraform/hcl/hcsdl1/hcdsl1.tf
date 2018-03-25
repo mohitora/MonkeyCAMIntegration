@@ -682,10 +682,30 @@ resource "null_resource" "cluster" {
   provisioner "remote-exec" {
     # Bootstrap script called with private_ip of each node in the clutser
     inline = [
-      "echo  HDP-mgmtnodes-ip=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  HDP-mgmtnodes-name=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.name)} >> /tmp/out.log",
-      "echo  HDP-datanodes-ip=${join(",",vsphere_virtual_machine.hdp-datanodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  HDP-datanodes-name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /tmp/out.log"
+    
+      "echo  idm-ip=${join(",",vsphere_virtual_machine.idm.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
+      "echo  idm-name=${join(",",vsphere_virtual_machine.idm.*.name)} >> /tmp/out.log",
+    
+      "echo  ishttp-ip=${join(",",vsphere_virtual_machine.ishttp.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
+      "echo  ishttp-name=${join(",",vsphere_virtual_machine.ishttp.*.name)} >> /tmp/out.log",
+    
+      "echo  iswasnd-ip=${join(",",vsphere_virtual_machine.iswasnd.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
+      "echo  iswasnd-name=${join(",",vsphere_virtual_machine.iswasnd.*.name)} >> /tmp/out.log",
+    
+      "echo  isdb2-ip=${join(",",vsphere_virtual_machine.isdb2.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
+      "echo  isdb2-name=${join(",",vsphere_virtual_machine.isdb2.*.name)} >> /tmp/out.log",
+    
+      "echo  isds-ip=${join(",",vsphere_virtual_machine.isds.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
+      "echo  isds-name=${join(",",vsphere_virtual_machine.isds.*.name)} >> /tmp/out.log",
+    
+      "echo  haproxy-ip=${join(",",vsphere_virtual_machine.haproxy.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
+      "echo  haproxy-name=${join(",",vsphere_virtual_machine.haproxy.*.name)} >> /tmp/out.log",
+    
+      "echo  hdp-mgmtnodes-ip=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
+      "echo  hdp-mgmtnodes-name=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.name)} >> /tmp/out.log",
+      
+      "echo  hdp-datanodes-ip=${join(",",vsphere_virtual_machine.hdp-datanodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
+      "echo  hdp-datanodes-name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /tmp/out.log"
     ]
   }
 }
