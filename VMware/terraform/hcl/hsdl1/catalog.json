@@ -1,6 +1,6 @@
 {
-   "name": "Hybrid Secure Data Lake 1",
-   "description": "Hybrid Secure Data Lake - Pattern 1",
+   "name": "Hybrid Cloud Secure Data Lake 1",
+   "description": "Hybrid Cloud Secure Data Lake - Pattern 1",
    "version": "2.0.0",
    "type": "userCreated",
    "manifest": {
@@ -16,11 +16,11 @@
        "githubRepoUrl": "",
        "githubAccessToken": "",
        "relativePathToTemplateFolder": "VMware/terraform/hcl/hsdl1",
-       "templateFileName": "mariadb.tf"
+       "templateFileName": "hsdl1.tf"
      }
    },
    "metadata": {
-     "displayName": "Hybrid Secure Data Lake 1",
+     "displayName": "Hybrid Cloud Secure Data Lake 1",
      "templateCategory": "Secure Data Lakes",
      "longDescription": "Deploys a secure data lake.",
      "bullets": [
