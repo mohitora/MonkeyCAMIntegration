@@ -727,7 +727,7 @@ resource "null_resource" "cluster" {
   # Bootstrap script can run on any instance of the cluster
   # So we just choose the first in this case
   connection {
-    host     = "${vsphere_virtual_machine.hdp-datanodes.0.clone.0.customize.0.network_interface.0.ipv4_address}"
+    host     = "${vsphere_virtual_machine.driver.0.clone.0.customize.0.network_interface.0.ipv4_address}"
     type     = "ssh"
     user     = "root"
     password = "${var.ssh_user_password}"
