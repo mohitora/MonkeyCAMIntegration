@@ -54,7 +54,7 @@
       "name": "vm_name_prefix",
       "type": "string",
       "description": "Prefix for vm names",
-      "default": "hsdl",
+      "default": "hcsdl",
       "hidden": false,
       "label": "Prefix for VM Short Host name",
       "secured": false,

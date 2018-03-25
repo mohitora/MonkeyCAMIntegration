@@ -52,7 +52,7 @@ data "vsphere_virtual_machine" "vm_template" {
 variable "vm-name" {
   type = "string"
   description = "Generated"
-  default = "hsdl"
+  default = "hcsdl"
 }
 
 

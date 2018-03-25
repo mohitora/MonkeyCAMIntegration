@@ -15,8 +15,8 @@
      "template_source": {
        "githubRepoUrl": "",
        "githubAccessToken": "",
-       "relativePathToTemplateFolder": "VMware/terraform/hcl/hsdl1",
-       "templateFileName": "hsdl1.tf"
+       "relativePathToTemplateFolder": "VMware/terraform/hcl/hcsdl1",
+       "templateFileName": "hcsdl1.tf"
      }
    },
    "metadata": {
@@ -46,7 +46,7 @@
        },
        {
          "title": "Usage and special notes",
-         "description": "<ul><li>1. Creates VMs.</li><li>2. Downloads software from Monkey mirror.</li><li>3. Installs HDP, BigIntegrate and IDM on the HSDL VMs.</li><li>4. Enables cluster with Kerberos and SSL.</li></ul>"
+         "description": "<ul><li>1. Creates VMs.</li><li>2. Downloads software from Monkey mirror.</li><li>3. Installs HDP, BigIntegrate and IDM on the hcsdl VMs.</li><li>4. Enables cluster with Kerberos and SSL.</li></ul>"
        }
      ]
    }
