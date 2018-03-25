@@ -229,7 +229,7 @@ resource "vsphere_virtual_machine" "idm" {
 # Datanodes
 resource "vsphere_virtual_machine" "datanodes" {
 	count  = "${var.num_vms}"
-  name = "${var.vm-name}-${ count.index }"
+  name = "${var.vm-name}-dn-${ count.index }"
   folder = "${var.vm_folder}"
   num_cpus = "${var.vm_number_of_vcpu}"
   memory = "${var.vm_memory}"
@@ -241,7 +241,7 @@ resource "vsphere_virtual_machine" "datanodes" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-${ count.index }"
+        host_name = "${var.vm-name}-dn-${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 1}"
