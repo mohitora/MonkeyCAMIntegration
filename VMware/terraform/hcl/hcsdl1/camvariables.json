@@ -225,6 +225,18 @@
       "group_name": "virtualmachine"
     },
     {
+      "name": "vm_mgmtnode_disk_size",
+      "type": "string",
+      "description": "Size of management node data disks",
+      "default": "20",
+      "hidden": false,
+      "label": "Management Node Data Disk Size",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
       "name": "vm_datanode_disk_size",
       "type": "string",
       "description": "Size of data node data disks",
