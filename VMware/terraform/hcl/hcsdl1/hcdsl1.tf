@@ -234,7 +234,7 @@ resource "vsphere_virtual_machine" "idm" {
 
 # HDP Management
 resource "vsphere_virtual_machine" "hdp-mgmtnodes" {
-	count  = "${var.num_vms}"
+	count  = "4"
   name = "${var.vm-name}-mn-${ count.index }"
   folder = "${var.vm_folder}"
   num_cpus = "${var.vm_number_of_vcpu}"
@@ -322,7 +322,7 @@ resource "vsphere_virtual_machine" "hdp-datanodes" {
         host_name = "${var.vm-name}-dn-${ count.index }"
       }
       network_interface {
-        ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 1}"
+        ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 1 + 4}"
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
