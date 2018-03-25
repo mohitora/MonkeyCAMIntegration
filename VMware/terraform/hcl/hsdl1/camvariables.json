@@ -39,6 +39,18 @@
       "group_name": "cloud"
     },
     {
+      "name": "num_vms",
+      "type": "string",
+      "description": "Number of VMs",
+      "hidden": false,
+      "label": "Number of VMs to create",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "cloud",
+      "default": "4"
+    },
+    {
       "name": "vm_name_prefix",
       "type": "string",
       "description": "Prefix for vm names",
@@ -51,7 +63,7 @@
       "group_name": "virtualmachine"
     },
     {
-      "name": "dns_servers",
+      "name": "vm_dns_servers",
       "type": "list",
       "description": "DNS servers for the virtual network adapter (NEW)",
       "hidden": false,
@@ -63,7 +75,7 @@
       "default": ["10.0.80.11"]
     },
     {
-      "name": "dns_suffixes",
+      "name": "vm_dns_suffixes",
       "type": "list",
       "description": "Name resolution suffixes for the virtual network adapter",
       "hidden": false,
