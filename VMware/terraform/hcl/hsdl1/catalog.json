@@ -43,10 +43,7 @@
        {
          "title": "Software deployed",
          "description": "<table style=\"width:100%\">
-         <tr><td width=\"20%\" valign=\"top\">HDP 2.6.2</td><td>Hortonworks Hadoop distribution.</td></tr>
-         <tr><td width=\"20%\" valign=\"top\">IS 11.7>IBM InfoSphere Information Server 11.7 (WAS-ND, HTTP Front-End, DB2 HADR).</td></tr>
-         <tr><td width=\"20%\" valign=\"top\">IDM (aka FreeIPA)>RedHat Identity Management.</td></tr>
-         </table>"
+         <tr><td width=\"20%\" valign=\"top\">HDP 2.6.2</td><td>Hortonworks Hadoop distribution.</td></tr><tr><td width=\"20%\" valign=\"top\">IS 11.7>IBM InfoSphere Information Server 11.7 (WAS-ND, HTTP Front-End, DB2 HADR).</td></tr><tr><td width=\"20%\" valign=\"top\">IDM (aka FreeIPA)>RedHat Identity Management.</td></tr></table>"
        },
        {
          "title": "Usage and special notes",
