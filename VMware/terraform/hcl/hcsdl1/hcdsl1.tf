@@ -662,7 +662,7 @@ resource "null_resource" "cluster" {
   depends_on = [ 
   	"vsphere_virtual_machine.idm",  
   	"vsphere_virtual_machine.ishttp",  
-  	"vsphere_virtual_machine.iswasdn",  
+  	"vsphere_virtual_machine.iswasnd",  
   	"vsphere_virtual_machine.isdb2",  
   	"vsphere_virtual_machine.isds",  
   	"vsphere_virtual_machine.haproxy",  
