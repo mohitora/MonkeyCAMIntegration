@@ -187,6 +187,56 @@ locals {
 
 ###########################################################################################################################################################
 
+# Driver 
+resource "vsphere_virtual_machine" "driver" {
+  name = "${var.vm-name}-driver-${ count.index }"
+  folder = "${var.vm_folder}"
+  num_cpus = "4"
+  memory = "4096"
+  resource_pool_id = "${data.vsphere_resource_pool.vm_resource_pool.id}"
+  datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
+  guest_id = "${data.vsphere_virtual_machine.vm_template.guest_id}"
+  clone {
+    template_uuid = "${data.vsphere_virtual_machine.vm_template.id}"
+    customize {
+      linux_options {
+        domain = "${var.vm_domain}"
+        host_name = "${var.vm-name}-driver-${ count.index }"
+      }
+      network_interface {
+        ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index }"
+        ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
+      }
+    ipv4_gateway = "${var.vm_ipv4_gateway}"
+    dns_suffix_list = "${var.vm_dns_suffixes}"
+    dns_server_list = "${var.vm_dns_servers}"
+    }
+  }
+
+  network_interface {
+    network_id = "${data.vsphere_network.vm_network.id}"
+    adapter_type = "${var.vm_adapter_type}"
+  }
+
+  disk {
+    label = "${var.vm-name}0.vmdk"
+    size = "${var.vm_root_disk_size}"
+    keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
+    datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
+  }
+
+  connection {
+    type = "ssh"
+    user     = "${var.ssh_user}"
+    password = "${var.ssh_user_password}"
+  }
+
+}
+
+
+
+###########################################################################################################################################################
+
 # IDM
 resource "vsphere_virtual_machine" "idm" {
   count="2"
@@ -205,7 +255,7 @@ resource "vsphere_virtual_machine" "idm" {
         host_name = "${var.vm-name}-idm-${ count.index }"
       }
       network_interface {
-        ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 2}"
+        ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 1}"
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
@@ -459,7 +509,7 @@ resource "vsphere_virtual_machine" "haproxy" {
         host_name = "${var.vm-name}-haproxy-${ count.index }"
       }
       network_interface {
-        ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 12 + count.index }"
+        ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 13 + count.index }"
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
@@ -509,7 +559,7 @@ resource "vsphere_virtual_machine" "hdp-mgmtnodes" {
         host_name = "${var.vm-name}-mn-${ count.index }"
       }
       network_interface {
-        ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 14 }"
+        ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 15 }"
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
@@ -581,7 +631,7 @@ resource "vsphere_virtual_machine" "hdp-datanodes" {
         host_name = "${var.vm-name}-dn-${ count.index }"
       }
       network_interface {
-        ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 18}"
+        ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 19}"
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
