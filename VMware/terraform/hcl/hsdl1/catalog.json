@@ -1,0 +1,53 @@
+{
+   "name": "Hybrid Secure Data Lake 1",
+   "description": "Hybrid Secure Data Lake - Pattern 1",
+   "version": "2.0.0",
+   "type": "userCreated",
+   "manifest": {
+     "template_type": "Terraform",
+     "template_format": "HCL",
+     "template_provider": "VMware vSphere",
+     "template": {
+       "templateData": "",
+       "templateVariables": "",
+       "templateOutput": ""
+     },
+     "template_source": {
+       "githubRepoUrl": "",
+       "githubAccessToken": "",
+       "relativePathToTemplateFolder": "VMware/terraform/hcl/hsdl1",
+       "templateFileName": "mariadb.tf"
+     }
+   },
+   "metadata": {
+     "displayName": "Hybrid Secure Data Lake 1",
+     "templateCategory": "Secure Data Lakes",
+     "longDescription": "Deploys a secure data lake.",
+     "bullets": [
+       {
+         "title": "Clouds",
+         "description": "VMware"
+       },
+       {
+         "title": "Template version",
+         "description": "V1.0"
+       },
+       {
+         "title": "Operating systems supported",
+         "description": "Red Hat Enterprise Linux 7"
+       },
+       {
+         "title": "Topology",
+         "description": "HDP, BigIntegrate and IDM."
+       },
+       {
+         "title": "Software deployed",
+         "description": "<table style=\"width:100%\"><tr><td width=\"20%\" valign=\"top\">HDP</td><td>Hortonworks Hadoop distribution.</td></tr></table>"
+       },
+       {
+         "title": "Usage and special notes",
+         "description": "<ul><li>1. Creates VMs.</li><li>2. Downloads software from Monkey mirror.</li><li>3. Installs HDP, BigIntegrate and IDM on the HSDL VMs.</li></ul>"
+       }
+     ]
+   }
+ }
