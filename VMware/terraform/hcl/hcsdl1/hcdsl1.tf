@@ -189,7 +189,7 @@ locals {
 
 # Driver 
 resource "vsphere_virtual_machine" "driver" {
-  name = "${var.vm-name}-driver-${ count.index }"
+  name = "${var.vm-name}-driver"
   folder = "${var.vm_folder}"
   num_cpus = "4"
   memory = "4096"
@@ -201,7 +201,7 @@ resource "vsphere_virtual_machine" "driver" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-driver-${ count.index }"
+        host_name = "${var.vm-name}-driver"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index }"
@@ -713,6 +713,7 @@ resource "vsphere_virtual_machine" "hdp-datanodes" {
 resource "null_resource" "cluster" {
 
   depends_on = [ 
+  	"vsphere_virtual_machine.driver",  
   	"vsphere_virtual_machine.idm",  
   	"vsphere_virtual_machine.ishttp",  
   	"vsphere_virtual_machine.iswasnd",  
@@ -735,6 +736,9 @@ resource "null_resource" "cluster" {
   provisioner "remote-exec" {
     # Bootstrap script called with private_ip of each node in the clutser
     inline = [
+    
+      "echo  driver-ip=${join(",",vsphere_virtual_machine.driver.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
+      "echo  driver-name=${join(",",vsphere_virtual_machine.driver.*.name)} >> /tmp/out.log",
     
       "echo  idm-ip=${join(",",vsphere_virtual_machine.idm.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
       "echo  idm-name=${join(",",vsphere_virtual_machine.idm.*.name)} >> /tmp/out.log",
