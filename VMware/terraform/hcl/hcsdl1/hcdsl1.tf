@@ -291,7 +291,7 @@ resource "vsphere_virtual_machine" "iswasnd" {
   name = "${var.vm-name}-iswasnd"
   folder = "${var.vm_folder}"
   num_cpus = "4"
-  memory = "8192
+  memory = "8192"
   resource_pool_id = "${data.vsphere_resource_pool.vm_resource_pool.id}"
   datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
   guest_id = "${data.vsphere_virtual_machine.vm_template.guest_id}"
@@ -339,7 +339,7 @@ resource "vsphere_virtual_machine" "isdb2" {
   name = "${var.vm-name}-isdb2"
   folder = "${var.vm_folder}"
   num_cpus = "4"
-  memory = "8192
+  memory = "8192"
   resource_pool_id = "${data.vsphere_resource_pool.vm_resource_pool.id}"
   datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
   guest_id = "${data.vsphere_virtual_machine.vm_template.guest_id}"
