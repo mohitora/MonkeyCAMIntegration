@@ -667,8 +667,7 @@ resource "null_resource" "cluster" {
   	"vsphere_virtual_machine.isds",  
   	"vsphere_virtual_machine.haproxy",  
   	"vsphere_virtual_machine.hdp-mgmtnodes",
-  	"vsphere_virtual_machine.hdp-datanodes",
-  	"vsphere_virtual_machine.idm"
+  	"vsphere_virtual_machine.hdp-datanodes"
   ]
 
   # Bootstrap script can run on any instance of the cluster
@@ -683,6 +682,8 @@ resource "null_resource" "cluster" {
   provisioner "remote-exec" {
     # Bootstrap script called with private_ip of each node in the clutser
     inline = [
+      "echo  HDP-mgmtnodes-ip=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
+      "echo  HDP-mgmtnodes-name=${join(",",vsphere_virtual_machine.hdp-mgmtnodes.*.name)} >> /tmp/out.log"
       "echo  HDP-datanodes-ip=${join(",",vsphere_virtual_machine.hdp-datanodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
       "echo  HDP-datanodes-name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /tmp/out.log"
     ]
