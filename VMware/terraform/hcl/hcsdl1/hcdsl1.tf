@@ -388,7 +388,7 @@ resource "vsphere_virtual_machine" "isds" {
   name = "${var.vm-name}-isds"
   folder = "${var.vm_folder}"
   num_cpus = "4"
-  memory = "8192
+  memory = "8192"
   resource_pool_id = "${data.vsphere_resource_pool.vm_resource_pool.id}"
   datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
   guest_id = "${data.vsphere_virtual_machine.vm_template.guest_id}"
