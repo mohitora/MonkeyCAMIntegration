@@ -656,21 +656,17 @@ resource "vsphere_virtual_machine" "hdp-datanodes" {
 
 }
 
-#########################################################
-# Output
-#########################################################
-output "ip_addresses" {
-  depends_on = [ 
-  	"vsphere_virtual_machine.hdp-datanodes",
-  	"vsphere_virtual_machine.idm"
-  ]
-  value = "${join(",", vsphere_virtual_machine.hdp-datanodes.*.clone.0.customize.0.network_interface.0.ipv4_address)}"
-}
-
 
 resource "null_resource" "cluster" {
 
   depends_on = [ 
+  	"vsphere_virtual_machine.idm",  
+  	"vsphere_virtual_machine.ishttp",  
+  	"vsphere_virtual_machine.iswasdn",  
+  	"vsphere_virtual_machine.isdb2",  
+  	"vsphere_virtual_machine.isds",  
+  	"vsphere_virtual_machine.haproxy",  
+  	"vsphere_virtual_machine.hdp-mgmtnodes",
   	"vsphere_virtual_machine.hdp-datanodes",
   	"vsphere_virtual_machine.idm"
   ]
