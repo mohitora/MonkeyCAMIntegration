@@ -319,7 +319,10 @@ output "ip_addresses" {
 
 resource "null_resource" "cluster" {
 
-  depends_on = [ "vsphere_virtual_machine.datanodes" ]
+  depends_on = [ 
+  	"vsphere_virtual_machine.hdp-datanodes",
+  	"vsphere_virtual_machine.idm"
+  ]
 
   # Bootstrap script can run on any instance of the cluster
   # So we just choose the first in this case
