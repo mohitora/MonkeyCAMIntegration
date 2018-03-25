@@ -288,7 +288,7 @@ resource "vsphere_virtual_machine" "hdp-mgmtnodes" {
   }
   
   disk {
-    label = "${var.vm-name}2.vmdk"
+    label = "${var.vm-name}3.vmdk"
     size = "${var.vm_mgmtnode_disk_size}"
     keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
     datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
@@ -377,7 +377,7 @@ resource "vsphere_virtual_machine" "hdp-datanodes" {
 
   
   disk {
-    label = "${var.vm-name}3.vmdk"
+    label = "${var.vm-name}5.vmdk"
     size = "${var.vm_datanode_disk_size}"
     keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
     datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
@@ -385,7 +385,7 @@ resource "vsphere_virtual_machine" "hdp-datanodes" {
   }
   
   disk {
-    label = "${var.vm-name}4.vmdk"
+    label = "${var.vm-name}6.vmdk"
     size = "${var.vm_datanode_disk_size}"
     keep_on_remove = "${var.vm_root_disk_keep_on_remove}"
     datastore_id = "${data.vsphere_datastore.vm_datastore.id}"
