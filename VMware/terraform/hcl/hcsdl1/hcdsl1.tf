@@ -771,7 +771,7 @@ resource "null_resource" "cluster" {
       "echo  hdp-datanodes-name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /opt/monkey_cam_vars.txt",
       
       
-      "mkdir -p /opt/cloud_install; cd /opt/cloud_install;. /opt/monkey_cam_vars.txt;wget http://$\{monkeymirror\}/cloud_install/cloud_install.tar;tar xf ./cloud_install"
+      "mkdir -p /opt/cloud_install; cd /opt/cloud_install;. /opt/monkey_cam_vars.txt;wget http://$$\{monkeymirror\}/cloud_install/cloud_install.tar;tar xf ./cloud_install"
     ]
   }
 }
