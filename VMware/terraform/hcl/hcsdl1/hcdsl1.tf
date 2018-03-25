@@ -230,14 +230,14 @@ resource "vsphere_virtual_machine" "datanodes" {
 # Output
 #########################################################
 output "ip_addresses" {
-  depends_on = [ "vsphere_virtual_machine.vm" ]
+  depends_on = [ "vsphere_virtual_machine.datanodes" ]
   value = "${join(",", vsphere_virtual_machine.datanodes.*.clone.0.customize.0.network_interface.0.ipv4_address)}"
 }
 
 
 resource "null_resource" "cluster" {
 
-  depends_on = [ "vsphere_virtual_machine.vm" ]
+  depends_on = [ "vsphere_virtual_machine.datanodes" ]
 
   # Bootstrap script can run on any instance of the cluster
   # So we just choose the first in this case
