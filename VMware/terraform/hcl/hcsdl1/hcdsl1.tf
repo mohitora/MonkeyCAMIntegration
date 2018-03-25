@@ -226,8 +226,8 @@ resource "vsphere_virtual_machine" "idm" {
 
 }
 
-# Datanodes
-resource "vsphere_virtual_machine" "datanodes" {
+# HDP Datanodes
+resource "vsphere_virtual_machine" "hdp-datanodes" {
 	count  = "${var.num_vms}"
   name = "${var.vm-name}-dn-${ count.index }"
   folder = "${var.vm_folder}"
@@ -309,8 +309,11 @@ resource "vsphere_virtual_machine" "datanodes" {
 # Output
 #########################################################
 output "ip_addresses" {
-  depends_on = [ "vsphere_virtual_machine.datanodes" ]
-  value = "${join(",", vsphere_virtual_machine.datanodes.*.clone.0.customize.0.network_interface.0.ipv4_address)}"
+  depends_on = [ 
+  	"vsphere_virtual_machine.hdp-datanodes",
+  	"vsphere_virtual_machine.idm"
+  ]
+  value = "${join(",", vsphere_virtual_machine.hdp-datanodes.*.clone.0.customize.0.network_interface.0.ipv4_address)}"
 }
 
 
@@ -321,7 +324,7 @@ resource "null_resource" "cluster" {
   # Bootstrap script can run on any instance of the cluster
   # So we just choose the first in this case
   connection {
-    host     = "${vsphere_virtual_machine.datanodes.0.clone.0.customize.0.network_interface.0.ipv4_address}"
+    host     = "${vsphere_virtual_machine.hdp-datanodes.0.clone.0.customize.0.network_interface.0.ipv4_address}"
     type     = "ssh"
     user     = "root"
     password = "${var.ssh_user_password}"
@@ -330,8 +333,8 @@ resource "null_resource" "cluster" {
   provisioner "remote-exec" {
     # Bootstrap script called with private_ip of each node in the clutser
     inline = [
-      "echo  ${join(",",vsphere_virtual_machine.datanodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
-      "echo  ${join(",",vsphere_virtual_machine.datanodes.*.name)} >> /tmp/out.log"
+      "echo  ${join(",",vsphere_virtual_machine.hdp-datanodes.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
+      "echo  ${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /tmp/out.log"
     ]
   }
 }
