@@ -741,6 +741,8 @@ resource "null_resource" "cluster" {
     # Bootstrap script called with private_ip of each node in the clutser
     inline = [
     
+      "echo  monkeymirror=${var.monkey_mirror} >> /tmp/out.log",
+    
       "echo  driver-ip=${join(",",vsphere_virtual_machine.driver.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /tmp/out.log",
       "echo  driver-name=${join(",",vsphere_virtual_machine.driver.*.name)} >> /tmp/out.log",
     
