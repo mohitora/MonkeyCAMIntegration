@@ -228,7 +228,7 @@
       "name": "vm_datanode_disk_size",
       "type": "string",
       "description": "Size of data node data disks",
-      "default": "100",
+      "default": "50",
       "hidden": false,
       "label": "Datanode Data Disk Size",
       "secured": false,
