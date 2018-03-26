@@ -247,7 +247,7 @@ wget http://$monkeymirror/cloud_install/cloud_install.tar;
 tar xf ./cloud_install.tar
 EOF
 
-    destination = "/tmp/installation.sh"
+    destination = "/opt/installation.sh"
 
   }
   
@@ -787,7 +787,7 @@ resource "null_resource" "start_install" {
       "echo  hdp_datanodes_name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /opt/monkey_cam_vars.txt",
       
       
-      "chmod 755 /tmp/installation.sh;/tmp/installation.sh"
+      "chmod 755 /opt/installation.sh;/opt/installation.sh"
     ]
   }
 }
