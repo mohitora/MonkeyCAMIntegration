@@ -760,7 +760,7 @@ resource "null_resource" "start_install" {
       "echo  ssh_user=${var.ssh_user} >> /opt/monkey_cam_vars.txt",
       "echo  ssh_user_password=${var.ssh_user_password} >> /opt/monkey_cam_vars.txt",
       
-      "echo  vm_dns_servers='${var.vm_dns_servers}' >> /opt/monkey_cam_vars.txt",
+      "echo  vm_dns_servers=${join(",",var.vm_dns_servers)} >> /opt/monkey_cam_vars.txt",
       
       # Hardcode the list of data devices here...
       # It must be updated if the data node template is modified.
