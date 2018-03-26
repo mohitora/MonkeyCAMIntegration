@@ -767,7 +767,7 @@ resource "null_resource" "start_install" {
       # Hardcode the list of data devices here...
       # It must be updated if the data node template is modified.
       # This list must match the number of disks and naming format, for the data node template definition.
-      "echo  export cloud_biginsights_data_devices=/disk1@/dev/sdb,/disk2@/dev/sdc,/disk3@/dev/sdd,/disk4@/dev/sde >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_cloud_biginsights_data_devices=/disk1@/dev/sdb,/disk2@/dev/sdc,/disk3@/dev/sdd,/disk4@/dev/sde >> /opt/monkey_cam_vars.txt",
       
       "echo  export cam_monkeymirror=${var.monkey_mirror} >> /opt/monkey_cam_vars.txt",
     
