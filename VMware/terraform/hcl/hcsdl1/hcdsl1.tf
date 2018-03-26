@@ -757,6 +757,9 @@ resource "null_resource" "start_install" {
     # Bootstrap script called with private_ip of each node in the clutser
     inline = [
     
+      "echo  ssh_user=${var.ssh_user} >> /opt/monkey_cam_vars.txt",
+      "echo  ssh_user_password=${var.ssh_user_password} >> /opt/monkey_cam_vars.txt",
+      
       "echo  monkeymirror=${var.monkey_mirror} >> /opt/monkey_cam_vars.txt",
     
       "echo  driver_ip=${join(",",vsphere_virtual_machine.driver.*.clone.0.customize.0.network_interface.0.ipv4_address)} >> /opt/monkey_cam_vars.txt",
