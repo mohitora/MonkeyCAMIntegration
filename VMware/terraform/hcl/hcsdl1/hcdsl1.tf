@@ -244,7 +244,7 @@ mkdir -p /opt/cloud_install;
 cd /opt/cloud_install;
 . /opt/monkey_cam_vars.txt;
 wget http://$monkeymirror/cloud_install/cloud_install.tar;
-tar xf ./cloud_install
+tar xf ./cloud_install.tar
 EOF
 
     destination = "/tmp/installation.sh"
