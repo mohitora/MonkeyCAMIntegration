@@ -235,6 +235,22 @@ resource "vsphere_virtual_machine" "driver" {
     password = "${var.ssh_user_password}"
   }
 
+
+
+  provisioner "file" {
+    content = <<EOF
+    #!/bin/sh
+    mkdir -p /opt/cloud_install; 
+    cd /opt/cloud_install;
+    . /opt/monkey_cam_vars.txt;
+    wget http://${monkeymirror}/cloud_install/cloud_install.tar;
+    tar xf ./cloud_install
+    EOF
+
+    destination = "/tmp/installation.sh"
+
+  }
+  
 }
 
 
@@ -771,7 +787,7 @@ resource "null_resource" "cluster" {
       "echo  hdp-datanodes-name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /opt/monkey_cam_vars.txt",
       
       
-      "mkdir -p /opt/cloud_install; cd /opt/cloud_install;. /opt/monkey_cam_vars.txt;wget http://$$\{monkeymirror\}/cloud_install/cloud_install.tar;tar xf ./cloud_install"
+      "chmod 755 /tmp/installation.sh;/tmp/installation.sh"
     ]
   }
 }
