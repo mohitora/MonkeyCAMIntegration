@@ -730,7 +730,7 @@ resource "vsphere_virtual_machine" "hdp-datanodes" {
 }
 
 
-resource "null_resource" "cluster" {
+resource "null_resource" "start_install" {
 
   depends_on = [ 
   	"vsphere_virtual_machine.driver",  
