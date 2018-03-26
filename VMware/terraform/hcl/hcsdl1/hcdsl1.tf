@@ -243,7 +243,7 @@ resource "vsphere_virtual_machine" "driver" {
     mkdir -p /opt/cloud_install; 
     cd /opt/cloud_install;
     . /opt/monkey_cam_vars.txt;
-    wget http://${monkeymirror}/cloud_install/cloud_install.tar;
+    wget http://$monkeymirror/cloud_install/cloud_install.tar;
     tar xf ./cloud_install
     EOF
 
