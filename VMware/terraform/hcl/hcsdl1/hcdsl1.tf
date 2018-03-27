@@ -211,7 +211,7 @@ resource "vsphere_virtual_machine" "driver" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-driver.${local.vm_dns_domain}"
+        host_name = "${var.vm-name}-driver"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index }"
@@ -278,7 +278,7 @@ resource "vsphere_virtual_machine" "idm" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-idm-${ count.index }.${local.vm_dns_domain}"
+        host_name = "${var.vm-name}-idm-${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 1}"
@@ -329,7 +329,7 @@ resource "vsphere_virtual_machine" "ishttp" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-ishttp-${ count.index }.${local.vm_dns_domain}"
+        host_name = "${var.vm-name}-ishttp-${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 4 + count.index}"
@@ -378,7 +378,7 @@ resource "vsphere_virtual_machine" "iswasnd" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-iswasnd-${ count.index }.${local.vm_dns_domain}"
+        host_name = "${var.vm-name}-iswasnd-${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 6 + count.index }"
@@ -426,7 +426,7 @@ resource "vsphere_virtual_machine" "isdb2" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-isdb2-${ count.index }.${local.vm_dns_domain}"
+        host_name = "${var.vm-name}-isdb2-${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 9 + count.index }"
@@ -475,7 +475,7 @@ resource "vsphere_virtual_machine" "isds" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-isds..${local.vm_dns_domain}"
+        host_name = "${var.vm-name}-isds"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 11 }"
@@ -532,7 +532,7 @@ resource "vsphere_virtual_machine" "haproxy" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-haproxy-${ count.index }.${local.vm_dns_domain}"
+        host_name = "${var.vm-name}-haproxy-${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 13 + count.index }"
@@ -582,7 +582,7 @@ resource "vsphere_virtual_machine" "hdp-mgmtnodes" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-mn-${ count.index }.${local.vm_dns_domain}"
+        host_name = "${var.vm-name}-mn-${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 15 }"
@@ -654,7 +654,7 @@ resource "vsphere_virtual_machine" "hdp-datanodes" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-dn-${ count.index }.${local.vm_dns_domain}"
+        host_name = "${var.vm-name}-dn-${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 19}"
