@@ -430,9 +430,9 @@
     {
       "name": "time_server",
       "type": "string",
-      "description": "IPv4 for time server",
+      "description": "Hostname or IPv4 for time server",
       "hidden": false,
-      "label": "IPv4 for time server",
+      "label": "Hostname or IPv4 for time server",
       "secured": false,
       "required": true,
       "immutable": false,

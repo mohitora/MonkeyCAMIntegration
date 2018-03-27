@@ -118,6 +118,11 @@ variable "vm_dns_servers" {
   description = "DNS servers for the virtual network adapter"
 }
 
+
+variable "time_server" {
+  description = "Hostname or IPv4 for time server"
+}
+
 variable "vm_network_interface_label" {
   description = "vSphere port group or network label for virtual machine's vNIC"
 }
