@@ -16,7 +16,7 @@ provider "vsphere" {
 }
 
 provider "camc" {
-  version = "~> 0.1"
+  version = "~> 0.2"
 }
 
 ##############################################################
@@ -211,7 +211,7 @@ resource "vsphere_virtual_machine" "driver" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-driver.${var.vm_domain}"
+        host_name = "${var.vm-name}-driver"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index }"
