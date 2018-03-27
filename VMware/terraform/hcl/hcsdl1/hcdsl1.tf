@@ -762,8 +762,6 @@ resource "null_resource" "start_install" {
     # Bootstrap script called with private_ip of each node in the clutser
     inline = [
     
-      "echo  rm -f /opt/monkey_cam_vars.txt",
-      
       "echo  export cam_ssh_user=${var.ssh_user} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_ssh_user_password=${var.ssh_user_password} >> /opt/monkey_cam_vars.txt",
       
