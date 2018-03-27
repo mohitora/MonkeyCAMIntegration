@@ -426,7 +426,7 @@
         "type": "string",
         "group_name": "virtualmachine",
         "default": "password"
-    }
+    },
     {
       "name": "time_server",
       "type": "string",
@@ -438,7 +438,7 @@
       "immutable": false,
       "group_name": "virtualmachine",
       "default": "time.service.softlayer.com"
-    },
+    }
   ],
   "template_output_params": [
     {
