@@ -427,6 +427,18 @@
         "group_name": "virtualmachine",
         "default": "password"
     }
+    {
+      "name": "time_server",
+      "type": "string",
+      "description": "IPv4 for time server",
+      "hidden": false,
+      "label": "IPv4 for time server",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine",
+      "default": "time.service.softlayer.com"
+    },
   ],
   "template_output_params": [
     {

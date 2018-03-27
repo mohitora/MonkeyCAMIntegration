@@ -764,6 +764,8 @@ resource "null_resource" "start_install" {
       "echo  export cam_vm_dns_suffixes=${join(",",var.vm_dns_suffixes)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_vm_ipv4_prefix_length=${var.vm_ipv4_prefix_length} >> /opt/monkey_cam_vars.txt",
       
+      "echo  export cam_time_server=${var.time_server} >> /opt/monkey_cam_vars.txt",
+      
       # Hardcode the list of data devices here...
       # It must be updated if the data node template is modified.
       # This list must match the number of disks and naming format, for the data node template definition.
