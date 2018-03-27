@@ -199,7 +199,7 @@ locals {
 
 # Driver 
 resource "vsphere_virtual_machine" "driver" {
-  name = "${var.vm-name}-driver"
+  name = "${var.vm-name}drv"
   folder = "${var.vm_folder}"
   num_cpus = "4"
   memory = "4096"
@@ -211,7 +211,7 @@ resource "vsphere_virtual_machine" "driver" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-driver"
+        host_name = "${var.vm-name}drv"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index }"
@@ -266,7 +266,7 @@ EOF
 # IDM
 resource "vsphere_virtual_machine" "idm" {
   count="2"
-  name = "${var.vm-name}-idm-${ count.index }"
+  name = "${var.vm-name}idm${ count.index }"
   folder = "${var.vm_folder}"
   num_cpus = "4"
   memory = "4096"
@@ -278,7 +278,7 @@ resource "vsphere_virtual_machine" "idm" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-idm-${ count.index }"
+        host_name = "${var.vm-name}idm${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 1}"
@@ -317,7 +317,7 @@ resource "vsphere_virtual_machine" "idm" {
 # IS HTTP Front-end
 resource "vsphere_virtual_machine" "ishttp" {
   count="2"
-  name = "${var.vm-name}-ishttp-${ count.index }"
+  name = "${var.vm-name}ishttp${ count.index }"
   folder = "${var.vm_folder}"
   num_cpus = "4"
   memory = "4096"
@@ -329,7 +329,7 @@ resource "vsphere_virtual_machine" "ishttp" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-ishttp-${ count.index }"
+        host_name = "${var.vm-name}ishttp${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 4 + count.index}"
@@ -366,7 +366,7 @@ resource "vsphere_virtual_machine" "ishttp" {
 # IS WAS-ND
 resource "vsphere_virtual_machine" "iswasnd" {
   count="3"
-  name = "${var.vm-name}-iswasnd-${ count.index }"
+  name = "${var.vm-name}iswasnd${ count.index }"
   folder = "${var.vm_folder}"
   num_cpus = "4"
   memory = "8192"
@@ -378,7 +378,7 @@ resource "vsphere_virtual_machine" "iswasnd" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-iswasnd-${ count.index }"
+        host_name = "${var.vm-name}iswasnd${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 6 + count.index }"
@@ -414,7 +414,7 @@ resource "vsphere_virtual_machine" "iswasnd" {
 # IS DB2
 resource "vsphere_virtual_machine" "isdb2" {
   count="2"
-  name = "${var.vm-name}-isdb2-${ count.index }"
+  name = "${var.vm-name}isdb2${ count.index }"
   folder = "${var.vm_folder}"
   num_cpus = "4"
   memory = "8192"
@@ -426,7 +426,7 @@ resource "vsphere_virtual_machine" "isdb2" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-isdb2-${ count.index }"
+        host_name = "${var.vm-name}isdb2${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 9 + count.index }"
@@ -463,7 +463,7 @@ resource "vsphere_virtual_machine" "isdb2" {
 
 # IS Engine
 resource "vsphere_virtual_machine" "isds" {
-  name = "${var.vm-name}-isds"
+  name = "${var.vm-name}isds"
   folder = "${var.vm_folder}"
   num_cpus = "4"
   memory = "8192"
@@ -475,7 +475,7 @@ resource "vsphere_virtual_machine" "isds" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-isds"
+        host_name = "${var.vm-name}isds"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 11 }"
@@ -520,7 +520,7 @@ resource "vsphere_virtual_machine" "isds" {
 # HAProxy
 resource "vsphere_virtual_machine" "haproxy" {
   count="2"
-  name = "${var.vm-name}-haproxy-${ count.index }"
+  name = "${var.vm-name}haproxy${ count.index }"
   folder = "${var.vm_folder}"
   num_cpus = "4"
   memory = "4096"
@@ -532,7 +532,7 @@ resource "vsphere_virtual_machine" "haproxy" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-haproxy-${ count.index }"
+        host_name = "${var.vm-name}haproxy${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + 13 + count.index }"
@@ -570,7 +570,7 @@ resource "vsphere_virtual_machine" "haproxy" {
 # HDP Management
 resource "vsphere_virtual_machine" "hdp-mgmtnodes" {
 	count  = "4"
-  name = "${var.vm-name}-mn-${ count.index }"
+  name = "${var.vm-name}mn${ count.index }"
   folder = "${var.vm_folder}"
   num_cpus = "${var.vm_number_of_vcpu}"
   memory = "${var.vm_memory}"
@@ -582,7 +582,7 @@ resource "vsphere_virtual_machine" "hdp-mgmtnodes" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-mn-${ count.index }"
+        host_name = "${var.vm-name}mn${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 15 }"
@@ -642,7 +642,7 @@ resource "vsphere_virtual_machine" "hdp-mgmtnodes" {
 # HDP Datanodes
 resource "vsphere_virtual_machine" "hdp-datanodes" {
 	count  = "${var.num_datanodes}"
-  name = "${var.vm-name}-dn-${ count.index }"
+  name = "${var.vm-name}dn${ count.index }"
   folder = "${var.vm_folder}"
   num_cpus = "${var.vm_number_of_vcpu}"
   memory = "${var.vm_memory}"
@@ -654,7 +654,7 @@ resource "vsphere_virtual_machine" "hdp-datanodes" {
     customize {
       linux_options {
         domain = "${var.vm_domain}"
-        host_name = "${var.vm-name}-dn-${ count.index }"
+        host_name = "${var.vm-name}dn${ count.index }"
       }
       network_interface {
         ipv4_address = "${local.vm_ipv4_address_base }.${local.vm_ipv4_address_start + count.index + 19}"
