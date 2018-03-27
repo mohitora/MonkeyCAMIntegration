@@ -766,7 +766,7 @@ resource "null_resource" "start_install" {
       "echo  export cam_ssh_user=${var.ssh_user} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_ssh_user_password=${var.ssh_user_password} >> /opt/monkey_cam_vars.txt",
       
-      "echo  export cam_vm_domain=${join(",",var.vm_domain)} >> /opt/monkey_cam_vars.txt",      
+      "echo  export cam_vm_domain=${var.vm_domain} >> /opt/monkey_cam_vars.txt",      
       "echo  export cam_vm_dns_servers=${join(",",var.vm_dns_servers)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_vm_dns_suffixes=${join(",",var.vm_dns_suffixes)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_vm_ipv4_prefix_length=${var.vm_ipv4_prefix_length} >> /opt/monkey_cam_vars.txt",
