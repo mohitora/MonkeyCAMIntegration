@@ -210,7 +210,7 @@ resource "vsphere_virtual_machine" "driver" {
     template_uuid = "${data.vsphere_virtual_machine.vm_template.id}"
     customize {
       linux_options {
-        domain = "${var.vm_domain}"
+#        domain = "${var.vm_domain}"
         host_name = "${var.vm-name}drv"
       }
       network_interface {
@@ -218,8 +218,8 @@ resource "vsphere_virtual_machine" "driver" {
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
-    dns_suffix_list = "${var.vm_dns_suffixes}"
-    dns_server_list = "${var.vm_dns_servers}"
+#    dns_suffix_list = "${var.vm_dns_suffixes}"
+#    dns_server_list = "${var.vm_dns_servers}"
     }
   }
 
