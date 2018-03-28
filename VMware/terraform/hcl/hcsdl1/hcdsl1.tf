@@ -218,8 +218,8 @@ resource "vsphere_virtual_machine" "driver" {
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
-#    dns_suffix_list = "${var.vm_dns_suffixes}"
-#    dns_server_list = "${var.vm_dns_servers}"
+    dns_suffix_list = "${var.vm_dns_suffixes}"
+    dns_server_list = "${var.vm_dns_servers}"
     }
   }
 
@@ -285,8 +285,8 @@ resource "vsphere_virtual_machine" "idm" {
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
-#    dns_suffix_list = "${var.vm_dns_suffixes}"
-#    dns_server_list = "${var.vm_dns_servers}"
+    dns_suffix_list = "${var.vm_dns_suffixes}"
+    dns_server_list = "[ "127.0.0.1" ]"
     }
   }
 
@@ -336,8 +336,8 @@ resource "vsphere_virtual_machine" "ishttp" {
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
-#    dns_suffix_list = "${var.vm_dns_suffixes}"
-#    dns_server_list = "${var.vm_dns_servers}"
+    dns_suffix_list = "${var.vm_dns_suffixes}"
+    dns_server_list = "${var.vm_dns_servers}"
     }
   }
 
@@ -385,8 +385,8 @@ resource "vsphere_virtual_machine" "iswasnd" {
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
-#    dns_suffix_list = "${var.vm_dns_suffixes}"
-#    dns_server_list = "${var.vm_dns_servers}"
+    dns_suffix_list = "${var.vm_dns_suffixes}"
+    dns_server_list = "${var.vm_dns_servers}"
     }
   }
 
@@ -433,8 +433,8 @@ resource "vsphere_virtual_machine" "isdb2" {
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
-#    dns_suffix_list = "${var.vm_dns_suffixes}"
-#    dns_server_list = "${var.vm_dns_servers}"
+    dns_suffix_list = "${var.vm_dns_suffixes}"
+    dns_server_list = "${var.vm_dns_servers}"
     }
   }
 
@@ -482,8 +482,8 @@ resource "vsphere_virtual_machine" "isds" {
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
-#    dns_suffix_list = "${var.vm_dns_suffixes}"
-#    dns_server_list = "${var.vm_dns_servers}"
+    dns_suffix_list = "${var.vm_dns_suffixes}"
+    dns_server_list = "${var.vm_dns_servers}"
     }
   }
 
@@ -539,8 +539,8 @@ resource "vsphere_virtual_machine" "haproxy" {
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
-#    dns_suffix_list = "${var.vm_dns_suffixes}"
-#    dns_server_list = "${var.vm_dns_servers}"
+    dns_suffix_list = "${var.vm_dns_suffixes}"
+    dns_server_list = "${var.vm_dns_servers}"
     }
   }
 
@@ -589,8 +589,8 @@ resource "vsphere_virtual_machine" "hdp-mgmtnodes" {
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
-#    dns_suffix_list = "${var.vm_dns_suffixes}"
-#    dns_server_list = "${var.vm_dns_servers}"
+    dns_suffix_list = "${var.vm_dns_suffixes}"
+    dns_server_list = "${var.vm_dns_servers}"
     }
   }
 
@@ -661,8 +661,8 @@ resource "vsphere_virtual_machine" "hdp-datanodes" {
         ipv4_netmask = "${ var.vm_ipv4_prefix_length }"
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
-#    dns_suffix_list = "${var.vm_dns_suffixes}"
-#    dns_server_list = "${var.vm_dns_servers}"
+    dns_suffix_list = "${var.vm_dns_suffixes}"
+    dns_server_list = "${var.vm_dns_servers}"
     }
   }
 
