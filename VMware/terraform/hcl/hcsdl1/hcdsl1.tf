@@ -286,7 +286,7 @@ resource "vsphere_virtual_machine" "idm" {
       }
     ipv4_gateway = "${var.vm_ipv4_gateway}"
     dns_suffix_list = "${var.vm_dns_suffixes}"
-    dns_server_list = [ "127.0.0.1" ]
+    dns_server_list = [ "127.0.0.1" , "10.0.80.11" , "10.0.80.12" ]
     }
   }
 
