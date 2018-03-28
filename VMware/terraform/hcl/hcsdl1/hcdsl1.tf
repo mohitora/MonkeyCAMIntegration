@@ -210,7 +210,7 @@ resource "vsphere_virtual_machine" "driver" {
     template_uuid = "${data.vsphere_virtual_machine.vm_template.id}"
     customize {
       linux_options {
-#        domain = "${var.vm_domain}"
+        domain = "${var.vm_domain}"
         host_name = "${var.vm-name}drv"
       }
       network_interface {
