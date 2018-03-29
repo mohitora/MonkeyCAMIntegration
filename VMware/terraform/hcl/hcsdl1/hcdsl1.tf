@@ -273,7 +273,7 @@ wget http://$cam_monkeymirror/cloud_install/$cloud_install_tar_file_name
 
 tar xf ./$cloud_install_tar_file_name
 
-yum install -y ksh rsync expect unzip
+yum install -y ksh rsync expect unzip 
 
 perl -f cam_integration/01_gen_cam_install_properties.pl
 
