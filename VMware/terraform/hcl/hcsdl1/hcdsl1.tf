@@ -281,24 +281,21 @@ perl -f cam_integration/01_gen_cam_install_properties.pl
 
 utils/01_prepare_driver.sh
 
+
 . $MASTER_INSTALLER_HOME/utils/00_globalFunctions.sh
-
 nodeList=`echo $cloud_hostpasswords|awk -v RS="," -v FS=":" '{s=sprintf("%s %s",s,$1);}END{print s}'`
-
 for hostName in `echo $nodeList|sed 's/,/ /g'`
 do
   if [ "$hostName" != "" ]
 	then
-		echo
-		echo
-		echo
-		echo "##### (`date` - `hostname`) Checking access to $hostName... ####"
     hostPwd=`get_root_password $hostName`
-		ssh.exp $hostName $hostPwd "echo \`hostname\`.\`hostname -d\`>/etc/hostname;reboot;"
+		ssh.exp $hostName $hostPwd "echo \`hostname\`.\`hostname -d\`>/etc/hostname;"
 	fi
 done
 
 utils/01_prepare_all_nodes.sh
+
+$MASTER_INSTALLER_HOME/01_master_install_hdp.sh
 
 EOF
 
@@ -861,7 +858,7 @@ resource "null_resource" "start_install" {
       "echo  export cam_hdp_datanodes_name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /opt/monkey_cam_vars.txt",
       
       
-      "chmod 755 /opt/installation.sh;/opt/installation.sh"
+      "chmod 755 /opt/installation.sh; nohup /opt/installation.sh&"
     ]
   }
 }
