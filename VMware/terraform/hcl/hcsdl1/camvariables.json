@@ -438,7 +438,50 @@
       "immutable": false,
       "group_name": "virtualmachine",
       "default": "time.service.softlayer.com"
+    },
+    
+    
+    {
+      "name": "public_nic_name",
+      "type": "string",
+      "description": "Name of the public network interface",
+      "hidden": false,
+      "label": "Name of the public network interface",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine",
+      "default": "ens192"
+    },
+    
+    
+    {
+      "name": "cluster_name",
+      "type": "string",
+      "description": "Name of the HDP Cluster",
+      "hidden": false,
+      "label": "Name of the HDP Cluster",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine",
+      "default": "MYCLUSTER"
+    },
+    
+    
+    {
+      "name": "cloud_install_tar_file_name",
+      "type": "string",
+      "description": "Name of the tar file downloaded from the mirror, which contains the Cloud Installer code.",
+      "hidden": false,
+      "label": "Cloud Install tar file name",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine",
+      "default": "cloud_install.tar"
     }
+    
   ],
   "template_output_params": [
     {

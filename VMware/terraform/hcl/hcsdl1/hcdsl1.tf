@@ -176,7 +176,6 @@ variable "vm_datanode_disk_size" {
   default = "100"
 }
 
-
 variable "vm_mgmtnode_disk_size" {
   description = "Management Node Data Disk Size"
   default = "20"
@@ -184,6 +183,21 @@ variable "vm_mgmtnode_disk_size" {
 
 variable "vm-image" {
   description = "Operating system image id / template that should be used when creating the virtual image"
+}
+
+variable "public_nic_name" {
+  description = "Name of the public network interface"
+  default = "ens192"
+}
+
+variable "cluster_name" {
+  description = "HDP Cluster Name"
+  default = "MYCLUSTER"
+}
+
+variable "cloud_install_tar_file_name" {
+  description = "Name of the tar file downloaded from the mirror, which contains the Cloud Installer code."
+  default = "cloud_install.tar"
 }
 
 ########
@@ -246,11 +260,46 @@ resource "vsphere_virtual_machine" "driver" {
   provisioner "file" {
     content = <<EOF
 #!/bin/sh
+
+set -x 
+
+cloudInstallTarName=$1
+
 mkdir -p /opt/cloud_install; 
+
 cd /opt/cloud_install;
+
 . /opt/monkey_cam_vars.txt;
-wget http://$cam_monkeymirror/cloud_install/cloud_install.tar;
-tar xf ./cloud_install.tar
+
+wget http://$cam_monkeymirror/cloud_install/${cloudInstallTarName};
+
+tar xf ./${cloudInstallTarName}
+
+yum install -y ksh rsync expect unzip
+
+perl -f cam_integration/01_gen_cam_install_properties.pl
+
+. ./setenv
+
+. ${MASTER_INSTALLER_HOME}/utils/00_globalFunctions.sh
+
+nodeList=`echo $cloud_hostpasswords|awk -v RS="," -v FS=":" '{s=sprintf("%s %s",s,$1);}END{print s}'`
+
+for hostName in `echo ${nodeList}|sed 's/,/ /g'`
+do
+  if [ "$hostName" != "" ]
+	then
+		echo
+		echo
+		echo
+		echo "##### (`date` - `hostname`) Checking access to ${hostName}... ####"
+    hostPwd=`get_root_password ${hostName}`
+		ssh.exp ${hostName} ${hostPwd} "echo \`hostname\`.\`hostname -d\`>/etc/hostname;reboot;"
+	fi
+done
+
+utils/01_prepare_all_nodes.sh
+
 EOF
 
     destination = "/opt/installation.sh"
@@ -773,11 +822,13 @@ resource "null_resource" "start_install" {
       
       "echo  export cam_time_server=${var.time_server} >> /opt/monkey_cam_vars.txt",
       
-            
+      "echo  export cam_public_nic_name=${var.public_nic_name} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_cluster_name=${var.cluster_name} >> /opt/monkey_cam_vars.txt",
+      
       # Hardcode the list of data devices here...
       # It must be updated if the data node template is modified.
       # This list must match the number of disks and naming format, for the data node template definition.
-      "echo  export cam_cloud_biginsights_data_devices=/disk1@/dev/sdb,/disk2@/dev/sdc,/disk3@/dev/sdd,/disk4@/dev/sde >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_cloud_biginsights_data_devices=/disk1@/dev/sdb,/disk2@/dev/sdc,/disk3@/dev/sdd,/disk4@/dev/sde,/disk5@/dev/sdf,/disk6@/dev/sdg,/disk7@/dev/sdh,/disk8@/dev/sdi,/disk9@/dev/sdj,/disk10@/dev/sdk,/disk11@/dev/sdl,/disk12@/dev/sdm,/disk13@/dev/sdn >> /opt/monkey_cam_vars.txt",
       
       "echo  export cam_monkeymirror=${var.monkey_mirror} >> /opt/monkey_cam_vars.txt",
     
@@ -809,7 +860,7 @@ resource "null_resource" "start_install" {
       "echo  export cam_hdp_datanodes_name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /opt/monkey_cam_vars.txt",
       
       
-      "chmod 755 /opt/installation.sh;/opt/installation.sh"
+      "chmod 755 /opt/installation.sh;/opt/installation.sh ${var.cloud_install_tar_file_name}"
     ]
   }
 }
