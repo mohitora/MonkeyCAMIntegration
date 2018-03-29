@@ -858,7 +858,7 @@ resource "null_resource" "start_install" {
       "echo  export cam_hdp_datanodes_name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /opt/monkey_cam_vars.txt",
       
       
-      "chmod 755 /opt/installation.sh; nohup /opt/installation.sh&"
+      "chmod 755 /opt/installation.sh; nohup /opt/installation.sh &; sleep 10;"
     ]
   }
 }
