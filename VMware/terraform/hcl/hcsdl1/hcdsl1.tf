@@ -263,17 +263,15 @@ resource "vsphere_virtual_machine" "driver" {
 
 set -x 
 
-cloudInstallTarName=$1
-
 mkdir -p /opt/cloud_install; 
 
 cd /opt/cloud_install;
 
 . /opt/monkey_cam_vars.txt;
 
-wget http://$cam_monkeymirror/cloud_install/${cloudInstallTarName};
+wget http://$cam_monkeymirror/cloud_install/$cloud_install_tar_file_name
 
-tar xf ./${cloudInstallTarName}
+tar xf ./$cloud_install_tar_file_name
 
 yum install -y ksh rsync expect unzip
 
@@ -281,20 +279,20 @@ perl -f cam_integration/01_gen_cam_install_properties.pl
 
 . ./setenv
 
-. ${MASTER_INSTALLER_HOME}/utils/00_globalFunctions.sh
+. $MASTER_INSTALLER_HOME/utils/00_globalFunctions.sh
 
 nodeList=`echo $cloud_hostpasswords|awk -v RS="," -v FS=":" '{s=sprintf("%s %s",s,$1);}END{print s}'`
 
-for hostName in `echo ${nodeList}|sed 's/,/ /g'`
+for hostName in `echo $nodeList|sed 's/,/ /g'`
 do
   if [ "$hostName" != "" ]
 	then
 		echo
 		echo
 		echo
-		echo "##### (`date` - `hostname`) Checking access to ${hostName}... ####"
-    hostPwd=`get_root_password ${hostName}`
-		ssh.exp ${hostName} ${hostPwd} "echo \`hostname\`.\`hostname -d\`>/etc/hostname;reboot;"
+		echo "##### (`date` - `hostname`) Checking access to $hostName... ####"
+    hostPwd=`get_root_password $hostName`
+		ssh.exp $hostName $hostPwd "echo \`hostname\`.\`hostname -d\`>/etc/hostname;reboot;"
 	fi
 done
 
@@ -824,6 +822,7 @@ resource "null_resource" "start_install" {
       
       "echo  export cam_public_nic_name=${var.public_nic_name} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_cluster_name=${var.cluster_name} >> /opt/monkey_cam_vars.txt",
+      "echo  export cloud_install_tar_file_name=${var.cloud_install_tar_file_name} >> /opt/monkey_cam_vars.txt",
       
       # Hardcode the list of data devices here...
       # It must be updated if the data node template is modified.
@@ -860,7 +859,7 @@ resource "null_resource" "start_install" {
       "echo  export cam_hdp_datanodes_name=${join(",",vsphere_virtual_machine.hdp-datanodes.*.name)} >> /opt/monkey_cam_vars.txt",
       
       
-      "chmod 755 /opt/installation.sh;/opt/installation.sh ${var.cloud_install_tar_file_name}"
+      "chmod 755 /opt/installation.sh;/opt/installation.sh"
     ]
   }
 }
