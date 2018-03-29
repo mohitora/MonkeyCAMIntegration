@@ -279,6 +279,8 @@ perl -f cam_integration/01_gen_cam_install_properties.pl
 
 . ./setenv
 
+utils/01_prepare_driver.sh
+
 . $MASTER_INSTALLER_HOME/utils/00_globalFunctions.sh
 
 nodeList=`echo $cloud_hostpasswords|awk -v RS="," -v FS=":" '{s=sprintf("%s %s",s,$1);}END{print s}'`
