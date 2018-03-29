@@ -295,7 +295,7 @@ done
 
 utils/01_prepare_all_nodes.sh
 
-$MASTER_INSTALLER_HOME/01_master_install_hdp.sh
+nohup ./01_master_install_hdp.sh &
 
 EOF
 
