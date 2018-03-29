@@ -859,7 +859,8 @@ resource "null_resource" "start_install" {
       
       
       "chmod 755 /opt/installation.sh",
-      "nohup /opt/installation.sh&"
+      "nohup /opt/installation.sh &",
+      "sleep 60"
     ]
   }
 }
