@@ -40,6 +40,10 @@ variable "num_vms" {
   description = "Number of VMs to create"
 }
 
+variable "vlan_number" {
+  description = "VLAN Number"
+}
+
 ##############################################################
 # Create public key in Devices>Manage>SSH Keys in SL console
 ##############################################################
@@ -60,6 +64,10 @@ resource "ibm_compute_ssh_key" "temp_public_key" {
   public_key = "${tls_private_key.ssh.public_key_openssh}"
 }
 
+data "ibm_network_vlan" "cluster_vlan" {
+    number = "${var.vlan_number}"
+}
+
 ##############################################################
 # Create Virtual Machine and install MongoDB
 ##############################################################
@@ -69,6 +77,7 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   os_reference_code        = "REDHAT_7_64"
   domain                   = "cam.ibm.com"
   datacenter               = "${var.datacenter}"
+  public_vlan_id           = "${data.ibm_network_vlan.cluster_vlan.id}"
   network_speed            = 10
   hourly_billing           = true
   private_network_only     = false
