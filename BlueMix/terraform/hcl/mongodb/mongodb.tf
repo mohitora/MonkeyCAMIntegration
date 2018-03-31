@@ -91,9 +91,9 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
 #########################################################
 # Output
 #########################################################
-output "The IP address of the VM with MongoDB installed" {
-  value = "join(",",ibm_compute_vm_instance.softlayer_virtual_guest.ipv4_address)}"
-}
+#output "The IP address of the VM with MongoDB installed" {
+#  value = "join(",",ibm_compute_vm_instance.softlayer_virtual_guest.ipv4_address)}"
+#}
 
 
 resource "null_resource" "start_install" {
