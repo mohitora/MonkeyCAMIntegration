@@ -47,7 +47,8 @@
           },
           {
               "value": "dal10",
-              "label": "Dallas 10, USA"
+              "label": "Dallas 10, USA",
+              "default": "true"
           },
           {
               "value": "fra02",
@@ -131,8 +132,7 @@
           },
           {
               "value": "wdc04",
-              "label": "Washington, D.C. 04, USA",
-              "default": "true"
+              "label": "Washington, D.C. 04, USA"
           }
         ]
     }, 
