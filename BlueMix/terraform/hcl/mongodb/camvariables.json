@@ -163,7 +163,7 @@
         "hidden": false, 
         "immutable": false, 
         "label": "Number of VMs", 
-        "name": "Number of VMs", 
+        "name": "num_vms", 
         "required": true, 
         "secured": false, 
         "type": "string",
