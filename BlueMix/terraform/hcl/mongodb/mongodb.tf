@@ -92,5 +92,29 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
 # Output
 #########################################################
 output "The IP address of the VM with MongoDB installed" {
-  value = "${ibm_compute_vm_instance.softlayer_virtual_guest.ipv4_address}"
+  value = "join(",",${ibm_compute_vm_instance.softlayer_virtual_guest.*.ipv4_address)}"
+}
+
+
+resource "null_resource" "start_install" {
+
+  depends_on = [ 
+  	"ibm_compute_vm_instance.softlayer_virtual_guest"
+  ]
+
+  # Bootstrap script can run on any instance of the cluster
+  # So we just choose the first in this case
+  connection {
+    host     = "${ibm_compute_vm_instance.softlayer_virtual_guest.0.ipv4_address}"
+    type     = "ssh"
+    user     = "root"
+    host_key = "${ibm_compute_ssh_key.cam_public_key.id}"
+  }
+
+  provisioner "remote-exec" {
+    # Bootstrap script called with private_ip of each node in the clutser
+    inline = [
+      "echo  export cam_ips=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.0.ipv4_address)} >> /opt/monkey_cam_vars.txt"
+    ]
+  }
 }
