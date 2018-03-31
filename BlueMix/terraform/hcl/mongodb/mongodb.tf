@@ -102,8 +102,6 @@ resource "null_resource" "start_install" {
   	"ibm_compute_vm_instance.softlayer_virtual_guest"
   ]
 
-  # Bootstrap script can run on any instance of the cluster
-  # So we just choose the first in this case
   connection {
     host     = "${ibm_compute_vm_instance.softlayer_virtual_guest.0.ipv4_address}"
     type     = "ssh"
@@ -112,9 +110,8 @@ resource "null_resource" "start_install" {
   }
 
   provisioner "remote-exec" {
-    # Bootstrap script called with private_ip of each node in the clutser
     inline = [
-      "echo  export cam_ips=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.0.ipv4_address)} >> /opt/monkey_cam_vars.txt"
+      "echo  export cam_ips=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.ipv4_address)} >> /opt/monkey_cam_vars.txt"
     ]
   }
 }
