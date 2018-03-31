@@ -65,8 +65,8 @@ resource "ibm_compute_ssh_key" "temp_public_key" {
 ##############################################################
 resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   count                    = "${var.num_vms}"
-  hostname                 = "${var.hostname}-${var.num_vms}"
-  os_reference_code        = "CENTOS_7_64"
+  hostname                 = "${var.hostname}-${ count.index }"
+  os_reference_code        = "RHEL_7_64"
   domain                   = "cam.ibm.com"
   datacenter               = "${var.datacenter}"
   network_speed            = 10
