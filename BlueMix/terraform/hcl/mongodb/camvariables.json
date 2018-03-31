@@ -156,7 +156,7 @@
         "required": true, 
         "secured": true, 
         "type": "string",
-        "regex": "^ssh-rsa AAAA[0-9A-Za-z+/]+[=]{0,3}( [^@]+@[^@]+| [^@]+){0,1}$"
+        "regex": "^ssh-rsa AAAA[0-9A-Za-z+/]+[=]{0,3}( [^@]+@[^@]+| [^@]+){0,1}$",
         "default": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDsfV/fqVGIN+vb3OLnu0b8Tu0SEcAyKyPoilPLWhI0BzkT5PPUeutAKf0StAkXQHCCG2ktkDGzBh01zz0cKK6AuqocsdirAoqOOMHtBBvfqfFbktZpskDtTzRCe4f0klXv8VbCJNDhk1gGvljOfb04cYc7b9VG2l/DAGwyQwuYWWODtyFfc5zdxfVT/Zb7tHwE6OpWCT3TIzNtUkRooon+ZZkajD+tXvzEdHoPuinSsePseOfAyuCYcHjRTg5kb4I6E5i3eg7oyyAQ8lBCgkCM32kjy3qPpUTbWIzzeTFQ5KlR1nD6tSvRNLUo9CZ2nK3/sdAk+VZn+UdckSIy/E/vY4v2oXscoibTu2sgDf8MsKH4kwejL/bGMcQSRA6b/oRNmT9wkIPEjpdT+UPHxWWcAVWal1yHx2rMiMpxptX5z+jvv/vABA9al98Ug5Gtqnal8JzF5SY91mB0epr4Lx8eDT8ZcpulGe02sAdMPYVgiMkByt0l82BYPdcdTvXfvOkm1z0GSmhSG8jeQHhtKjWAYkaLzEwTT6zqmQGiJbNBABQhClmtqacyc0N+ZnJ4ypNjbM3lmrAXCNAKCLB67NkmowusJcgGLH89YmPcArDo5ljqe07eIpLD1mmOlX+0P43Y08qK6xSyGCd+m5KYDzQJ5Bwh9uA2x9TiUTZonzlOLQ== jlerm@us.ibm.com"
         
     },
