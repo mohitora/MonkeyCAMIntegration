@@ -106,7 +106,7 @@ resource "null_resource" "start_install" {
     host     = "${ibm_compute_vm_instance.softlayer_virtual_guest.ipv4_address}"
     type     = "ssh"
     user     = "root"
-    public_key = "${ibm_compute_ssh_key.cam_public_key.id}"
+    private_key = "${tls_private_key.ssh.private_key_pem}"
   }
 
   provisioner "remote-exec" {
