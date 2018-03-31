@@ -103,7 +103,7 @@ resource "null_resource" "start_install" {
   ]
 
   connection {
-    host     = "${ibm_compute_vm_instance.softlayer_virtual_guest.0.ipv4_address}"
+    host     = "${ibm_compute_vm_instance.softlayer_virtual_guest.ipv4_address}"
     type     = "ssh"
     user     = "root"
     host_key = "${ibm_compute_ssh_key.cam_public_key.id}"
@@ -111,7 +111,7 @@ resource "null_resource" "start_install" {
 
   provisioner "remote-exec" {
     inline = [
-      "echo  export cam_ips=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.ipv4_address)} >> /opt/monkey_cam_vars.txt"
+      "echo  export cam_ips=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.ipv4_address)} >> /opt/monkey_cam_vars.txt"
     ]
   }
 }
