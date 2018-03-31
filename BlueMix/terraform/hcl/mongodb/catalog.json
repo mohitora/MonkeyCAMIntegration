@@ -1,5 +1,5 @@
 {
-   "name": "Test MongoDB on a Single VM",
+   "name": "Test multiple VMs on Bluemix",
    "description": "Test MongoDB - Copied.",
    "version": "2.0.0",
    "imageUrl": "./assets/svg/IBM_WebSphere_Standalone.svg",
@@ -23,7 +23,7 @@
      }
    },
    "metadata": {
-     "displayName": "Test MongoDB on a Single VM",
+     "displayName": "Test multiple VMs on Bluemix",
      "providerDisplayName": "IBM",
      "longDescription": "Deploys a single node of MongoDB in IBM Cloud for development use, where MongoDB is an open-source cross-platform document-oriented database.",
      "bullets": [
