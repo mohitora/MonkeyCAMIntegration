@@ -181,5 +181,16 @@
         "secured": false, 
         "type": "string",
         "default": "1457"
+    },
+    {
+        "description": "VLAN Router", 
+        "hidden": false, 
+        "immutable": false, 
+        "label": "VLAN Router", 
+        "name": "vlan_router", 
+        "required": true, 
+        "secured": false, 
+        "type": "string",
+        "default": "bcr01a.dal10"
     }
 ]

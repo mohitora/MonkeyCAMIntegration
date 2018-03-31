@@ -44,6 +44,10 @@ variable "vlan_number" {
   description = "VLAN Number"
 }
 
+variable "vlan_router" {
+  description = "VLAN router"
+}
+
 ##############################################################
 # Create public key in Devices>Manage>SSH Keys in SL console
 ##############################################################
@@ -65,7 +69,8 @@ resource "ibm_compute_ssh_key" "temp_public_key" {
 }
 
 data "ibm_network_vlan" "cluster_vlan" {
-    number = "${var.vlan_number}"
+    number = "${var.vlan_number}",
+    router_hostname = "${var.vlan_router}"
 }
 
 ##############################################################
