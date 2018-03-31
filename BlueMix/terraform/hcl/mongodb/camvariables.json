@@ -154,8 +154,19 @@
         "label": "Public SSH Key", 
         "name": "public_ssh_key", 
         "required": true, 
-        "secured": false, 
+        "secured": true, 
         "type": "string",
         "regex": "^ssh-rsa AAAA[0-9A-Za-z+/]+[=]{0,3}( [^@]+@[^@]+| [^@]+){0,1}$"
+    },
+    {
+        "description": "Number of VMs to create", 
+        "hidden": false, 
+        "immutable": false, 
+        "label": "Number of VMs", 
+        "name": "Number of VMs", 
+        "required": true, 
+        "secured": false, 
+        "type": "string",
+        "default": "1"
     }
 ]

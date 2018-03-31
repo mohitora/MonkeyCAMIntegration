@@ -36,6 +36,10 @@ variable "public_ssh_key" {
   description = "Public SSH key used to connect to the virtual guest"
 }
 
+variable "num_vms" {
+  description = "Number of VMs to create"
+}
+
 ##############################################################
 # Create public key in Devices>Manage>SSH Keys in SL console
 ##############################################################
@@ -60,7 +64,8 @@ resource "ibm_compute_ssh_key" "temp_public_key" {
 # Create Virtual Machine and install MongoDB
 ##############################################################
 resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
-  hostname                 = "${var.hostname}"
+  count                    = ${var.num_vms}
+  hostname                 = "${var.hostname}-${var.num_vms}"
   os_reference_code        = "CENTOS_7_64"
   domain                   = "cam.ibm.com"
   datacenter               = "${var.datacenter}"
@@ -81,45 +86,6 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
     host        = "${self.ipv4_address}"
   }
 
-  # Create the installation script
-  provisioner "file" {
-    content = <<EOF
-#!/bin/bash
-
-set -o errexit
-set -o nounset
-set -o pipefail
-
-LOGFILE="/var/log/install_mongodb.log"
-
-#install mongodb
-
-echo "---start installing mongodb---" | tee -a $LOGFILE 2>&1
-mongo_repo=/etc/yum.repos.d/mongodb-org-3.4.repo
-cat <<EOT | tee -a $mongo_repo                                                    >> $LOGFILE 2>&1 || { echo "---Failed to create mongo repo---" | tee -a $LOGFILE; exit 1; }
-[mongodb-org-3.4]
-name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/redhat/\$releasever/mongodb-org/3.4/x86_64/
-gpgcheck=1
-enabled=1
-gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
-EOT
-yum install -y mongodb-org                                                        >> $LOGFILE 2>&1 || { echo "---Failed to install mongodb-org---" | tee -a $LOGFILE; exit 1; }
-sed -i -e 's/  bindIp/#  bindIp/g' /etc/mongod.conf                               >> $LOGFILE 2>&1 || { echo "---Failed to configure mongod---" | tee -a $LOGFILE; exit 1; }
-service mongod start                                                              >> $LOGFILE 2>&1 || { echo "---Failed to start mongodb---" | tee -a $LOGFILE; exit 1; }
-echo "---finish installing mongodb---" | tee -a $LOGFILE 2>&1
-
-EOF
-
-    destination = "/tmp/installation.sh"
-  }
-
-  # Execute the script remotely
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/installation.sh; bash /tmp/installation.sh",
-    ]
-  }
 }
 
 #########################################################
