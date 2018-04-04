@@ -1,0 +1,79 @@
+{
+   "name": "Cloud Install Mirror on Bluemix",
+   "description": "Creates a Cloud Install Mirror Server on Bluemix.",
+   "version": "2.0.0",
+   "imageUrl": "./assets/svg/IBM_WebSphere_Standalone.svg",
+   "image": "tp_WAS_standalone.png",
+   "type": "userCreated",
+   "status": "active",
+   "manifest": {
+     "template_type": "Terraform",
+     "template_format": "HCL",
+     "template_provider": "IBM",
+     "template": {
+       "templateData": "",
+       "templateVariables": "",
+       "templateOutput": ""
+     },
+     "template_source": {
+       "githubRepoUrl": "",
+       "githubAccessToken": "",
+       "relativePathToTemplateFolder": "BlueMix/terraform/hcl/mirror",
+       "templateFileName": "mirror.tf"
+     }
+   },
+   "metadata": {
+     "displayName": "Creates a Cloud Install Mirror Server on Bluemix",
+     "providerDisplayName": "IBM",
+     "longDescription": "Creates a single VM on Bluemix, downloads the Cloud Install mirror and scripts from AWS and sets up an HTTP server.",
+     "bullets": [
+       {
+         "title": "Clouds",
+         "description": "IBM Cloud/Softlayer"
+       },
+       {
+         "title": "Template version",
+         "description": "V1.0"
+       },
+       {
+         "title": "Operating systems supported",
+         "description": "IBM Cloud: RHEL 7"
+       },
+       {
+         "title": "Topology",
+         "description": "IBM Cloud: 1 virtual machine: RHEL 7"
+       },
+       {
+         "title": "Software deployed",
+         "description": "<table style=\"width:100%\"><tr><td width=\"20%\" valign=\"top\">1. Cloud Install Mirror</td><td>a mirror containing the Cloud Install scripts, RHEL, EPEL, product distributions and open source componets in support of installations of Hybrid Cloud Secure Data Lakes.</td></tr></table>"
+       },
+       {
+         "title": "Usage and special notes",
+         "description": "<ul><li>1. Deployment takes approximately 3 hours to complete.</li><li>2. Log into the VM and check /root/nohup.out to follow install progress.</li></ul>"
+       }
+     ],
+     "featuredImageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_50.png",
+     "imageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_50.png",
+     "mediumImageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_32.png",
+     "smallImageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_24.png",
+     "documentationUrl": "https://console.stage1.ng.bluemix.net/docs/services/CloudAutomationManager/index.html",
+     "termsUrl": "http://www-03.ibm.com/software/sla/sladb.nsf/sla/bm-7448-01",
+     "media": [
+       {
+         "type": "image",
+         "thumbnailUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/screenshots_1.png",
+         "url": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/screenshots_1_large.png",
+         "caption": ""
+       },
+       {
+         "type": "image",
+         "thumbnailUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/screenshots_2.png",
+         "url": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/screenshots_2_large.png",
+         "caption": ""
+       }
+     ]
+   },
+   "toolchain": {
+     "git": "https://github.com/ibmcam/cam-toolchain"
+   }
+ }
