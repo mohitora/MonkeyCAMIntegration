@@ -105,6 +105,23 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address}"
   }
+  
+  
+  provisioner "file" {
+    content = <<EOF
+#!/bin/sh
+
+set -x 
+
+. /opt/monkey_cam_vars.txt;
+
+
+EOF
+
+    destination = "/opt/installation.sh"
+
+  }
+  
 
 }
 
@@ -131,6 +148,7 @@ resource "null_resource" "start_install" {
 
   provisioner "remote-exec" {
     inline = [
+      "echo  export cam_aws_access_key_id=${var.aws_access_key_id} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_private_ips=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_private_subnets=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.private_subnet)} >> /opt/monkey_cam_vars.txt"
     ]
