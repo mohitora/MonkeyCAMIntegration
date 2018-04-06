@@ -91,7 +91,7 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   datacenter               = "${var.datacenter}"
   network_speed            = 10
   hourly_billing           = true
-  private_network_only     = true
+  private_network_only     = false
   cores                    = 8
   memory                   = 8192
   disks                    = [100,1000]
