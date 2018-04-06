@@ -110,7 +110,62 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   
     content = <<EOF
 #!/bin/bash
-date
+
+set -x
+
+yum install python rsync unzip ksh perl  wget expect createrepo -y
+curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+unzip awscli-bundle.zip
+sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+
+# Create /root/.aws/credentials
+mkdir -p ~/.aws
+cat<<END>>~/.aws/credentials
+[default]
+aws_access_key_id = $cam_aws_access_key_id
+aws_secret_access_key = $cam_aws_secret_access_key
+END
+
+devname=/dev/xvdc
+partname=/dev/xvdc1
+parted -s $devname mklabel gpt
+parted -s -a optimal $devname mkpart primary 0% 100%
+mkfs.xfs $partname
+mkdir -p /var/www/html
+echo "/$partname /var/www/html xfs defaults 1 1" >> /etc/fstab
+mount -a 
+
+# Download mirror
+aws --endpoint-url=$cam_aws_endpoint_url s3 cp $cam_aws_source_mirror_path /var/www/html
+
+# Expand mirror
+cd /var/www/html
+tar xf *.tar
+
+# Also download cloud_installer from AWS into /var/www/html/cloud_install
+mkdir -p /var/www/html/cloud_install
+aws --endpoint-url=$cam_aws_endpoint_url s3 cp $cam_aws_source_cloud_install_path /var/www/html/cloud_install
+
+# Install HTTP server
+
+sudo yum -y install httpd
+sudo firewall-cmd --permanent --add-port=80/tcp
+sudo firewall-cmd --permanent --add-port=443/tcp
+sudo firewall-cmd --reload
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+
+# Disable SELinux
+cat /etc/selinux/config|grep -v "^SELINUX=">/tmp/__selinuxConfig
+echo "SELINUX=disabled">>/tmp/__selinuxConfig
+mv -f /tmp/__selinuxConfig /etc/selinux/config
+setenforce 0
+
+echo "Mirror setup complete. Rebooting..."
+
+reboot
 EOF
 
     destination = "/opt/installation.sh"
