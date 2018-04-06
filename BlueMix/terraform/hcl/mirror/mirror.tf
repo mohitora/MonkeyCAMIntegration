@@ -149,6 +149,11 @@ resource "null_resource" "start_install" {
   provisioner "remote-exec" {
     inline = [
       "echo  export cam_aws_access_key_id=${var.aws_access_key_id} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_aws_secret_access_key=${var.aws_secret_access_key} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_aws_endpoint_url=${var.aws_endpoint_url} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_aws_source_mirror_path=${var.aws_source_mirror_path} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_aws_source_cloud_install_path=${var.aws_source_cloud_install_path} >> /opt/monkey_cam_vars.txt",
+      
       "echo  export cam_private_ips=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_private_subnets=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.private_subnet)} >> /opt/monkey_cam_vars.txt"
     ]
