@@ -106,22 +106,16 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
     host        = "${self.ipv4_address}"
   }
   
+  provisioner "file" {
   
-#  provisioner "file" {
-#    content = <<EOF
-##!/bin/sh
-#
-#set -x 
-#
-#. /opt/monkey_cam_vars.txt;
-#
-#
-#EOF
-#
-#    destination = "/opt/installation.sh"
-#
-#  }
-  
+    content = <<EOF
+#!/bin/sh
+set -x 
+. /opt/monkey_cam_vars.txt;
+EOF
+
+    destination = "/opt/installation.sh"
+  }
 
 }
 
