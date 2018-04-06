@@ -111,10 +111,11 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
     content = <<EOF
 #!/bin/sh
 set -x 
-. /opt/monkey_cam_vars.txt;
+LOGFILE="/var/log/my_installation.log"
+date
 EOF
 
-    destination = "/opt/installation.sh"
+    destination = "/tmp/installation.sh"
   }
 
 }
