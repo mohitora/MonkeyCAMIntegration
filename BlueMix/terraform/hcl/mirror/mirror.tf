@@ -107,20 +107,20 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   }
   
   
-  provisioner "file" {
-    content = <<EOF
-#!/bin/sh
-
-set -x 
-
-. /opt/monkey_cam_vars.txt;
-
-
-EOF
-
-    destination = "/opt/installation.sh"
-
-  }
+#  provisioner "file" {
+#    content = <<EOF
+##!/bin/sh
+#
+#set -x 
+#
+#. /opt/monkey_cam_vars.txt;
+#
+#
+#EOF
+#
+#    destination = "/opt/installation.sh"
+#
+#  }
   
 
 }
