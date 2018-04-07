@@ -120,7 +120,7 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address}"
   }
-  
+   
   provisioner "file" {
   
     content = <<EOF
