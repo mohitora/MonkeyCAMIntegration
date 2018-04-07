@@ -85,7 +85,7 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   private_vlan_id           = "${data.ibm_network_vlan.cluster_vlan.id}"
   network_speed            = 10
   hourly_billing           = true
-  private_network_only     = false
+  private_network_only     = true
   cores                    = 1
   memory                   = 1024
   disks                    = [25]
