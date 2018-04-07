@@ -60,6 +60,14 @@ variable "aws_source_cloud_install_path" {
   description = "AWS Source Cloud Installer Path (points to a tar file containing the Cloud Install scripts)."
 }
 
+variable "vlan_number" {
+  description = "VLAN Number"
+}
+
+variable "vlan_router" {
+  description = "VLAN router"
+}
+
 ##############################################################
 # Create public key in Devices>Manage>SSH Keys in SL console
 ##############################################################
