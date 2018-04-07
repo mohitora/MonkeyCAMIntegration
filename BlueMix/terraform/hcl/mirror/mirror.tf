@@ -103,10 +103,10 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   os_reference_code        = "REDHAT_7_64"
   domain                   = "${var.vm_domain}"
   datacenter               = "${var.datacenter}"
-  private_vlan_id          = "${data.ibm_network_vlan.cluster_vlan.id}"
+#  private_vlan_id          = "${data.ibm_network_vlan.cluster_vlan.id}"
   network_speed            = 10
   hourly_billing           = true
-  private_network_only     = true
+  private_network_only     = false
   cores                    = 8
   memory                   = 8192
   disks                    = [100,1000]
