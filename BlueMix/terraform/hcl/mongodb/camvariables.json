@@ -180,7 +180,7 @@
         "required": true, 
         "secured": false, 
         "type": "string",
-        "default": "1457"
+        "default": "1739"
     },
     {
         "description": "VLAN Router", 
@@ -191,6 +191,6 @@
         "required": true, 
         "secured": false, 
         "type": "string",
-        "default": "bcr01a.dal10"
+        "default": "bcr02a.dal10"
     }
 ]
