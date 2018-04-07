@@ -135,6 +135,28 @@
               "label": "Washington, D.C. 04, USA"
           }
         ]
+    },
+    {
+        "description": "VLAN Number", 
+        "hidden": false, 
+        "immutable": false, 
+        "label": "VLAN Number", 
+        "name": "vlan_number", 
+        "required": true, 
+        "secured": false, 
+        "type": "string",
+        "default": "1457"
+    },
+    {
+        "description": "VLAN Router", 
+        "hidden": false, 
+        "immutable": false, 
+        "label": "VLAN Router", 
+        "name": "vlan_router", 
+        "required": true, 
+        "secured": false, 
+        "type": "string",
+        "default": "bcr01a.dal10"
     }, 
     {
         "description": "Hostname of the virtual instance to be deployed; Allow 1 to 200 alphanumeric characters and non-consecutive non-leading non-ending dashes", 
