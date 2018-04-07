@@ -100,7 +100,7 @@ data "ibm_network_vlan" "cluster_vlan" {
 resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   count                    = "1"
   hostname                 = "${var.hostname}"
-  os_reference_code        = "CENTOS_7_64"
+  os_reference_code        = "REDHAT_7_64"
   domain                   = "${var.vm_domain}"
   datacenter               = "${var.datacenter}"
   network_speed            = 1000
