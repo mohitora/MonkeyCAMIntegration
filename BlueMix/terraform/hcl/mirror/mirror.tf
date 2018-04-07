@@ -103,7 +103,7 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   os_reference_code        = "CENTOS_7_64"
   domain                   = "${var.vm_domain}"
   datacenter               = "${var.datacenter}"
-  network_speed            = 10
+  network_speed            = 1000
   hourly_billing           = true
   private_network_only     = false
   cores                    = 8
