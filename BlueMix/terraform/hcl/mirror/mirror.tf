@@ -222,7 +222,7 @@ resource "null_resource" "start_install" {
       "echo  export cam_private_ips=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_private_subnets=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.private_subnet)} >> /opt/monkey_cam_vars.txt",
 
-      "echo  'echo "/$partname /var/www/html xfs defaults 1 1" >> /etc/fstab' >> /opt/monkey_cam_vars.txt"
+      "echo  echo "/$partname /var/www/html xfs defaults 1 1" >> /etc/fstab >> /opt/monkey_cam_vars.txt"
       
 #      "chmod 755 /opt/installation.sh",
 #      "nohup /opt/installation.sh &",
