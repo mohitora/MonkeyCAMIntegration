@@ -1,6 +1,8 @@
 #################################################################
 # Terraform template that will deploy an VM with Cloud Install Mirror only
 #
+# This is the version that works with the file provisioner when using both public and private interfaces without a firewall in front of the VLAN.
+#
 # Version: 1.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -118,11 +120,84 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   connection {
     user        = "root"
     private_key = "${tls_private_key.ssh.private_key_pem}"
-    host        = "${self.ipv4_address}"
+    host        = "${self.ipv4_address_private}"
+  }
+   
+  provisioner "file" {
+  
+    content = <<EOF
+#!/bin/bash
+
+set -x
+
+. /opt/monkey_cam_vars.txt
+
+yum install python rsync unzip ksh perl  wget expect createrepo -y
+curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+unzip awscli-bundle.zip
+sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+
+# Create /root/.aws/credentials
+mkdir -p ~/.aws
+cat<<END>>~/.aws/credentials
+[default]
+aws_access_key_id = $cam_aws_access_key_id
+aws_secret_access_key = $cam_aws_secret_access_key
+END
+
+devname=/dev/xvdc
+partname=/dev/xvdc1
+parted -s $devname mklabel gpt
+parted -s -a optimal $devname mkpart primary 0% 100%
+mkfs.xfs $partname
+mkdir -p /var/www/html
+echo "/$partname /var/www/html xfs defaults 1 1" >> /etc/fstab
+mount -a 
+
+# Download mirror
+aws --endpoint-url=$cam_aws_endpoint_url s3 cp $cam_aws_source_mirror_path /var/www/html
+
+# Expand mirror
+cd /var/www/html
+tar xf *.tar
+
+# Also download cloud_installer from AWS into /var/www/html/cloud_install
+mkdir -p /var/www/html/cloud_install
+aws --endpoint-url=$cam_aws_endpoint_url s3 cp $cam_aws_source_cloud_install_path /var/www/html/cloud_install
+
+# Install HTTP server
+
+sudo yum -y install httpd
+sudo firewall-cmd --permanent --add-port=80/tcp
+sudo firewall-cmd --permanent --add-port=443/tcp
+sudo firewall-cmd --reload
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+
+# Disable SELinux
+cat /etc/selinux/config|grep -v "^SELINUX=">/tmp/__selinuxConfig
+echo "SELINUX=disabled">>/tmp/__selinuxConfig
+mv -f /tmp/__selinuxConfig /etc/selinux/config
+setenforce 0
+
+echo "Mirror setup complete. Rebooting..."
+
+reboot
+EOF
+
+    destination = "/opt/installation.sh"
   }
 
 }
 
+#########################################################
+# Output
+#########################################################
+#output "The IP address of the VM with Mirror installed" {
+#  value = "join(",",ibm_compute_vm_instance.softlayer_virtual_guest.ipv4_address_private)}"
+#}
 
 
 resource "null_resource" "start_install" {
@@ -148,45 +223,6 @@ resource "null_resource" "start_install" {
       
       "echo  export cam_private_ips=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_private_subnets=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.private_subnet)} >> /opt/monkey_cam_vars.txt",
-
-      # Create the installation script here, line-by-line, since the file provisioner does not work with a private network interface...
-      "echo set -x >> /opt/installation.sh",
-      "echo . /opt/monkey_cam_vars.txt >> /opt/installation.sh",
-      "echo yum install python rsync unzip ksh perl  wget expect createrepo -y >> /opt/installation.sh",
-      "echo curl \"https://s3.amazonaws.com/aws-cli/awscli-bundle.zip\" -o awscli-bundle.zip >> /opt/installation.sh",
-      "echo unzip awscli-bundle.zip >> /opt/installation.sh",
-      "echo sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws >> /opt/installation.sh",
-      
-      "mkdir -p ~/.aws",
-      "echo [default] >> ~/.aws/credentials",
-      "echo aws_access_key_id = ${var.aws_access_key_id} >> ~/.aws/credentials",
-      "echo aws_secret_access_key =${var.aws_secret_access_key} >> ~/.aws/credentials",
-      
-      "echo parted -s /dev/xvdc mklabel gpt >> /opt/installation.sh",
-      "echo parted -s -a optimal /dev/xvdc mkpart primary 0% 100% >> /opt/installation.sh",
-      "echo mkfs.xfs /dev/xvdc1 >> /opt/installation.sh",
-      "echo mkdir -p /var/www/html >> /opt/installation.sh",
-      
-      "echo /dev/xvdc1 /var/www/html xfs defaults 1 1 >> /etc/fstab",
-      
-      "echo mount -a >> /opt/installation.sh",
-      "echo aws --endpoint-url=${var.aws_endpoint_url} s3 cp ${var.aws_source_mirror_path} /var/www/html >> /opt/installation.sh",
-      "echo cd /var/www/html >> /opt/installation.sh",
-      "echo tar xf *.tar >> /opt/installation.sh",
-      "echo mkdir -p /var/www/html/cloud_install >> /opt/installation.sh",
-      "echo aws --endpoint-url=${var.aws_endpoint_url} s3 cp ${var.aws_source_cloud_install_path} /var/www/html >> /opt/installation.sh",
-      "echo sudo yum -y install httpd >> /opt/installation.sh",
-      "echo sudo firewall-cmd --permanent --add-port=80/tcp >> /opt/installation.sh",
-      "echo sudo firewall-cmd --permanent --add-port=443/tcp >> /opt/installation.sh",
-      "echo sudo firewall-cmd --reload >> /opt/installation.sh",
-      "echo sudo systemctl start httpd >> /opt/installation.sh",
-      "echo sudo systemctl enable httpd >> /opt/installation.sh",
-      "echo \"cat /etc/selinux/config|grep -v '^SELINUX='>/tmp/__selinuxConfig\" >> /opt/installation.sh",
-      "echo \"echo 'SELINUX=disabled'>>/tmp/__selinuxConfig\" >> /opt/installation.sh",
-      "echo mv -f /tmp/__selinuxConfig /etc/selinux/config >> /opt/installation.sh",
-      "echo setenforce 0 >> /opt/installation.sh",
-      "echo echo 'Mirror setup complete. Rebooting...' >> /opt/installation.sh",
-#      "echo reboot >> /opt/installation.sh",
       
       "chmod 755 /opt/installation.sh",
       "nohup /opt/installation.sh &",
