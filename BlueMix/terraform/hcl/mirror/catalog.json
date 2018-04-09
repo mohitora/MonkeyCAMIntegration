@@ -1,6 +1,6 @@
 {
    "name": "Cloud Install Mirror on Bluemix",
-   "description": "Creates a Cloud Install Mirror Server on Bluemix.",
+   "description": "Cloud Install Mirror Server on IBM Cloud.",
    "version": "2.0.0",
    "imageUrl": "./assets/svg/IBM_WebSphere_Standalone.svg",
    "image": "tp_WAS_standalone.png",
@@ -23,7 +23,7 @@
      }
    },
    "metadata": {
-     "displayName": "Creates a Cloud Install Mirror Server on Bluemix",
+     "displayName": "Creates a Cloud Install Mirror Server on IBM Cloud",
      "providerDisplayName": "IBM",
      "longDescription": "Creates a single VM on Bluemix, downloads the Cloud Install mirror and scripts from AWS and sets up an HTTP server.",
      "bullets": [

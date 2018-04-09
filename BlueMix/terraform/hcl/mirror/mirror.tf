@@ -1,7 +1,9 @@
 #################################################################
 # Terraform template that will deploy an VM with Cloud Install Mirror only
 #
-# This is the version that works with the file provisioner when using both public and private interfaces without a firewall in front of the VLAN.
+# This works with a private network-only VM.
+#
+# Julius Lerm, 8apr2018, 9:49pm
 #
 # Version: 1.0
 #
