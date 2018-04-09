@@ -186,7 +186,7 @@ resource "null_resource" "start_install" {
       "echo mv -f /tmp/__selinuxConfig /etc/selinux/config >> /opt/installation.sh",
       "echo setenforce 0 >> /opt/installation.sh",
       "echo echo 'Mirror setup complete. Rebooting...' >> /opt/installation.sh",
-      "echo reboot >> /opt/installation.sh",
+#      "echo reboot >> /opt/installation.sh",
       
       "chmod 755 /opt/installation.sh",
       "nohup /opt/installation.sh &",
