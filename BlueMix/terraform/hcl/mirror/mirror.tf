@@ -156,8 +156,8 @@ resource "null_resource" "start_install" {
       "echo curl \"https://s3.amazonaws.com/aws-cli/awscli-bundle.zip\" -o awscli-bundle.zip >> /opt/installation.sh",
       "echo unzip awscli-bundle.zip >> /opt/installation.sh",
       "echo sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws >> /opt/installation.sh",
-      "echo mkdir -p ~/.aws >> /opt/installation.sh",
       
+      "mkdir -p ~/.aws >> /opt/installation.sh",
       "echo [default] >> ~/.aws/credentials",
       "echo ${var.aws_access_key_id} >> ~/.aws/credentials",
       "echo ${var.aws_secret_access_key} >> ~/.aws/credentials",
@@ -188,9 +188,9 @@ resource "null_resource" "start_install" {
       "echo echo 'Mirror setup complete. Rebooting...' >> /opt/installation.sh",
       "echo reboot >> /opt/installation.sh"
       
-#      "chmod 755 /opt/installation.sh",
-#      "nohup /opt/installation.sh &",
-#      "sleep 60"
+      "chmod 755 /opt/installation.sh",
+      "nohup /opt/installation.sh &",
+      "sleep 60"
     ]
   }
 }
