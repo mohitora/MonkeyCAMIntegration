@@ -153,7 +153,7 @@ resource "null_resource" "start_install" {
       "echo set -x >> /opt/installation.sh",
       "echo . /opt/monkey_cam_vars.txt >> /opt/installation.sh",
       "echo yum install python rsync unzip ksh perl  wget expect createrepo -y >> /opt/installation.sh",
-      "curl https://s3.amazonaws.com/aws-cli/awscli-bundle.zip -o awscli-bundle.zip >> /opt/installation.sh"
+      "curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o awscli-bundle.zip >> /opt/installation.sh"
       
 #      "chmod 755 /opt/installation.sh",
 #      "nohup /opt/installation.sh &",
