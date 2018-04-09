@@ -120,82 +120,17 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address}"
   }
-   
-  provisioner "file" {
-  
-    content = <<EOF
-#!/bin/bash
-
-set -x
-
-. /opt/monkey_cam_vars.txt
-
-yum install python rsync unzip ksh perl  wget expect createrepo -y
-curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-unzip awscli-bundle.zip
-sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-
-
-# Create /root/.aws/credentials
-mkdir -p ~/.aws
-cat<<END>>~/.aws/credentials
-[default]
-aws_access_key_id = $cam_aws_access_key_id
-aws_secret_access_key = $cam_aws_secret_access_key
-END
-
-devname=/dev/xvdc
-partname=/dev/xvdc1
-parted -s $devname mklabel gpt
-parted -s -a optimal $devname mkpart primary 0% 100%
-mkfs.xfs $partname
-mkdir -p /var/www/html
-echo "/$partname /var/www/html xfs defaults 1 1" >> /etc/fstab
-mount -a 
-
-# Download mirror
-aws --endpoint-url=$cam_aws_endpoint_url s3 cp $cam_aws_source_mirror_path /var/www/html
-
-# Expand mirror
-cd /var/www/html
-tar xf *.tar
-
-# Also download cloud_installer from AWS into /var/www/html/cloud_install
-mkdir -p /var/www/html/cloud_install
-aws --endpoint-url=$cam_aws_endpoint_url s3 cp $cam_aws_source_cloud_install_path /var/www/html/cloud_install
-
-# Install HTTP server
-
-sudo yum -y install httpd
-sudo firewall-cmd --permanent --add-port=80/tcp
-sudo firewall-cmd --permanent --add-port=443/tcp
-sudo firewall-cmd --reload
-sudo systemctl start httpd
-sudo systemctl enable httpd
-
-
-# Disable SELinux
-cat /etc/selinux/config|grep -v "^SELINUX=">/tmp/__selinuxConfig
-echo "SELINUX=disabled">>/tmp/__selinuxConfig
-mv -f /tmp/__selinuxConfig /etc/selinux/config
-setenforce 0
-
-echo "Mirror setup complete. Rebooting..."
-
-reboot
-EOF
-
-    destination = "/opt/installation.sh"
-  }
 
 }
 
-#########################################################
-# Output
-#########################################################
-#output "The IP address of the VM with Mirror installed" {
-#  value = "join(",",ibm_compute_vm_instance.softlayer_virtual_guest.ipv4_address_private)}"
-#}
+########
+# Local variables
+locals {
+  vm_ipv4_address_elements = "${split(".",var.vm_start_ipv4_address)}"
+  vm_ipv4_address_base = "${format("%s.%s.%s",local.vm_ipv4_address_elements[0],local.vm_ipv4_address_elements[1],local.vm_ipv4_address_elements[2])}"
+  vm_ipv4_address_start= "${local.vm_ipv4_address_elements[3] + 5}"
+  vm_dns_domain="${join(",",var.vm_dns_suffixes)}"
+}
 
 
 resource "null_resource" "start_install" {
@@ -222,7 +157,11 @@ resource "null_resource" "start_install" {
       "echo  export cam_private_ips=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_private_subnets=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.private_subnet)} >> /opt/monkey_cam_vars.txt",
 
-      "echo  echo /$partname /var/www/html xfs defaults 1 1 >> /etc/fstab >> /opt/monkey_cam_vars.txt"
+      # Create the installation script here, line-by-line, since the file provisioner does not work with a private network interface...
+      "echo set -x >> /opt/installation.sh",
+      "echo . /opt/monkey_cam_vars.txt >> /opt/installation.sh",
+      "echo yum install python rsync unzip ksh perl  wget expect createrepo -y >> /opt/installation.sh",
+      "curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" >> /opt/installation.sh"
       
 #      "chmod 755 /opt/installation.sh",
 #      "nohup /opt/installation.sh &",
