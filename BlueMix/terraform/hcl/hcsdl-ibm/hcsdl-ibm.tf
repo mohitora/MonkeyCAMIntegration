@@ -56,10 +56,12 @@ variable "time_server" {
 }
 
 variable "vm_dns_servers" {
+  type = "list"
   description = "vm_dns_servers"
 }
 
 variable "vm_dns_suffixes" {
+  type = "list"
   description = "vm_dns_suffixes"
 }
 
@@ -88,6 +90,7 @@ variable "mgmtnode_mem" {
 }
 
 variable "mgmtnode_disks" {
+  type = "list"
   description = "mgmtnode_disks"
 }
 
@@ -104,6 +107,7 @@ variable "datanode_mem" {
 }
 
 variable "datanode_disks" {
+  type = "list"
   description = "datanode_disks"
 }
 
