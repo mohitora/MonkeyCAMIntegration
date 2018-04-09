@@ -159,10 +159,10 @@ resource "null_resource" "start_install" {
       
       "mkdir -p ~/.aws",
       "echo [default] >> ~/.aws/credentials",
-      "echo ${var.aws_access_key_id} >> ~/.aws/credentials",
-      "echo ${var.aws_secret_access_key} >> ~/.aws/credentials",
+      "echo aws_access_key_id = ${var.aws_access_key_id} >> ~/.aws/credentials",
+      "echo aws_secret_access_key =${var.aws_secret_access_key} >> ~/.aws/credentials",
       
-      "echo parted -s /dev/xvdc gpt >> /opt/installation.sh",
+      "echo parted -s /dev/xvdc mklabel gpt >> /opt/installation.sh",
       "echo parted -s -a optimal /dev/xvdc mkpart primary 0% 100% >> /opt/installation.sh",
       "echo mkfs.xfs /dev/xvdc1 >> /opt/installation.sh",
       "echo mkdir -p /var/www/html >> /opt/installation.sh",
