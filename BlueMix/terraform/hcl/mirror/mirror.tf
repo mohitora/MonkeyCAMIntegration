@@ -153,7 +153,40 @@ resource "null_resource" "start_install" {
       "echo set -x >> /opt/installation.sh",
       "echo . /opt/monkey_cam_vars.txt >> /opt/installation.sh",
       "echo yum install python rsync unzip ksh perl  wget expect createrepo -y >> /opt/installation.sh",
-      "echo curl \"https://s3.amazonaws.com/aws-cli/awscli-bundle.zip\" -o awscli-bundle.zip >> /opt/installation.sh"
+      "echo curl \"https://s3.amazonaws.com/aws-cli/awscli-bundle.zip\" -o awscli-bundle.zip >> /opt/installation.sh",
+      "echo unzip awscli-bundle.zip >> /opt/installation.sh",
+      "echo sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws >> /opt/installation.sh",
+      "echo mkdir -p ~/.aws >> /opt/installation.sh",
+      
+      "echo [default] >> ~/.aws/credentials",
+      "echo ${var.aws_access_key_id} >> ~/.aws/credentials",
+      "echo ${var.aws_secret_access_key} >> ~/.aws/credentials",
+      
+      "echo parted -s /dev/xvdc gpt >> /opt/installation.sh",
+      "echo parted -s -a optimal /dev/xvdc mkpart primary 0% 100% >> /opt/installation.sh",
+      "echo mkfs.xfs /dev/xvdc1 >> /opt/installation.sh",
+      "echo mkdir -p /var/www/html >> /opt/installation.sh",
+      
+      "echo /dev/xvdc1 /var/www/html xfs defaults 1 1 >> /etc/fstab",
+      
+      "echo mount -a >> /opt/installation.sh",
+      "echo aws --endpoint-url=${var.aws_endpoint_url} s3 cp ${var.aws_source_mirror_path} /var/www/html >> /opt/installation.sh",
+      "echo cd /var/www/html >> /opt/installation.sh",
+      "echo tar xf *.tar >> /opt/installation.sh",
+      "echo mkdir -p /var/www/html/cloud_install >> /opt/installation.sh",
+      "echo aws --endpoint-url=${var.aws_endpoint_url} s3 cp ${var.aws_source_cloud_install_path} /var/www/html >> /opt/installation.sh",
+      "echo sudo yum -y install httpd >> /opt/installation.sh",
+      "echo sudo firewall-cmd --permanent --add-port=80/tcp >> /opt/installation.sh",
+      "echo sudo firewall-cmd --permanent --add-port=443/tcp >> /opt/installation.sh",
+      "echo sudo firewall-cmd --reload >> /opt/installation.sh",
+      "echo sudo systemctl start httpd >> /opt/installation.sh",
+      "echo sudo systemctl enable httpd >> /opt/installation.sh",
+      "echo \"cat /etc/selinux/config|grep -v '^SELINUX='>/tmp/__selinuxConfig\" >> /opt/installation.sh",
+      "echo \"echo 'SELINUX=disabled'>>/tmp/__selinuxConfig\" >> /opt/installation.sh",
+      "echo mv -f /tmp/__selinuxConfig /etc/selinux/config >> /opt/installation.sh",
+      "echo setenforce 0 >> /opt/installation.sh",
+      "echo echo 'Mirror setup complete. Rebooting...' >> /opt/installation.sh",
+      "echo reboot >> /opt/installation.sh"
       
 #      "chmod 755 /opt/installation.sh",
 #      "nohup /opt/installation.sh &",
