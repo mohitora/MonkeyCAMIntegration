@@ -1,5 +1,5 @@
 {
-   "name": "Cloud Install Mirror on Bluemix",
+   "name": "Cloud Install Mirror on IBM Cloud",
    "description": "Cloud Install Mirror Server on IBM Cloud.",
    "version": "2.0.0",
    "imageUrl": "./assets/svg/IBM_WebSphere_Standalone.svg",
