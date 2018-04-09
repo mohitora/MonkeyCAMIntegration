@@ -157,7 +157,7 @@ resource "null_resource" "start_install" {
       "echo unzip awscli-bundle.zip >> /opt/installation.sh",
       "echo sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws >> /opt/installation.sh",
       
-      "mkdir -p ~/.aws >> /opt/installation.sh",
+      "mkdir -p ~/.aws",
       "echo [default] >> ~/.aws/credentials",
       "echo ${var.aws_access_key_id} >> ~/.aws/credentials",
       "echo ${var.aws_secret_access_key} >> ~/.aws/credentials",
@@ -186,7 +186,7 @@ resource "null_resource" "start_install" {
       "echo mv -f /tmp/__selinuxConfig /etc/selinux/config >> /opt/installation.sh",
       "echo setenforce 0 >> /opt/installation.sh",
       "echo echo 'Mirror setup complete. Rebooting...' >> /opt/installation.sh",
-      "echo reboot >> /opt/installation.sh"
+      "echo reboot >> /opt/installation.sh",
       
       "chmod 755 /opt/installation.sh",
       "nohup /opt/installation.sh &",
