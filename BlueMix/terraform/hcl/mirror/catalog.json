@@ -23,9 +23,9 @@
      }
    },
    "metadata": {
-     "displayName": "Creates a Cloud Install Mirror Server on IBM Cloud",
+     "displayName": "Cloud Install Mirror Server on IBM Cloud",
      "providerDisplayName": "IBM",
-     "longDescription": "Creates a single VM on Bluemix, downloads the Cloud Install mirror and scripts from AWS and sets up an HTTP server.",
+     "longDescription": "Creates a single VM on IBM Cloud, downloads the Cloud Install mirror and scripts from AWS and sets up an HTTP server.",
      "bullets": [
        {
          "title": "Clouds",
