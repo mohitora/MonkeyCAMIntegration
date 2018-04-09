@@ -81,9 +81,9 @@ data "ibm_network_vlan" "cluster_vlan" {
 ##############################################################
 # Create VMs
 ##############################################################
-resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
+resource "ibm_compute_vm_instance" "driver" {
   count                    = "1"
-  hostname                 = "${var.vm_name_prefix}-test"
+  hostname                 = "${var.vm_name_prefix}-drv"
   os_reference_code        = "REDHAT_7_64"
   domain                   = "${var.vm_domain}"
   datacenter               = "${var.datacenter}"
@@ -91,9 +91,9 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   network_speed            = 1000
   hourly_billing           = true
   private_network_only     = true
-  cores                    = 8
-  memory                   = 8192
-  disks                    = [100,1000]
+  cores                    = 4
+  memory                   = 4096
+  disks                    = [100]
   dedicated_acct_host_only = false
   local_disk               = false
   ssh_key_ids              = ["${ibm_compute_ssh_key.cam_public_key.id}", "${ibm_compute_ssh_key.temp_public_key.id}"]
@@ -105,6 +105,39 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
     host        = "${self.ipv4_address_private}"
   }
 
+  provisioner "file" {
+    content = <<EOF
+#!/bin/sh
+
+set -x 
+
+mkdir -p /opt/cloud_install; 
+
+cd /opt/cloud_install;
+
+. /opt/monkey_cam_vars.txt;
+
+wget http://$cam_monkeymirror/cloud_install/$cloud_install_tar_file_name
+
+tar xf ./$cloud_install_tar_file_name
+
+yum install -y ksh rsync expect unzip 
+
+perl -f cam_integration/01_gen_cam_install_properties.pl
+
+. ./setenv
+
+utils/01_prepare_driver.sh
+
+utils/01_prepare_all_nodes.sh
+
+nohup ./01_master_install_hdp.sh &
+
+EOF
+
+    destination = "/opt/installation.sh"
+
+  }
 }
 
 #########################################################
