@@ -43,7 +43,6 @@ variable "public_ssh_key" {
   description = "Public SSH key used to connect to the virtual guest"
 }
 
-
 variable "vlan_number" {
   description = "VLAN Number"
 }
@@ -51,6 +50,72 @@ variable "vlan_number" {
 variable "vlan_router" {
   description = "VLAN router"
 }
+
+variable "time_server" {
+  description = "time_server"
+}
+
+variable "vm_dns_servers" {
+  description = "vm_dns_servers"
+}
+
+variable "vm_dns_suffixes" {
+  description = "vm_dns_suffixes"
+}
+
+variable "monkey_mirror" {
+  description = "monkey_mirror"
+}
+
+variable "cloud_install_tar_file_name" {
+  description = "cloud_install_tar_file_name"
+}
+
+variable "public_nic_name" {
+  description = "public_nic_name"
+}
+
+variable "cluster_name" {
+  description = "cluster_name"
+}
+
+variable "mgmtnode_num_cpus" {
+  description = "mgmtnode_num_cpus"
+}
+
+variable "mgmtnode_mem" {
+  description = "mgmtnode_mem"
+}
+
+variable "mgmtnode_disks" {
+  description = "mgmtnode_disks"
+}
+
+variable "num_datanodes" {
+  description = "num_datanodes"
+}
+
+variable "datanode_num_cpus" {
+  description = "datanode_num_cpus"
+}
+
+variable "datanode_mem" {
+  description = "datanode_mem"
+}
+
+variable "datanode_disks" {
+  description = "datanode_disks"
+}
+
+variable "dsengine_mem" {
+  description = "dsengine_mem"
+}
+
+variable "dsengine_num_cpus" {
+  description = "dsengine_num_cpus"
+}
+
+
 
 ##############################################################
 # Create public key in Devices>Manage>SSH Keys in SL console
@@ -121,7 +186,7 @@ wget http://$cam_monkeymirror/cloud_install/$cloud_install_tar_file_name
 
 tar xf ./$cloud_install_tar_file_name
 
-yum install -y ksh rsync expect unzip 
+yum install -y ksh rsync expect unzip perl
 
 perl -f cam_integration/01_gen_cam_install_properties.pl
 
