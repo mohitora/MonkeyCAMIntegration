@@ -256,7 +256,7 @@
       "description": "Prefix for vm names",
       "default": "hcsdl",
       "hidden": false,
-      "label": "Prefix for VM Short Host name",
+      "label": "Prefix for vm names",
       "secured": false,
       "required": true,
       "immutable": false,
