@@ -144,18 +144,18 @@ EOF
 # Output
 #########################################################
 #output "The IP address of the VM with Mirror installed" {
-#  value = "join(",",ibm_compute_vm_instance.softlayer_virtual_guest.ipv4_address_private)}"
+#  value = "join(",",ibm_compute_vm_instance.driver.ipv4_address_private)}"
 #}
 
 
 resource "null_resource" "start_install" {
 
   depends_on = [ 
-  	"ibm_compute_vm_instance.softlayer_virtual_guest"
+  	"ibm_compute_vm_instance.driver"
   ]
 
   connection {
-    host     = "${ibm_compute_vm_instance.softlayer_virtual_guest.0.ipv4_address_private}"
+    host     = "${ibm_compute_vm_instance.driver.0.ipv4_address_private}"
     type     = "ssh"
     user     = "root"
     private_key = "${tls_private_key.ssh.private_key_pem}"
@@ -164,8 +164,8 @@ resource "null_resource" "start_install" {
   provisioner "remote-exec" {
     inline = [
       
-      "echo  export cam_private_ips=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
-      "echo  export cam_private_subnets=${join(",",ibm_compute_vm_instance.softlayer_virtual_guest.*.private_subnet)} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_private_ips=${join(",",ibm_compute_vm_instance.driver.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_private_subnets=${join(",",ibm_compute_vm_instance.driver.*.private_subnet)} >> /opt/monkey_cam_vars.txt",
       
       "chmod 755 /opt/installation.sh",
       "nohup /opt/installation.sh &",
