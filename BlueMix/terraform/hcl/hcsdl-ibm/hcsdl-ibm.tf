@@ -410,13 +410,49 @@ resource "ibm_compute_vm_instance" "hdp-mgmtnodes" {
 
 
 ############################################################################################################################################################
+# HDP Data Nodes
+resource "ibm_compute_vm_instance" "hdp-datanodes" {
+  count="${var.num_datanodes}"
+  hostname = "${var.vm_name_prefix}-dn-${ count.index }"
+  os_reference_code        = "REDHAT_7_64"
+  domain                   = "${var.vm_domain}"
+  datacenter               = "${var.datacenter}"
+  private_vlan_id          = "${data.ibm_network_vlan.cluster_vlan.id}"
+  network_speed            = 1000
+  hourly_billing           = true
+  private_network_only     = true
+  cores                    = "${var.datanode_num_cpus}"
+  memory                   = "${var.datanode_mem}"
+  disks                    = "${var.datanode_disks}"
+  dedicated_acct_host_only = false
+  local_disk               = false
+  ssh_key_ids              = ["${ibm_compute_ssh_key.cam_public_key.id}", "${ibm_compute_ssh_key.temp_public_key.id}"]
+
+  # Specify the ssh connection
+  connection {
+    user        = "root"
+    private_key = "${tls_private_key.ssh.private_key_pem}"
+    host        = "${self.ipv4_address_private}"
+  }
+}
+
+
+############################################################################################################################################################
 # Start Install
 resource "null_resource" "start_install" {
 
   depends_on = [ 
-  	"ibm_compute_vm_instance.driver"
+  	"vsphere_virtual_machine.driver",  
+  	"vsphere_virtual_machine.idm",  
+  	"vsphere_virtual_machine.ishttp",  
+  	"vsphere_virtual_machine.iswasnd",  
+  	"vsphere_virtual_machine.isdb2",  
+  	"vsphere_virtual_machine.isds",  
+  	"vsphere_virtual_machine.haproxy",  
+  	"vsphere_virtual_machine.hdp-mgmtnodes",
+  	"vsphere_virtual_machine.hdp-datanodes"
   ]
-
+  
   connection {
     host     = "${ibm_compute_vm_instance.driver.0.ipv4_address_private}"
     type     = "ssh"
@@ -429,7 +465,31 @@ resource "null_resource" "start_install" {
       
       "echo  export cam_private_ips=${join(",",ibm_compute_vm_instance.driver.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_private_subnets=${join(",",ibm_compute_vm_instance.driver.*.private_subnet)} >> /opt/monkey_cam_vars.txt",
+
+      "echo  export cam_vm_domain=${var.vm_domain} >> /opt/monkey_cam_vars.txt",      
+      "echo  export cam_vm_dns_servers=${join(",",var.vm_dns_servers)} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_vm_dns_suffixes=${join(",",var.vm_dns_suffixes)} >> /opt/monkey_cam_vars.txt",
+
+      "echo  export cam_time_server=${var.time_server} >> /opt/monkey_cam_vars.txt",
       
+      "echo  export cam_public_nic_name=${var.public_nic_name} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_cluster_name=${var.cluster_name} >> /opt/monkey_cam_vars.txt",
+      "echo  export cloud_install_tar_file_name=${var.cloud_install_tar_file_name} >> /opt/monkey_cam_vars.txt",
+      
+      # Hardcode the list of data devices here...
+      # It must be updated if the data node template is modified.
+      # This list must match the naming format, for the data node template definition.
+      "echo  export cam_cloud_biginsights_data_devices=/disk1@/dev/vxdb,/disk2@/dev/vxdc,/disk3@/dev/vxdd,/disk4@/dev/vxde,/disk5@/dev/vxdf,/disk6@/dev/vxdg,/disk7@/dev/vxdh,/disk8@/dev/vxdi,/disk9@/dev/vxdj,/disk10@/dev/vxdk,/disk11@/dev/vxdl,/disk12@/dev/vxdm,/disk13@/dev/vxdn >> /opt/monkey_cam_vars.txt",
+      
+      "echo  export cam_monkeymirror=${var.monkey_mirror} >> /opt/monkey_cam_vars.txt",
+    
+      "echo  export cam_driver_ip=${join(",",ibm_compute_vm_instance.driver.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_driver_name=${join(",",ibm_compute_vm_instance.driver.*.hostname)} >> /opt/monkey_cam_vars.txt",
+    
+      "echo  export cam_idm_ip=${join(","ibm_compute_vm_instance.idm.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_idm_name=${join(",",ibm_compute_vm_instance.idm.*.hostname)} >> /opt/monkey_cam_vars.txt",
+    
+    
       "chmod 755 /opt/installation.sh",
       "nohup /opt/installation.sh &",
       "sleep 60"
