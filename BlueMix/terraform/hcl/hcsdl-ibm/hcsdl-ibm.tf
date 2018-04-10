@@ -180,7 +180,7 @@ resource "ibm_compute_vm_instance" "driver" {
   
 
   provisioner "file" {
-    content = 
+    content = "${tls_private_key.ssh.private_key_pem}"
     destination = "/root/.ssh/id_rsa"
   }
 
