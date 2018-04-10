@@ -395,7 +395,7 @@ resource "ibm_compute_vm_instance" "hdp-mgmtnodes" {
   private_network_only     = true
   cores                    = "${var.mgmtnode_num_cpus}"
   memory                   = "${var.mgmtnode_mem}"
-  disks                    = ${var.mgmtnode_disks}
+  disks                    = "${var.mgmtnode_disks}"
   dedicated_acct_host_only = false
   local_disk               = false
   ssh_key_ids              = ["${ibm_compute_ssh_key.cam_public_key.id}", "${ibm_compute_ssh_key.temp_public_key.id}"]
