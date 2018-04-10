@@ -195,7 +195,7 @@ resource "ibm_compute_vm_instance" "driver" {
       "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
       "usermod ${var.sudo_user} -g wheel"
     ]
-   }
+  }
 
   provisioner "file" {
     content = <<EOF
@@ -258,6 +258,15 @@ resource "ibm_compute_vm_instance" "idm" {
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address_private}"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "useradd ${var.sudo_user}",
+      "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "usermod ${var.sudo_user} -g wheel"
+    ]
+  }
 }
 
 
@@ -286,6 +295,15 @@ resource "ibm_compute_vm_instance" "ishttp" {
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address_private}"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "useradd ${var.sudo_user}",
+      "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "usermod ${var.sudo_user} -g wheel"
+    ]
+  }
 }
 
 ############################################################################################################################################################
@@ -312,6 +330,15 @@ resource "ibm_compute_vm_instance" "iswasnd" {
     user        = "root"
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address_private}"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "useradd ${var.sudo_user}",
+      "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "usermod ${var.sudo_user} -g wheel"
+    ]
   }
 }
 
@@ -341,6 +368,15 @@ resource "ibm_compute_vm_instance" "isdb2" {
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address_private}"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "useradd ${var.sudo_user}",
+      "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "usermod ${var.sudo_user} -g wheel"
+    ]
+  }
 }
 
 
@@ -368,6 +404,15 @@ resource "ibm_compute_vm_instance" "isds" {
     user        = "root"
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address_private}"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "useradd ${var.sudo_user}",
+      "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "usermod ${var.sudo_user} -g wheel"
+    ]
   }
 }
 
@@ -398,6 +443,15 @@ resource "ibm_compute_vm_instance" "haproxy" {
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address_private}"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "useradd ${var.sudo_user}",
+      "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "usermod ${var.sudo_user} -g wheel"
+    ]
+  }
 }
 
 
@@ -426,6 +480,15 @@ resource "ibm_compute_vm_instance" "hdp-mgmtnodes" {
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address_private}"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "useradd ${var.sudo_user}",
+      "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "usermod ${var.sudo_user} -g wheel"
+    ]
+  }
 }
 
 
@@ -453,6 +516,15 @@ resource "ibm_compute_vm_instance" "hdp-datanodes" {
     user        = "root"
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address_private}"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "useradd ${var.sudo_user}",
+      "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "usermod ${var.sudo_user} -g wheel"
+    ]
   }
 }
 
