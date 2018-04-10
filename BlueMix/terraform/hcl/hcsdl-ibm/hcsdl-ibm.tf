@@ -271,7 +271,7 @@ resource "ibm_compute_vm_instance" "ishttp" {
 ############################################################################################################################################################
 # IS WAS-ND
 resource "ibm_compute_vm_instance" "iswasnd" {
-  count="1"
+  count="3"
   hostname = "${var.vm_name_prefix}-iswasnd-${ count.index }"
   os_reference_code        = "REDHAT_7_64"
   domain                   = "${var.vm_domain}"
@@ -299,7 +299,7 @@ resource "ibm_compute_vm_instance" "iswasnd" {
 ############################################################################################################################################################
 # IS DB2
 resource "ibm_compute_vm_instance" "isdb2" {
-  count="1"
+  count="2"
   hostname = "${var.vm_name_prefix}-isdb2-${ count.index }"
   os_reference_code        = "REDHAT_7_64"
   domain                   = "${var.vm_domain}"
@@ -328,7 +328,7 @@ resource "ibm_compute_vm_instance" "isdb2" {
 # IS Engine
 resource "ibm_compute_vm_instance" "isds" {
   count="1"
-  hostname = "${var.vm_name_prefix}-isds-${ count.index }"
+  hostname = "${var.vm_name_prefix}-isds"
   os_reference_code        = "REDHAT_7_64"
   domain                   = "${var.vm_domain}"
   datacenter               = "${var.datacenter}"
