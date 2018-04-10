@@ -43,6 +43,14 @@ variable "public_ssh_key" {
   description = "Public SSH key used to connect to the virtual guest"
 }
 
+variable "sudo_user" {
+  description = "Sudo User"
+}
+
+variable "sudo_password" {
+  description = "Sudo Password"
+}
+
 variable "vlan_number" {
   description = "VLAN Number"
 }
@@ -180,6 +188,14 @@ resource "ibm_compute_vm_instance" "driver" {
     destination = "/root/.ssh/id_rsa"
   }
 
+  provisioner "remote-exec" {
+    inline = [
+      "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "useradd ${var.sudo_user}",
+      "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "usermod ${var.sudo_password} -g wheel"
+    ]
+   }
 
   provisioner "file" {
     content = <<EOF
@@ -469,11 +485,8 @@ resource "null_resource" "start_install" {
     
       "chmod 600 /root/.ssh/id_rsa",
     
-      # Create this property with a bogus password.
-      # SL VMs are created with password-less ssh.
-      # The passwords are only needed for the expect scripts, so they can get a password in the right parameter,
-      # obtained via "get_root_password"()" function...
-      "echo  export cam_ssh_user_password=BOGUSPWD >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_sudo_user=${var.sudo_user} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_sudo_password=${var.sudo_password} >> /opt/monkey_cam_vars.txt",
       
       "echo  export cam_private_ips=${join(",",ibm_compute_vm_instance.driver.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_private_subnets=${join(",",ibm_compute_vm_instance.driver.*.private_subnet)} >> /opt/monkey_cam_vars.txt",

@@ -239,6 +239,31 @@
     },
      
     {
+      "name": "sudo_user",
+      "type": "string",
+      "description": "User name for sudo access",
+      "hidden": false,
+      "label": "Sudo User",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cluster",
+      "default": "sudo1"
+    },
+    {
+      "name": "sudo_password",
+      "type": "string",
+      "description": "Password for sudo user",
+      "hidden": false,
+      "label": "Sudo Password",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cluster",
+      "default": "pwd12345"
+    },
+     
+    {
       "name": "vm_domain",
       "type": "string",
       "description": "Domain Name of cluster VMs",
