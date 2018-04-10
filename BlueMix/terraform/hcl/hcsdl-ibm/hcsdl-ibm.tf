@@ -182,11 +182,6 @@ resource "ibm_compute_vm_instance" "driver" {
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address_private}"
   }
-  
-  provisioner "file" {
-    content = "${tls_private_key.ssh.private_key_pem}"
-    destination = "/root/.ssh/id_rsa"
-  }
 
   provisioner "remote-exec" {
     inline = [
@@ -554,8 +549,6 @@ resource "null_resource" "start_install" {
 
   provisioner "remote-exec" {
     inline = [
-    
-      "chmod 600 /root/.ssh/id_rsa",
     
       "echo  export cam_sudo_user=${var.sudo_user} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_sudo_password=${var.sudo_password} >> /opt/monkey_cam_vars.txt",
