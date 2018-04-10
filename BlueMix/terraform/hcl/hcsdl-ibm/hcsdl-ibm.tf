@@ -462,6 +462,12 @@ resource "null_resource" "start_install" {
 
   provisioner "remote-exec" {
     inline = [
+    
+      # Create this property with a bogus password.
+      # SL VMs are created with password-less ssh.
+      # The passwords are only needed for the expect scripts, so they can get a password in the right parameter,
+      # obtained via "get_root_password"()" function...
+      "echo  export cam_ssh_user_password=BOGUSPWD >> /opt/monkey_cam_vars.txt",
       
       "echo  export cam_private_ips=${join(",",ibm_compute_vm_instance.driver.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_private_subnets=${join(",",ibm_compute_vm_instance.driver.*.private_subnet)} >> /opt/monkey_cam_vars.txt",
