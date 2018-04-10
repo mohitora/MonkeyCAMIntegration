@@ -119,8 +119,6 @@ variable "dsengine_num_cpus" {
   description = "dsengine_num_cpus"
 }
 
-
-
 ##############################################################
 # Create public key in Devices>Manage>SSH Keys in SL console
 ##############################################################
@@ -177,8 +175,6 @@ resource "ibm_compute_vm_instance" "driver" {
     host        = "${self.ipv4_address_private}"
   }
   
-  
-
   provisioner "file" {
     content = "${tls_private_key.ssh.private_key_pem}"
     destination = "/root/.ssh/id_rsa"
