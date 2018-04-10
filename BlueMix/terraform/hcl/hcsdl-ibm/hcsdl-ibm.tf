@@ -366,7 +366,7 @@ resource "ibm_compute_vm_instance" "haproxy" {
   hourly_billing           = true
   private_network_only     = true
   cores                    = 4
-  memory                   = 4092
+  memory                   = 4096
   disks                    = [100]
   dedicated_acct_host_only = false
   local_disk               = false
