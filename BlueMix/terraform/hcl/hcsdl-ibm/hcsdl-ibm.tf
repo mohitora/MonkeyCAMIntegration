@@ -193,7 +193,7 @@ resource "ibm_compute_vm_instance" "driver" {
       "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "useradd ${var.sudo_user}",
       "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
-      "usermod ${var.sudo_password} -g wheel"
+      "usermod ${var.sudo_user} -g wheel"
     ]
    }
 
