@@ -217,7 +217,7 @@ EOF
 # IDM
 resource "ibm_compute_vm_instance" "idm" {
   count="2"
-  name = "${var.vm_name_prefix}-idm-${ count.index }"
+  hostname = "${var.vm_name_prefix}-idm-${ count.index }"
   os_reference_code        = "REDHAT_7_64"
   domain                   = "${var.vm_domain}"
   datacenter               = "${var.datacenter}"
