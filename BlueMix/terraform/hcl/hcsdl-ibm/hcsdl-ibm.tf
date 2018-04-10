@@ -382,6 +382,34 @@ resource "ibm_compute_vm_instance" "haproxy" {
 
 
 ############################################################################################################################################################
+# HDP MAnagement Nodes
+resource "ibm_compute_vm_instance" "hdp-mgmtnodes" {
+  count="4"
+  hostname = "${var.vm_name_prefix}-mn-${ count.index }"
+  os_reference_code        = "REDHAT_7_64"
+  domain                   = "${var.vm_domain}"
+  datacenter               = "${var.datacenter}"
+  private_vlan_id          = "${data.ibm_network_vlan.cluster_vlan.id}"
+  network_speed            = 1000
+  hourly_billing           = true
+  private_network_only     = true
+  cores                    = "${var.mgmtnode_num_cpus}"
+  memory                   = "${var.mgmtnode_mem}"
+  disks                    = ${var.mgmtnode_disks}
+  dedicated_acct_host_only = false
+  local_disk               = false
+  ssh_key_ids              = ["${ibm_compute_ssh_key.cam_public_key.id}", "${ibm_compute_ssh_key.temp_public_key.id}"]
+
+  # Specify the ssh connection
+  connection {
+    user        = "root"
+    private_key = "${tls_private_key.ssh.private_key_pem}"
+    host        = "${self.ipv4_address_private}"
+  }
+}
+
+
+############################################################################################################################################################
 # Start Install
 resource "null_resource" "start_install" {
 
