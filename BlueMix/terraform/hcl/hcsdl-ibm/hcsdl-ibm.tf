@@ -486,7 +486,7 @@ resource "null_resource" "start_install" {
       "echo  export cam_driver_ip=${join(",",ibm_compute_vm_instance.driver.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_driver_name=${join(",",ibm_compute_vm_instance.driver.*.hostname)} >> /opt/monkey_cam_vars.txt",
     
-      "echo  export cam_idm_ip=${join(","ibm_compute_vm_instance.idm.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_idm_ip=${join(",",ibm_compute_vm_instance.idm.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_idm_name=${join(",",ibm_compute_vm_instance.idm.*.hostname)} >> /opt/monkey_cam_vars.txt",
     
     
