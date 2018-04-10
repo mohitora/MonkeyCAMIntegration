@@ -442,15 +442,15 @@ resource "ibm_compute_vm_instance" "hdp-datanodes" {
 resource "null_resource" "start_install" {
 
   depends_on = [ 
-  	"vsphere_virtual_machine.driver",  
-  	"vsphere_virtual_machine.idm",  
-  	"vsphere_virtual_machine.ishttp",  
-  	"vsphere_virtual_machine.iswasnd",  
-  	"vsphere_virtual_machine.isdb2",  
-  	"vsphere_virtual_machine.isds",  
-  	"vsphere_virtual_machine.haproxy",  
-  	"vsphere_virtual_machine.hdp-mgmtnodes",
-  	"vsphere_virtual_machine.hdp-datanodes"
+  	"ibm_compute_vm_instance.driver",  
+  	"ibm_compute_vm_instance.idm",  
+  	"ibm_compute_vm_instance.ishttp",  
+  	"ibm_compute_vm_instance.iswasnd",  
+  	"ibm_compute_vm_instance.isdb2",  
+  	"ibm_compute_vm_instance.isds",  
+  	"ibm_compute_vm_instance.haproxy",  
+  	"ibm_compute_vm_instance.hdp-mgmtnodes",
+  	"ibm_compute_vm_instance.hdp-datanodes"
   ]
   
   connection {
