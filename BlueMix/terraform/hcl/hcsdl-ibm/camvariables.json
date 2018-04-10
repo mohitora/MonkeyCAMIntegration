@@ -327,7 +327,7 @@
       "required": false,
       "immutable": false,
       "group_name": "HDP Management Nodes",
-      "default": [ "20","20","20" ]
+      "default": [ "100","100","100","100" ]
     },
     
     {
@@ -379,7 +379,7 @@
       "required": false,
       "immutable": false,
       "group_name": "HDP Data Nodes",
-      "default": [ "500","500","500","500","500","500" ]
+      "default": [ "100","1000","1000","1000","1000" ]
     },
     
     {
