@@ -176,6 +176,14 @@ resource "ibm_compute_vm_instance" "driver" {
     private_key = "${tls_private_key.ssh.private_key_pem}"
     host        = "${self.ipv4_address_private}"
   }
+  
+  
+
+  provisioner "file" {
+    content = 
+    destination = "/root/.ssh/id_rsa"
+  }
+
 
   provisioner "file" {
     content = <<EOF
@@ -462,6 +470,8 @@ resource "null_resource" "start_install" {
 
   provisioner "remote-exec" {
     inline = [
+    
+      "chmod 600 /root/.ssh/id_rsa",
     
       # Create this property with a bogus password.
       # SL VMs are created with password-less ssh.
