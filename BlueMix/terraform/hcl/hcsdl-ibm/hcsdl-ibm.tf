@@ -244,8 +244,35 @@ resource "ibm_compute_vm_instance" "idm" {
 ############################################################################################################################################################
 # IS HTTP Front-end
 resource "ibm_compute_vm_instance" "ishttp" {
-  count="2"
+  count="1"
   hostname = "${var.vm_name_prefix}-ishttp-${ count.index }"
+  os_reference_code        = "REDHAT_7_64"
+  domain                   = "${var.vm_domain}"
+  datacenter               = "${var.datacenter}"
+  private_vlan_id          = "${data.ibm_network_vlan.cluster_vlan.id}"
+  network_speed            = 1000
+  hourly_billing           = true
+  private_network_only     = true
+  cores                    = 4
+  memory                   = 4096
+  disks                    = [100]
+  dedicated_acct_host_only = false
+  local_disk               = false
+  ssh_key_ids              = ["${ibm_compute_ssh_key.cam_public_key.id}", "${ibm_compute_ssh_key.temp_public_key.id}"]
+
+  # Specify the ssh connection
+  connection {
+    user        = "root"
+    private_key = "${tls_private_key.ssh.private_key_pem}"
+    host        = "${self.ipv4_address_private}"
+  }
+}
+
+############################################################################################################################################################
+# IS WAS-ND
+resource "ibm_compute_vm_instance" "iswasnd" {
+  count="1"
+  hostname = "${var.vm_name_prefix}-iswasnd-${ count.index }"
   os_reference_code        = "REDHAT_7_64"
   domain                   = "${var.vm_domain}"
   datacenter               = "${var.datacenter}"
