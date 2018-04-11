@@ -580,7 +580,10 @@ resource "null_resource" "start_install" {
       # Hardcode the list of data devices here...
       # It must be updated if the data node template is modified.
       # This list must match the naming format, for the data node template definition.
-      "echo  export cam_cloud_biginsights_data_devices=/disk1@/dev/xvdb,/disk2@/dev/xvdc,/disk3@/dev/xvdd,/disk4@/dev/xvde,/disk5@/dev/xvdf,/disk6@/dev/xvdg,/disk7@/dev/xvdh,/disk8@/dev/xvdi,/disk9@/dev/xvdj,/disk10@/dev/xvdk,/disk11@/dev/xvdl,/disk12@/dev/xvdm,/disk13@/dev/xvdn >> /opt/monkey_cam_vars.txt",
+      
+      # For the SL VMs used so far, /dev/xvdb is defined as swap. Removing it for now...
+      #"echo  export cam_cloud_biginsights_data_devices=/disk1@/dev/xvdb,/disk2@/dev/xvdc,/disk3@/dev/xvdd,/disk4@/dev/xvde,/disk5@/dev/xvdf,/disk6@/dev/xvdg,/disk7@/dev/xvdh,/disk8@/dev/xvdi,/disk9@/dev/xvdj,/disk10@/dev/xvdk,/disk11@/dev/xvdl,/disk12@/dev/xvdm,/disk13@/dev/xvdn >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_cloud_biginsights_data_devices=/disk2@/dev/xvdc,/disk3@/dev/xvdd,/disk4@/dev/xvde,/disk5@/dev/xvdf,/disk6@/dev/xvdg,/disk7@/dev/xvdh,/disk8@/dev/xvdi,/disk9@/dev/xvdj,/disk10@/dev/xvdk,/disk11@/dev/xvdl,/disk12@/dev/xvdm,/disk13@/dev/xvdn >> /opt/monkey_cam_vars.txt",
       
       "echo  export cam_monkeymirror=${var.monkey_mirror} >> /opt/monkey_cam_vars.txt",
     
