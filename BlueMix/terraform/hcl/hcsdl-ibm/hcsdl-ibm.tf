@@ -282,7 +282,7 @@ resource "ibm_compute_vm_instance" "ishttp" {
   hourly_billing           = true
   private_network_only     = true
   cores                    = 4
-  memory                   = 4096
+  memory                   = 8192
   disks                    = [100]
   dedicated_acct_host_only = false
   local_disk               = false
@@ -319,7 +319,7 @@ resource "ibm_compute_vm_instance" "iswasnd" {
   hourly_billing           = true
   private_network_only     = true
   cores                    = 4
-  memory                   = 4096
+  memory                   = 8192
   disks                    = [100]
   dedicated_acct_host_only = false
   local_disk               = false
@@ -357,7 +357,7 @@ resource "ibm_compute_vm_instance" "isdb2" {
   hourly_billing           = true
   private_network_only     = true
   cores                    = 4
-  memory                   = 8192
+  memory                   = 16384
   disks                    = [100,1000]
   dedicated_acct_host_only = false
   local_disk               = false
