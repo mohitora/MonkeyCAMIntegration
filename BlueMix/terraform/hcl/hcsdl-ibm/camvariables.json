@@ -339,7 +339,7 @@
       "required": false,
       "immutable": false,
       "group_name": "HDP Management Nodes",
-      "default": "16384"
+      "default": "32768"
     },
     
     {
@@ -391,7 +391,7 @@
       "required": false,
       "immutable": false,
       "group_name": "HDP Data Nodes",
-      "default": "16384"
+      "default": "32768"
     },
     
     {
@@ -417,7 +417,7 @@
       "required": false,
       "immutable": false,
       "group_name": "Information Server",
-      "default": "16384"
+      "default": "32768"
     },
     
     {
