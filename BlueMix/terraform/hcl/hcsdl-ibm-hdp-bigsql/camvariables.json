@@ -405,31 +405,5 @@
       "immutable": false,
       "group_name": "HDP Data Nodes",
       "default": [ "100","1000","1000","1000","1000" ]
-    },
-    
-    {
-      "name": "dsengine_mem",
-      "type": "string",
-      "description": "Memory (MBs) for DSEngine",
-      "hidden": false,
-      "label": "Memory (MBs) for DSEngine",
-      "secured": false,
-      "required": false,
-      "immutable": false,
-      "group_name": "Information Server",
-      "default": "32768"
-    },
-    
-    {
-      "name": "dsengine_num_cpus",
-      "type": "string",
-      "description": "Number of CPUs for DSEngine",
-      "hidden": false,
-      "label": "Number of CPUs for DSEngine",
-      "secured": false,
-      "required": false,
-      "immutable": false,
-      "group_name": "Information Server",
-      "default": "8"
     }
 ]
