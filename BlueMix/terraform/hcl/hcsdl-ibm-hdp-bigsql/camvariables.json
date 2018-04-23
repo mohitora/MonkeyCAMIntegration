@@ -1,0 +1,435 @@
+[
+    {
+        "description": "Softlayer datacenter where infrastructure resources will be deployed", 
+        "hidden": false, 
+        "immutable": false, 
+        "label": "SoftLayer Data Center", 
+        "name": "datacenter", 
+        "required": true, 
+        "secured": false, 
+        "type": "string",
+        "group_name": "Cloud",
+        "options": [
+          {
+              "value": "ams01",
+              "label": "Amsterdam 01, The Netherlands"
+          },
+          {
+              "value": "ams03",
+              "label": "Amsterdam 03, The Netherlands"
+          },
+          {
+              "value": "che01",
+              "label": "Chennai, India"
+          },
+          {
+              "value": "dal01",
+              "label": "Dallas 01, USA"
+          },
+          {
+              "value": "dal02",
+              "label": "Dallas 02, USA"
+          },
+          {
+              "value": "dal05",
+              "label": "Dallas 05, USA"
+          },
+          {
+              "value": "dal06",
+              "label": "Dallas 06, USA"
+          },
+          {
+              "value": "dal07",
+              "label": "Dallas 07, USA"
+          },
+          {
+              "value": "dal09",
+              "label": "Dallas 09, USA"
+          },
+          {
+              "value": "dal10",
+              "label": "Dallas 10, USA",
+              "default": "true"
+          },
+          {
+              "value": "fra02",
+              "label": "Frankfurt, Germany"
+          },
+          {
+              "value": "hkg02",
+              "label": "Hong Kong, China"
+          },
+          {
+              "value": "hou02",
+              "label": "Houston, USA"
+          },
+          {
+              "value": "lon02",
+              "label": "London, England"
+          },
+          {
+              "value": "mel01",
+              "label": "Melbourne, Australia"
+          },
+          {
+              "value": "mil01",
+              "label": "Milan, Italy"
+          },
+          {
+              "value": "mon01",
+              "label": "Montreal, Canada"
+          },
+          {
+              "value": "osl01",
+              "label": "Oslo, Norway"
+          },
+          {
+              "value": "par01",
+              "label": "Paris, France"
+          },
+          {
+              "value": "mex01",
+              "label": "Querétaro, Mexico"
+          },
+          {
+              "value": "sjc01",
+              "label": "San Jose 01, USA"
+          },
+          {
+              "value": "sjc03",
+              "label": "San Jose 03, USA"
+          },
+          {
+              "value": "sao01",
+              "label": "Sao Paulo, Brazil"
+          },
+          {
+              "value": "sea01",
+              "label": "Seattle, USA"
+          },
+          {
+              "value": "seo01",
+              "label": "Seoul 01, Korea"
+          },
+          {
+              "value": "sng01",
+              "label": "Singapore, Singapore"
+          },
+          {
+              "value": "syd01",
+              "label": "Sydney, Australia"
+          },
+          {
+              "value": "tok02",
+              "label": "Tokyo, Japan"
+          },
+          {
+              "value": "tor01",
+              "label": "Toronto, Canada"
+          },
+          {
+              "value": "wdc01",
+              "label": "Washington, D.C. 01, USA"
+          },
+          {
+              "value": "wdc04",
+              "label": "Washington, D.C. 04, USA"
+          }
+        ]
+    },
+    {
+        "description": "VLAN Number", 
+        "hidden": false, 
+        "immutable": false, 
+        "label": "VLAN Number", 
+        "name": "vlan_number", 
+        "required": true, 
+        "secured": false, 
+        "type": "string",
+        "group_name": "Cloud", 
+        "default": "1457"
+    },
+    {
+        "description": "VLAN Router", 
+        "hidden": false, 
+        "immutable": false, 
+        "label": "VLAN Router", 
+        "name": "vlan_router", 
+        "required": true, 
+        "secured": false, 
+        "type": "string",
+        "group_name": "Cloud", 
+        "default": "bcr01a.dal10"
+    },
+    
+    {
+      "name": "time_server",
+      "type": "string",
+      "description": "Hostname or IPv4 for time server",
+      "hidden": false,
+      "label": "Hostname or IPv4 for time server",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cloud",
+      "default": "time.service.softlayer.com"
+    },
+    {
+      "name": "vm_dns_servers",
+      "type": "list",
+      "description": "DNS servers for the virtual network adapter",
+      "hidden": false,
+      "label": "DNS Servers",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cloud",
+      "default": ["10.0.80.11"]
+    },
+    {
+      "name": "vm_dns_suffixes",
+      "type": "list",
+      "description": "Name resolution suffixes for the virtual network adapters",
+      "hidden": false,
+      "label": "DNS Suffixes",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cloud",
+      "default": [ "jlerm.com" ]
+    },
+    
+    {
+      "name": "monkey_mirror",
+      "type": "string",
+      "description": "Monkey Mirror IP or Hostname",
+      "hidden": false,
+      "label": "Monkey Mirror IP or Hostname",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "Cloud",
+      "default": "10.176.112.137"
+    },
+    {
+      "name": "cloud_install_tar_file_name",
+      "type": "string",
+      "description": "Name of the tar file downloaded from the mirror, which contains the Cloud Installer code.",
+      "hidden": false,
+      "label": "Cloud Install tar file name",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cloud",
+      "default": "cloud_install.tar"
+    },
+    
+    {
+        "description": "Public SSH key used to connect to the cluster VMs; Allow the openSSH format key with optional comment (with optional email)", 
+        "hidden": false, 
+        "immutable": false, 
+        "label": "Public SSH Key", 
+        "name": "public_ssh_key", 
+        "required": true, 
+        "secured": true, 
+        "type": "string",
+        "regex": "^ssh-rsa AAAA[0-9A-Za-z+/]+[=]{0,3}( [^@]+@[^@]+| [^@]+){0,1}$",
+        "group_name": "Cluster",
+        "default": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDsfV/fqVGIN+vb3OLnu0b8Tu0SEcAyKyPoilPLWhI0BzkT5PPUeutAKf0StAkXQHCCG2ktkDGzBh01zz0cKK6AuqocsdirAoqOOMHtBBvfqfFbktZpskDtTzRCe4f0klXv8VbCJNDhk1gGvljOfb04cYc7b9VG2l/DAGwyQwuYWWODtyFfc5zdxfVT/Zb7tHwE6OpWCT3TIzNtUkRooon+ZZkajD+tXvzEdHoPuinSsePseOfAyuCYcHjRTg5kb4I6E5i3eg7oyyAQ8lBCgkCM32kjy3qPpUTbWIzzeTFQ5KlR1nD6tSvRNLUo9CZ2nK3/sdAk+VZn+UdckSIy/E/vY4v2oXscoibTu2sgDf8MsKH4kwejL/bGMcQSRA6b/oRNmT9wkIPEjpdT+UPHxWWcAVWal1yHx2rMiMpxptX5z+jvv/vABA9al98Ug5Gtqnal8JzF5SY91mB0epr4Lx8eDT8ZcpulGe02sAdMPYVgiMkByt0l82BYPdcdTvXfvOkm1z0GSmhSG8jeQHhtKjWAYkaLzEwTT6zqmQGiJbNBABQhClmtqacyc0N+ZnJ4ypNjbM3lmrAXCNAKCLB67NkmowusJcgGLH89YmPcArDo5ljqe07eIpLD1mmOlX+0P43Y08qK6xSyGCd+m5KYDzQJ5Bwh9uA2x9TiUTZonzlOLQ== jlerm@us.ibm.com"
+    },
+     
+    {
+      "name": "sudo_user",
+      "type": "string",
+      "description": "User name for sudo access",
+      "hidden": false,
+      "label": "Sudo User",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cluster",
+      "default": "sudo1"
+    },
+    {
+      "name": "sudo_password",
+      "type": "string",
+      "description": "Password for sudo user",
+      "hidden": false,
+      "label": "Sudo Password",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cluster",
+      "default": "pwd12345"
+    },
+     
+    {
+      "name": "vm_domain",
+      "type": "string",
+      "description": "Domain Name of cluster VMs",
+      "hidden": false,
+      "label": "Domain Name",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cluster",
+      "default": "jlerm.com"
+    },
+    {
+      "name": "vm_name_prefix",
+      "type": "string",
+      "description": "Prefix for vm names",
+      "default": "hcsdl",
+      "hidden": false,
+      "label": "Prefix for vm names",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cluster"
+    },
+    
+    
+    {
+      "name": "public_nic_name",
+      "type": "string",
+      "description": "Name of the public network interface",
+      "hidden": false,
+      "label": "Name of the public network interface",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cluster",
+      "default": "ens192"
+    },
+    
+    {
+      "name": "cluster_name",
+      "type": "string",
+      "description": "Name of the HDP Cluster",
+      "hidden": false,
+      "label": "Name of the HDP Cluster",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cluster",
+      "default": "MYCLUSTER"
+    },
+    
+    
+    {
+      "name": "mgmtnode_num_cpus",
+      "type": "string",
+      "description": "Number of CPUs for HDP Management Nodes",
+      "hidden": false,
+      "label": "Number of CPUs for HDP Management Nodes",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "HDP Management Nodes",
+      "default": "8"
+    },
+    
+    {
+      "name": "mgmtnode_mem",
+      "type": "string",
+      "description": "Memory (MBs) for Management Nodes",
+      "hidden": false,
+      "label": "Memory (MBs) for HDP Management Nodes",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "HDP Management Nodes",
+      "default": "32768"
+    },
+    
+    {
+      "name": "mgmtnode_disks",
+      "type": "list",
+      "description": "Data disk sizes for HDP Management Nodes",
+      "hidden": false,
+      "label": "Data disk sizes for HDP Management Nodes",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "HDP Management Nodes",
+      "default": [ "100","100","100","100" ]
+    },
+    
+    {
+      "name": "num_datanodes",
+      "type": "string",
+      "description": "Number of Data Nodes",
+      "hidden": false,
+      "label": "Number of HDP Datanodes to create",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "HDP Data Nodes",
+      "default": "6"
+    },
+    
+    {
+      "name": "datanode_num_cpus",
+      "type": "string",
+      "description": "Number of CPUs for HDP Data Nodes",
+      "hidden": false,
+      "label": "Number of CPUs for HDP Data Nodes",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "HDP Data Nodes",
+      "default": "8"
+    },
+    
+    {
+      "name": "datanode_mem",
+      "type": "string",
+      "description": "Memory (MBs) for Data Nodes",
+      "hidden": false,
+      "label": "Memory (MBs) for HDP Data Nodes",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "HDP Data Nodes",
+      "default": "32768"
+    },
+    
+    {
+      "name": "datanode_disks",
+      "type": "list",
+      "description": "Data disk sizes for HDP Data Nodes",
+      "hidden": false,
+      "label": "Data disk sizes for HDP Data Nodes",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "HDP Data Nodes",
+      "default": [ "100","1000","1000","1000","1000" ]
+    },
+    
+    {
+      "name": "dsengine_mem",
+      "type": "string",
+      "description": "Memory (MBs) for DSEngine",
+      "hidden": false,
+      "label": "Memory (MBs) for DSEngine",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "Information Server",
+      "default": "32768"
+    },
+    
+    {
+      "name": "dsengine_num_cpus",
+      "type": "string",
+      "description": "Number of CPUs for DSEngine",
+      "hidden": false,
+      "label": "Number of CPUs for DSEngine",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "Information Server",
+      "default": "8"
+    }
+]
