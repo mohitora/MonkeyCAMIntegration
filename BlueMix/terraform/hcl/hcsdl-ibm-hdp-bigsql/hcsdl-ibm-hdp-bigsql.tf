@@ -119,13 +119,6 @@ variable "datanode_disks" {
   description = "datanode_disks"
 }
 
-variable "dsengine_mem" {
-  description = "dsengine_mem"
-}
-
-variable "dsengine_num_cpus" {
-  description = "dsengine_num_cpus"
-}
 
 ##############################################################
 # Create public key in Devices>Manage>SSH Keys in SL console
