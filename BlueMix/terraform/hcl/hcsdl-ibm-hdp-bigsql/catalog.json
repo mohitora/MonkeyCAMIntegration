@@ -23,7 +23,7 @@
      }
    },
    "metadata": {
-     "displayName": "Hybrid Cloud Secure Data Lake on IBM Cloud",
+     "displayName": "Hybrid Cloud Secure Data Lake on IBM Cloud - HDP/BigSQL",
      "providerDisplayName": "IBM",
      "longDescription": "Deploys a Hybrid Cloud Secure Data Lake (HDP, BigSQL, IDM) on IBM Cloud.",
      "bullets": [
@@ -45,7 +45,7 @@
        },
        {
          "title": "Software deployed",
-         "description": "<table style=\"width:100%\"><tr><td width=\"20%\" valign=\"top\">HDP 2.6.2</td><td>Hortonworks Hadoop distribution.</td></tr><tr><td width=\"20%\" valign=\"top\">IS 11.7</td><td>BigSQL 5.0.1.</td></tr><tr><td width=\"20%\" valign=\"top\">IDM (aka FreeIPA)</td><td>RedHat Identity Management.</td></tr></table>"
+         "description": "<table style=\"width:100%\"><tr><td width=\"20%\" valign=\"top\">HDP 2.6.2</td><td>Hortonworks Hadoop distribution.</td></tr><tr><td width=\"20%\" valign=\"top\">BigSQL 5.0.1</td><td>BigSQL</td></tr><tr><td width=\"20%\" valign=\"top\">IDM (aka FreeIPA)</td><td>RedHat Identity Management.</td></tr></table>"
        },
        {
          "title": "Usage and special notes",
