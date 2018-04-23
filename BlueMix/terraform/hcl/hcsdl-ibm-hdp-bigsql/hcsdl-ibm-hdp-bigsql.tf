@@ -392,10 +392,6 @@ resource "null_resource" "start_install" {
   depends_on = [ 
   	"ibm_compute_vm_instance.driver",  
   	"ibm_compute_vm_instance.idm",  
-  	"ibm_compute_vm_instance.ishttp",  
-  	"ibm_compute_vm_instance.iswasnd",  
-  	"ibm_compute_vm_instance.isdb2",  
-  	"ibm_compute_vm_instance.isds",  
   	"ibm_compute_vm_instance.haproxy",  
   	"ibm_compute_vm_instance.hdp-mgmtnodes",
   	"ibm_compute_vm_instance.hdp-datanodes"
