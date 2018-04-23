@@ -25,7 +25,7 @@
    "metadata": {
      "displayName": "Hybrid Cloud Secure Data Lake on IBM Cloud",
      "providerDisplayName": "IBM",
-     "longDescription": "Deploys a Hybrid Cloud Secure Data Lake (HDP, IS, IDM) on IBM Cloud.",
+     "longDescription": "Deploys a Hybrid Cloud Secure Data Lake (HDP, BigSQL, BigIntegrate, IDM) on IBM Cloud.",
      "bullets": [
        {
          "title": "Clouds",
@@ -41,15 +41,15 @@
        },
        {
          "title": "Topology",
-         "description": "HDP, BigIntegrate and IDM."
+         "description": "HDP, BigSQL, BigIntegrate and IDM."
        },
        {
          "title": "Software deployed",
-         "description": "<table style=\"width:100%\"><tr><td width=\"20%\" valign=\"top\">HDP 2.6.2</td><td>Hortonworks Hadoop distribution.</td></tr><tr><td width=\"20%\" valign=\"top\">IS 11.7</td><td>IBM InfoSphere Information Server 11.7 (WAS-ND, HTTP Front-End, DB2 HADR).</td></tr><tr><td width=\"20%\" valign=\"top\">IDM (aka FreeIPA)</td><td>RedHat Identity Management.</td></tr></table>"
+         "description": "<table style=\"width:100%\"><tr><td width=\"20%\" valign=\"top\">HDP 2.6.2</td><td>Hortonworks Hadoop distribution.</td></tr><tr><td width=\"20%\" valign=\"top\">BigSQL 5.0.1</td><td>BigSQL</td></tr><tr><td width=\"20%\" valign=\"top\">IS 11.7</td><td>BigIntegrate/IBM InfoSphere Information Server 11.7 (WAS-ND, HTTP Front-End, DB2 HADR).</td></tr><tr><td width=\"20%\" valign=\"top\">IDM (aka FreeIPA)</td><td>RedHat Identity Management.</td></tr></table>"
        },
        {
          "title": "Usage and special notes",
-         "description": "<ul><li>1. Creates VMs.</li><li>2. Downloads software from Monkey mirror.</li><li>3. Installs HDP, BigIntegrate and IDM on the hcsdl VMs.</li><li>4. Enables cluster with Kerberos and SSL.</li></ul>"
+         "description": "<ul><li>1. Creates VMs.</li><li>2. Downloads software from Monkey mirror.</li><li>3. Installs HDP, BigSQL, BigIntegrate and IDM on the hcsdl VMs.</li><li>4. Enables cluster with Kerberos and SSL.</li></ul>"
        }
      ],
      "featuredImageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_50.png",
