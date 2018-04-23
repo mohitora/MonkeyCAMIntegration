@@ -100,6 +100,10 @@
               "label": "San Jose 03, USA"
           },
           {
+              "value": "sjc04",
+              "label": "San Jose 04, USA"
+          },
+          {
               "value": "sao01",
               "label": "Sao Paulo, Brazil"
           },
