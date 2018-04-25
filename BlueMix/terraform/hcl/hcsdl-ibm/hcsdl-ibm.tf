@@ -185,7 +185,6 @@ resource "ibm_compute_vm_instance" "driver" {
 
   provisioner "remote-exec" {
     inline = [
-    	"yum groupinstall \"Infrastructure Server\" -y",
       "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "useradd ${var.sudo_user}",
       "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
@@ -260,7 +259,6 @@ resource "ibm_compute_vm_instance" "idm" {
 
   provisioner "remote-exec" {
     inline = [
-    	"yum groupinstall \"Infrastructure Server\" -y",
       "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "useradd ${var.sudo_user}",
       "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
@@ -298,7 +296,6 @@ resource "ibm_compute_vm_instance" "ishttp" {
 
   provisioner "remote-exec" {
     inline = [
-    	"yum groupinstall \"Infrastructure Server\" -y",
       "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "useradd ${var.sudo_user}",
       "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
@@ -335,7 +332,6 @@ resource "ibm_compute_vm_instance" "iswasnd" {
 
   provisioner "remote-exec" {
     inline = [
-    	"yum groupinstall \"Infrastructure Server\" -y",
       "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "useradd ${var.sudo_user}",
       "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
@@ -373,7 +369,6 @@ resource "ibm_compute_vm_instance" "isdb2" {
 
   provisioner "remote-exec" {
     inline = [
-    	"yum groupinstall \"Infrastructure Server\" -y",
       "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "useradd ${var.sudo_user}",
       "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
@@ -411,7 +406,6 @@ resource "ibm_compute_vm_instance" "isds" {
 
   provisioner "remote-exec" {
     inline = [
-    	"yum groupinstall \"Infrastructure Server\" -y",
       "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "useradd ${var.sudo_user}",
       "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
@@ -450,7 +444,6 @@ resource "ibm_compute_vm_instance" "haproxy" {
 
   provisioner "remote-exec" {
     inline = [
-    	"yum groupinstall \"Infrastructure Server\" -y",
       "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "useradd ${var.sudo_user}",
       "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
@@ -488,7 +481,6 @@ resource "ibm_compute_vm_instance" "hdp-mgmtnodes" {
 
   provisioner "remote-exec" {
     inline = [
-    	"yum groupinstall \"Infrastructure Server\" -y",
       "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "useradd ${var.sudo_user}",
       "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
@@ -526,7 +518,6 @@ resource "ibm_compute_vm_instance" "hdp-datanodes" {
 
   provisioner "remote-exec" {
     inline = [
-    	"yum groupinstall \"Infrastructure Server\" -y",
       "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "useradd ${var.sudo_user}",
       "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
