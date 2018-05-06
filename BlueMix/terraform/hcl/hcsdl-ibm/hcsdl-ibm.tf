@@ -530,7 +530,7 @@ resource "ibm_compute_vm_instance" "hdp-datanodes" {
 ############################################################################################################################################################
 # BigSQL Head Node
 resource "ibm_compute_vm_instance" "bigsql-head" {
-  count="${var.num_datanodes}"
+  count="1"
   hostname = "${var.vm_name_prefix}-bigsql-${ count.index }"
   os_reference_code        = "REDHAT_7_64"
   domain                   = "${var.vm_domain}"
