@@ -421,7 +421,8 @@ resource "null_resource" "start_install" {
   	"ibm_compute_vm_instance.idm",  
   	"ibm_compute_vm_instance.haproxy",  
   	"ibm_compute_vm_instance.hdp-mgmtnodes",
-  	"ibm_compute_vm_instance.hdp-datanodes"
+  	"ibm_compute_vm_instance.hdp-datanodes",
+  	"ibm_compute_vm_instance.bigsql-head"
   ]
   
   connection {
