@@ -214,6 +214,7 @@ perl -f cam_integration/01_gen_cam_install_properties.pl
 
 sed -i 's/cloud_replace_rhel_repo=1/cloud_replace_rhel_repo=0/' global.properties
 #sed -i 's/cloud_biginsights_bigsql_/#cloud_biginsights_bigsql_/' global.properties
+sed -i 's/cloud_skip_prepare_nodes=0/cloud_skip_prepare_nodes=1/' global.properties
 
 . ./setenv
 
@@ -526,6 +527,42 @@ resource "ibm_compute_vm_instance" "hdp-datanodes" {
   }
 }
 
+############################################################################################################################################################
+# BigSQL Head Node
+resource "ibm_compute_vm_instance" "bigsql-head" {
+  count="${var.num_datanodes}"
+  hostname = "${var.vm_name_prefix}-bigsql-${ count.index }"
+  os_reference_code        = "REDHAT_7_64"
+  domain                   = "${var.vm_domain}"
+  datacenter               = "${var.datacenter}"
+  private_vlan_id          = "${data.ibm_network_vlan.cluster_vlan.id}"
+  network_speed            = 1000
+  hourly_billing           = true
+  private_network_only     = true
+  cores                    = "${var.datanode_num_cpus}"
+  memory                   = "${var.datanode_mem}"
+  disks                    = "${var.datanode_disks}"
+  dedicated_acct_host_only = false
+  local_disk               = false
+  ssh_key_ids              = ["${ibm_compute_ssh_key.cam_public_key.id}", "${ibm_compute_ssh_key.temp_public_key.id}"]
+
+  # Specify the ssh connection
+  connection {
+    user        = "root"
+    private_key = "${tls_private_key.ssh.private_key_pem}"
+    host        = "${self.ipv4_address_private}"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "useradd ${var.sudo_user}",
+      "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "usermod ${var.sudo_user} -g wheel"
+    ]
+  }
+}
+
 
 ############################################################################################################################################################
 # Start Install
@@ -540,7 +577,8 @@ resource "null_resource" "start_install" {
   	"ibm_compute_vm_instance.isds",  
   	"ibm_compute_vm_instance.haproxy",  
   	"ibm_compute_vm_instance.hdp-mgmtnodes",
-  	"ibm_compute_vm_instance.hdp-datanodes"
+  	"ibm_compute_vm_instance.hdp-datanodes",
+  	"ibm_compute_vm_instance.bigsql-head"
   ]
   
   connection {
@@ -606,6 +644,9 @@ resource "null_resource" "start_install" {
       
       "echo  export cam_hdp_datanodes_ip=${join(",",ibm_compute_vm_instance.hdp-datanodes.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_hdp_datanodes_name=${join(",",ibm_compute_vm_instance.hdp-datanodes.*.hostname)} >> /opt/monkey_cam_vars.txt",
+    
+      "echo  export cam_bigsql_head_ip=${join(",",ibm_compute_vm_instance.bigsql-head.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
+      "echo  export cam_bigsql_head_name=${join(",",ibm_compute_vm_instance.bigsql-head.*.hostname)} >> /opt/monkey_cam_vars.txt",
     
     
       "chmod 755 /opt/installation.sh",
