@@ -52,6 +52,11 @@
               "default": "true"
           },
           {
+              "value": "dal12",
+              "label": "Dallas 12, USA",
+              "default": "true"
+          },
+          {
               "value": "fra02",
               "label": "Frankfurt, Germany"
           },
