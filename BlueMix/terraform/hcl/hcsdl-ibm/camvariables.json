@@ -170,6 +170,18 @@
         "group_name": "Cloud", 
         "default": "bcr01a.dal10"
     },
+    {
+        "description": "Private Subnet", 
+        "hidden": false, 
+        "immutable": false, 
+        "label": "Private Subnet", 
+        "name": "private_subnet", 
+        "required": true, 
+        "secured": false, 
+        "type": "string",
+        "group_name": "Cloud", 
+        "default": "10.93.254.128/25"
+    },
     
     {
       "name": "time_server",

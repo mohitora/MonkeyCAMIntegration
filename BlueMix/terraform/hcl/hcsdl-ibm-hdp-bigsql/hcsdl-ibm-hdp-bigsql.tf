@@ -59,6 +59,10 @@ variable "vlan_router" {
   description = "VLAN router"
 }
 
+variable "private_subnet" {
+  description = "Private Subnet"
+}
+
 variable "time_server" {
   description = "time_server"
 }
@@ -159,6 +163,7 @@ resource "ibm_compute_vm_instance" "driver" {
   domain                   = "${var.vm_domain}"
   datacenter               = "${var.datacenter}"
   private_vlan_id          = "${data.ibm_network_vlan.cluster_vlan.id}"
+  private_subnet           = "${var.private_subnet}"
   network_speed            = 1000
   hourly_billing           = true
   private_network_only     = true
