@@ -336,6 +336,19 @@
       "default": "MYCLUSTER"
     },
     
+    {
+      "name": "install_bigsql",
+      "type": "string",
+      "description": "Install BigSQL? (0/1)",
+      "hidden": false,
+      "label": "Install BigSQL? (0/1)",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "Cluster",
+      "default": "1"
+    },
+    
     
     {
       "name": "mgmtnode_num_cpus",
