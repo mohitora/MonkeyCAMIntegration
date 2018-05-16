@@ -93,6 +93,10 @@ variable "cluster_name" {
   description = "cluster_name"
 }
 
+variable "install_bigsql"
+  description = "install_bigsql"
+}
+
 variable "mgmtnode_num_cpus" {
   description = "mgmtnode_num_cpus"
 }
@@ -123,6 +127,9 @@ variable "datanode_disks" {
   description = "datanode_disks"
 }
 
+locals {
+  num_bigsql_nodes = "${var.install_bigsql * 1}"
+}
 
 ##############################################################
 # Create public key in Devices>Manage>SSH Keys in SL console
@@ -383,7 +390,7 @@ resource "ibm_compute_vm_instance" "hdp-datanodes" {
 ############################################################################################################################################################
 # BigSQL Head Node
 resource "ibm_compute_vm_instance" "bigsql-head" {
-  count="1"
+  count="${local.num_bigsql_nodes}"
   hostname = "${var.vm_name_prefix}-bigsql-${ count.index }"
   os_reference_code        = "REDHAT_7_64"
   domain                   = "${var.vm_domain}"
@@ -454,6 +461,9 @@ resource "null_resource" "start_install" {
       
       "echo  export cam_public_nic_name=${var.public_nic_name} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_cluster_name=${var.cluster_name} >> /opt/monkey_cam_vars.txt",
+      
+      "echo  export cam_install_bigsql=${var.install_bigsql} >> /opt/monkey_cam_vars.txt",
+      
       "echo  export cloud_install_tar_file_name=${var.cloud_install_tar_file_name} >> /opt/monkey_cam_vars.txt",
       
       # Hardcode the list of data devices here...
