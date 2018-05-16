@@ -93,7 +93,7 @@ variable "cluster_name" {
   description = "cluster_name"
 }
 
-variable "install_bigsql"
+variable "install_bigsql" {
   description = "install_bigsql"
 }
 
