@@ -82,7 +82,8 @@ resource "aws_instance" "orpheus_ubuntu_micro" {
   instance_type = "m4.large"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
-  key_name      = "${aws_key_pair.orpheus_public_key.id}"
+#  key_name      = "${aws_key_pair.orpheus_public_key.id}"
+  key_name      = "${aws_key_pair.temp_public_key.id}"
   root_block_device = { "volume_type" = "gp2", "volume_size" = "100", "delete_on_termination" = true }
   ebs_block_device = { "device_name" = "/dev/sdf", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
   ebs_block_device = { "device_name" = "/dev/sdg", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
@@ -108,4 +109,9 @@ EOF
     destination = "/tmp/test.sh"
 }
 
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/addkey.sh; sudo bash /tmp/addkey.sh \"${var.public_ssh_key}\""
+    ]
+}
 }
