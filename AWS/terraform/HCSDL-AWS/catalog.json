@@ -1,0 +1,79 @@
+{
+   "name": "Hybrid Cloud Secure Data Lake on AWS EC2",
+   "description": "Hybrid Cloud Secure Data Lake on AWS EC2",
+   "version": "2.0.0",
+   "imageUrl": "./assets/svg/IBM_WebSphere_Standalone.svg",
+   "image": "tp_WAS_standalone.png",
+   "type": "userCreated",
+   "status": "active",
+   "manifest": {
+     "template_type": "Terraform",
+     "template_format": "HCL",
+     "template_provider": "Amazon EC2",
+     "template": {
+       "templateData": "",
+       "templateVariables": "",
+       "templateOutput": ""
+     },
+     "template_source": {
+       "githubRepoUrl": "",
+       "githubAccessToken": "",
+       "relativePathToTemplateFolder": " AWS/terraform/HCSDL-AWS",
+       "templateFileName": "hcsdl-aws.tf"
+     }
+   },
+   "metadata": {
+     "displayName": "Hybrid Cloud Secure Data Lake on AWS EC2",
+     "providerDisplayName": "Amazon EC2",
+     "longDescription": "Deploys a Hybrid Cloud Secure Data Lake (HDP, BigSQL, BigIntegrate, IDM) on AWS EC2.",
+     "bullets": [
+       {
+         "title": "Clouds",
+         "description": "AWS EC2"
+       },
+       {
+         "title": "Template version",
+         "description": "V1.0"
+       },
+       {
+         "title": "Operating systems supported",
+         "description": "AWS EC2: RHEL 7.4"
+       },
+       {
+         "title": "Topology",
+         "description": "HDP, BigSQL, BigIntegrate and IDM."
+       },
+       {
+         "title": "Software deployed",
+         "description": "<table style=\"width:100%\"><tr><td width=\"20%\" valign=\"top\">HDP 2.6.2</td><td>Hortonworks Hadoop distribution.</td></tr><tr><td width=\"20%\" valign=\"top\">BigSQL 5.0.1</td><td>BigSQL</td></tr><tr><td width=\"20%\" valign=\"top\">IS 11.7</td><td>BigIntegrate/IBM InfoSphere Information Server 11.7 (WAS-ND, HTTP Front-End, DB2 HADR).</td></tr><tr><td width=\"20%\" valign=\"top\">IDM (aka FreeIPA)</td><td>RedHat Identity Management.</td></tr></table>"
+       },
+       {
+         "title": "Usage and special notes",
+         "description": "<ul><li>1. Creates VMs.</li><li>2. Downloads software from Monkey mirror.</li><li>3. Installs HDP, BigSQL, BigIntegrate and IDM on the hcsdl VMs.</li><li>4. Enables cluster with Kerberos and SSL.</li></ul>"
+       }
+     ],
+     "featuredImageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_50.png",
+     "imageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_50.png",
+     "mediumImageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_32.png",
+     "smallImageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_24.png",
+     "documentationUrl": "https://console.stage1.ng.bluemix.net/docs/services/CloudAutomationManager/index.html",
+     "termsUrl": "http://www-03.ibm.com/software/sla/sladb.nsf/sla/bm-7448-01",
+     "media": [
+       {
+         "type": "image",
+         "thumbnailUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/screenshots_1.png",
+         "url": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/screenshots_1_large.png",
+         "caption": ""
+       },
+       {
+         "type": "image",
+         "thumbnailUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/screenshots_2.png",
+         "url": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/screenshots_2_large.png",
+         "caption": ""
+       }
+     ]
+   },
+   "toolchain": {
+     "git": "https://github.com/ibmcam/cam-toolchain"
+   }
+ }
