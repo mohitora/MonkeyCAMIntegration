@@ -191,11 +191,11 @@ EOF
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/addkey.sh; sudo bash /tmp/addkey.sh \"${var.public_ssh_key}\"",
-      "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
-      "useradd ${var.sudo_user}",
-      "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
-      "usermod ${var.sudo_user} -g wheel"
+      "sudo chmod +x /tmp/addkey.sh; sudo bash /tmp/addkey.sh \"${var.public_ssh_key}\"",
+      "sudo sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "sudo useradd ${var.sudo_user}",
+      "sudo echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "sudo usermod ${var.sudo_user} -g wheel"
     ]
  }
 
