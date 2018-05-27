@@ -177,7 +177,7 @@ resource "aws_instance" "driver" {
   count         = "2"
 #  hostname      = "${var.vm_name_prefix}-driver-${ count.index }"
 #  domain        = "${var.vm_domain}"
-  tags { Name = "driver-${ count.index }" }
+  tags { Name = "driver-${ count.index }.${var.vm_domain}" }
   instance_type = "m4.large"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
@@ -209,6 +209,7 @@ EOF
 
   provisioner "remote-exec" {
     inline = [
+      "sudo echo \"driver-${ count.index }.${var.vm_domain}\">/etc/hostname",
       "sudo chmod +x /tmp/addkey.sh; sudo bash /tmp/addkey.sh \"${var.public_ssh_key}\"",
       "sudo sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "sudo useradd ${var.sudo_user}",
