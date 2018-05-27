@@ -567,20 +567,20 @@ EOF
 
 
 
-
-
-
 ###########################################################################################################################################################
-# IS Management Nodes
+# HDP Management Nodes
 #
 resource "aws_instance" "hdp-mgmtnodes" {
   count         = "4"
   tags { Name = "${var.vm_name_prefix}-mn-${ count.index }.${var.vm_domain}" }
-  instance_type = "m4.large"
+  instance_type = "m4.4xlarge"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
   key_name      = "${aws_key_pair.temp_public_key.id}"
-  root_block_device = { "volume_type" = "gp2", "volume_size" = "100", "delete_on_termination" = true }
+  root_block_device = { "volume_type" = "gp2", "volume_size" = "100", "delete_on_termination" = true }  
+  ebs_block_device = { "device_name" = "/dev/sdf", "volume_type" = "gp2", "volume_size" = "1000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdg", "volume_type" = "gp2", "volume_size" = "1000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdh", "volume_type" = "gp2", "volume_size" = "1000", "delete_on_termination" = true, "encrypted" = true }
   
   connection {
     user        = "ec2-user"
@@ -608,6 +608,131 @@ EOF
       "echo \"${var.vm_name_prefix}-mn-${ count.index }.${var.vm_domain}\">/tmp/hostname",
       "sudo mv /tmp/hostname /etc/hostname",
       "sudo hostname \"${var.vm_name_prefix}-mn-${ count.index }.${var.vm_domain}\"",
+      "sudo chmod +x /tmp/addkey.sh; sudo bash /tmp/addkey.sh \"${var.public_ssh_key}\"",
+      "sudo sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "sudo useradd ${var.sudo_user}",
+      "sudo echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "sudo usermod ${var.sudo_user} -g wheel"
+    ]
+ }
+
+  
+}
+
+
+
+
+###########################################################################################################################################################
+# HDP Data Nodes
+#
+resource "aws_instance" "hdp-datanodes" {
+  count         = "${var.num_datanodes}"
+  tags { Name = "${var.vm_name_prefix}-dn-${ count.index }.${var.vm_domain}" }
+  instance_type = "m4.16xlarge"
+  ami           = "${var.aws_image}"
+  subnet_id     = "${data.aws_subnet.selected.id}"
+  key_name      = "${aws_key_pair.temp_public_key.id}"
+  root_block_device = { "volume_type" = "gp2", "volume_size" = "100", "delete_on_termination" = true }  
+  ebs_block_device = { "device_name" = "/dev/sdf", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdg", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdh", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdi", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdj", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdk", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdl", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdm", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdn", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdo", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  
+  connection {
+    user        = "ec2-user"
+    private_key = "${tls_private_key.ssh.private_key_pem}"
+    host        = "${self.public_ip}"
+  }
+  
+   provisioner "file" {
+    content = <<EOF
+#!/bin/bash
+LOGFILE="/var/log/addkey.log"
+user_public_key=$1
+if [ "$user_public_key" != "None" ] ; then
+    echo "---start adding user_public_key----" | tee -a $LOGFILE 2>&1
+    echo "$user_public_key" | tee -a $HOME/.ssh/authorized_keys          >> $LOGFILE 2>&1 || { echo "---Failed to add user_public_key---" | tee -a $LOGFILE; exit 1; }
+    echo "---finish adding user_public_key----" | tee -a $LOGFILE 2>&1
+fi
+EOF
+
+    destination = "/tmp/addkey.sh"
+}
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo \"${var.vm_name_prefix}-dn-${ count.index }.${var.vm_domain}\">/tmp/hostname",
+      "sudo mv /tmp/hostname /etc/hostname",
+      "sudo hostname \"${var.vm_name_prefix}-dn-${ count.index }.${var.vm_domain}\"",
+      "sudo chmod +x /tmp/addkey.sh; sudo bash /tmp/addkey.sh \"${var.public_ssh_key}\"",
+      "sudo sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "sudo useradd ${var.sudo_user}",
+      "sudo echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "sudo usermod ${var.sudo_user} -g wheel"
+    ]
+ }
+
+  
+}
+
+
+
+
+
+###########################################################################################################################################################
+# HDP BigSQL Head Node
+#
+resource "aws_instance" "hdp-bigsql" {
+  count         = "1"
+  tags { Name = "${var.vm_name_prefix}-bigsql-${ count.index }.${var.vm_domain}" }
+  instance_type = "m4.16xlarge"
+  ami           = "${var.aws_image}"
+  subnet_id     = "${data.aws_subnet.selected.id}"
+  key_name      = "${aws_key_pair.temp_public_key.id}"
+  root_block_device = { "volume_type" = "gp2", "volume_size" = "100", "delete_on_termination" = true }  
+  ebs_block_device = { "device_name" = "/dev/sdf", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdg", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdh", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdi", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdj", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdk", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdl", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdm", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdn", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  ebs_block_device = { "device_name" = "/dev/sdo", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
+  
+  connection {
+    user        = "ec2-user"
+    private_key = "${tls_private_key.ssh.private_key_pem}"
+    host        = "${self.public_ip}"
+  }
+  
+   provisioner "file" {
+    content = <<EOF
+#!/bin/bash
+LOGFILE="/var/log/addkey.log"
+user_public_key=$1
+if [ "$user_public_key" != "None" ] ; then
+    echo "---start adding user_public_key----" | tee -a $LOGFILE 2>&1
+    echo "$user_public_key" | tee -a $HOME/.ssh/authorized_keys          >> $LOGFILE 2>&1 || { echo "---Failed to add user_public_key---" | tee -a $LOGFILE; exit 1; }
+    echo "---finish adding user_public_key----" | tee -a $LOGFILE 2>&1
+fi
+EOF
+
+    destination = "/tmp/addkey.sh"
+}
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo \"${var.vm_name_prefix}-bigsql-${ count.index }.${var.vm_domain}\">/tmp/hostname",
+      "sudo mv /tmp/hostname /etc/hostname",
+      "sudo hostname \"${var.vm_name_prefix}-bigsql-${ count.index }.${var.vm_domain}\"",
       "sudo chmod +x /tmp/addkey.sh; sudo bash /tmp/addkey.sh \"${var.public_ssh_key}\"",
       "sudo sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "sudo useradd ${var.sudo_user}",
