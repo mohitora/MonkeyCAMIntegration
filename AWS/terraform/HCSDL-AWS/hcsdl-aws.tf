@@ -628,7 +628,7 @@ EOF
 resource "aws_instance" "hdp-datanodes" {
   count         = "${var.num_datanodes}"
   tags { Name = "${var.vm_name_prefix}-dn-${ count.index }.${var.vm_domain}" }
-  instance_type = "m4.16xlarge"
+  instance_type = "m4.4xlarge"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
   key_name      = "${aws_key_pair.temp_public_key.id}"
@@ -691,7 +691,7 @@ EOF
 resource "aws_instance" "hdp-bigsql" {
   count         = "1"
   tags { Name = "${var.vm_name_prefix}-bigsql-${ count.index }.${var.vm_domain}" }
-  instance_type = "m4.16xlarge"
+  instance_type = "m4.4xlarge"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
   key_name      = "${aws_key_pair.temp_public_key.id}"
