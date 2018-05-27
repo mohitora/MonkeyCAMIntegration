@@ -44,7 +44,8 @@
         "required": true,
         "secured": false,
         "type": "string",
-        "default": "172.31.80.0/20"
+        "default": "172.31.80.0/20",
+        "group_name": "Cluster"
     },
     
     {
@@ -107,6 +108,17 @@
       "immutable": false,
       "group_name": "Cloud",
       "default": "cloud_install.tar"
+    },
+    {
+        "description": "Name of the public SSH key used to connect to the virtual guest",
+        "hidden": false,
+        "immutable": false,
+        "label": "Public SSH Key Name",
+        "name": "public_ssh_key_name",
+        "required": true,
+        "secured": false,
+        "type": "string",
+        "group_name": "Cluster"
     },
     
     {
