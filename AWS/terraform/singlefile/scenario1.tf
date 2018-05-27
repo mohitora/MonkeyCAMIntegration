@@ -106,7 +106,7 @@ if [ "$user_public_key" != "None" ] ; then
 fi
 EOF
 
-    destination = "/tmp/test.sh"
+    destination = "/tmp/addkey.sh"
 }
 
   provisioner "remote-exec" {
