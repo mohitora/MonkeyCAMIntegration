@@ -73,7 +73,7 @@ resource "tls_private_key" "ssh" {
 }
 
 resource "aws_key_pair" "temp_public_key" {
-  key_name   = "${var.public_key_name}-temp"
+  key_name   = "${var.public_ssh_key_name}-temp"
   public_key = "${tls_private_key.ssh.public_key_openssh}"
 }
 
