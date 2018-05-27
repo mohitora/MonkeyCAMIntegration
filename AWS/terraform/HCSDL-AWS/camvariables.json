@@ -70,7 +70,7 @@
       "required": true,
       "immutable": false,
       "group_name": "Cloud",
-      "default": ["10.0.80.11"]
+      "default": ["172.31.0.2"]
     },
     {
       "name": "vm_dns_suffixes",

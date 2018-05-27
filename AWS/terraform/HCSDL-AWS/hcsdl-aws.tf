@@ -177,6 +177,7 @@ resource "aws_instance" "driver" {
   count         = "2"
 #  hostname      = "${var.vm_name_prefix}-driver-${ count.index }"
 #  domain        = "${var.vm_domain}"
+  tags { Name = "driver-${ count.index }" }
   instance_type = "m4.large"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
