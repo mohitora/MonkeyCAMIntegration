@@ -1,0 +1,64 @@
+[
+    {
+        "default": "us-east-1",
+        "description": "AWS region to launch servers.",
+        "hidden": false,
+        "immutable": false,
+        "label": "AWS Region",
+        "name": "aws_region",
+        "required": true,
+        "secured": false,
+        "type": "string"
+    },
+    {
+        "name": "aws_image",
+        "type": "string",
+        "description": "Operating system image id / template that should be used when creating the virtual image",
+        "default": "ami-c998b6b2",
+        "hidden": false,
+        "label": "Operating System ID",
+        "secured": false,
+        "required": true,
+        "immutable": false
+    },
+    {
+        "description": "Name of the Virtual Private Cloud (VPC) this resource is going to be deployed into",
+        "hidden": false,
+        "immutable": false,
+        "label": "Virtual Private Cloud",
+        "name": "vpc_name_tag",
+        "required": true,
+        "secured": false,
+        "type": "string"
+    },
+    {
+        "description": "subnet cidr",
+        "hidden": false,
+        "immutable": false,
+        "label": "Subnet CIDR",
+        "name": "subnet_cidr",
+        "required": true,
+        "secured": false,
+        "type": "string"
+    },
+    {
+        "description": "Name of the public SSH key used to connect to the virtual guest",
+        "hidden": false,
+        "immutable": false,
+        "label": "Public SSH Key Name",
+        "name": "public_ssh_key_name",
+        "required": true,
+        "secured": false,
+        "type": "string"
+    },
+    {
+        "description": "Public SSH key used to connect to the virtual guest",
+        "hidden": false,
+        "immutable": false,
+        "label": "Public SSH Key",
+        "name": "public_ssh_key",
+        "required": true,
+        "secured": false,
+        "type": "string"
+    }
+]
