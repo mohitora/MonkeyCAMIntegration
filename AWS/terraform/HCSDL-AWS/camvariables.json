@@ -118,7 +118,8 @@
         "required": true,
         "secured": false,
         "type": "string",
-        "group_name": "Cluster"
+        "group_name": "Cluster",
+        "default": "k1"   
     },
     
     {
