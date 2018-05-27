@@ -82,7 +82,6 @@ resource "aws_instance" "orpheus_ubuntu_micro" {
   instance_type = "m4.large"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
-#  key_name      = "${aws_key_pair.orpheus_public_key.id}"
   key_name      = "${aws_key_pair.temp_public_key.id}"
   root_block_device = { "volume_type" = "gp2", "volume_size" = "100", "delete_on_termination" = true }
   ebs_block_device = { "device_name" = "/dev/sdf", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
@@ -111,7 +110,50 @@ EOF
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/addkey.sh; sudo bash /tmp/addkey.sh \"${var.public_ssh_key}\""
+      "chmod +x /tmp/addkey.sh; sudo bash /tmp/addkey.sh \"${var.public_ssh_key}\"",
+      "sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
+      "useradd ${var.sudo_user}",
+      "echo ${var.sudo_password} | passwd ${var.sudo_user} --stdin",
+      "usermod ${var.sudo_user} -g wheel"
     ]
-}
+ }
+
+  provisioner "file" {
+    content = <<EOF
+#!/bin/sh
+
+set -x 
+
+mkdir -p /opt/cloud_install; 
+
+cd /opt/cloud_install;
+
+. /opt/monkey_cam_vars.txt;
+
+wget http://$cam_monkeymirror/cloud_install/$cloud_install_tar_file_name
+
+tar xf ./$cloud_install_tar_file_name
+
+yum install -y ksh rsync expect unzip perl
+
+perl -f cam_integration/01_gen_cam_install_properties.pl
+
+sed -i 's/cloud_replace_rhel_repo=1/cloud_replace_rhel_repo=0/' global.properties
+#sed -i 's/cloud_biginsights_bigsql_/#cloud_biginsights_bigsql_/' global.properties
+#sed -i 's/cloud_skip_prepare_nodes=0/cloud_skip_prepare_nodes=1/' global.properties
+
+. ./setenv
+
+utils/01_prepare_driver.sh
+
+utils/01_prepare_all_nodes.sh
+
+nohup ./01_master_install_hdp.sh &
+
+EOF
+
+    destination = "/opt/installation.sh"
+
+  }
+  
 }
