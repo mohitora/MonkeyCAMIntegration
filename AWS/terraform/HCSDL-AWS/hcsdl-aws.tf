@@ -233,7 +233,7 @@ nohup ./01_master_install_hdp.sh &
 
 EOF
 
-    destination = "/opt/installation.sh"
+    destination = "/tmp/installation.sh"
 
   }
   
