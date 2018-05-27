@@ -61,6 +61,14 @@ variable "aws_image" {
 
 
 
+variable "vm_name_prefix" {
+  description = "Prefix for vm names"
+}
+
+variable "vm_domain" {
+  description = "Domain Name of virtual machine"
+}
+
 variable "sudo_user" {
   description = "Sudo User"
 }
