@@ -174,9 +174,9 @@ resource "aws_key_pair" "temp_public_key" {
 # Driver
 #
 resource "aws_instance" "driver" {
-  count="1"
-  hostname      = "${var.vm_name_prefix}-driver-${ count.index }"
-  domain        = "${var.vm_domain}"
+  count         = "2"
+#  hostname      = "${var.vm_name_prefix}-driver-${ count.index }"
+#  domain        = "${var.vm_domain}"
   instance_type = "m4.large"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
