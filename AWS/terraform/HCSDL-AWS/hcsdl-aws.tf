@@ -59,6 +59,87 @@ variable "aws_image" {
   default = "ami-c998b6b2"
 }
 
+
+
+variable "sudo_user" {
+  description = "Sudo User"
+}
+
+variable "sudo_password" {
+  description = "Sudo Password"
+}
+
+variable "time_server" {
+  description = "time_server"
+}
+
+variable "vm_dns_servers" {
+  type = "list"
+  description = "vm_dns_servers"
+}
+
+variable "vm_dns_suffixes" {
+  type = "list"
+  description = "vm_dns_suffixes"
+}
+
+variable "monkey_mirror" {
+  description = "monkey_mirror"
+}
+
+variable "cloud_install_tar_file_name" {
+  description = "cloud_install_tar_file_name"
+}
+
+variable "public_nic_name" {
+  description = "public_nic_name"
+}
+
+variable "cluster_name" {
+  description = "cluster_name"
+}
+
+variable "mgmtnode_num_cpus" {
+  description = "mgmtnode_num_cpus"
+}
+
+variable "mgmtnode_mem" {
+  description = "mgmtnode_mem"
+}
+
+variable "mgmtnode_disks" {
+  type = "list"
+  description = "mgmtnode_disks"
+}
+
+variable "num_datanodes" {
+  description = "num_datanodes"
+}
+
+variable "datanode_num_cpus" {
+  description = "datanode_num_cpus"
+}
+
+variable "datanode_mem" {
+  description = "datanode_mem"
+}
+
+variable "datanode_disks" {
+  type = "list"
+  description = "datanode_disks"
+}
+
+variable "dsengine_mem" {
+  description = "dsengine_mem"
+}
+
+variable "dsengine_num_cpus" {
+  description = "dsengine_num_cpus"
+}
+
+
+#######################
+
 resource "aws_key_pair" "orpheus_public_key" {
   key_name   = "${var.public_ssh_key_name}"
   public_key = "${var.public_ssh_key}"
@@ -78,7 +159,7 @@ resource "aws_key_pair" "temp_public_key" {
 }
 
 
-resource "aws_instance" "orpheus_ubuntu_micro" {
+resource "aws_instance" "driver" {
   instance_type = "m4.large"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
