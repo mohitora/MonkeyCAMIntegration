@@ -211,6 +211,7 @@ EOF
     inline = [
       "echo \"driver-${ count.index }.${var.vm_domain}\">/tmp/hostname",
       "sudo mv /tmp/hostname /etc/hostname",
+      "sudo hostname \"driver-${ count.index }.${var.vm_domain}\"",
       "sudo chmod +x /tmp/addkey.sh; sudo bash /tmp/addkey.sh \"${var.public_ssh_key}\"",
       "sudo sed -i -e 's/# %wheel/%wheel/' -e 's/Defaults    requiretty/#Defaults    requiretty/' /etc/sudoers",
       "sudo useradd ${var.sudo_user}",
