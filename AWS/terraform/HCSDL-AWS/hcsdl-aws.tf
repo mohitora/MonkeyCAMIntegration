@@ -176,7 +176,7 @@ resource "aws_key_pair" "temp_public_key" {
 resource "aws_instance" "driver" {
   count         = "1"
   tags { Name = "${var.vm_name_prefix}-driver.${var.vm_domain}" }
-  instance_type = "m4.large"
+  instance_type = "m4.2xlarge"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
   key_name      = "${aws_key_pair.temp_public_key.id}"
@@ -262,7 +262,7 @@ EOF
 resource "aws_instance" "idm" {
   count         = "1"
   tags { Name = "${var.vm_name_prefix}-idm-${ count.index }.${var.vm_domain}" }
-  instance_type = "m4.large"
+  instance_type = "m4.2xlarge"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
   key_name      = "${aws_key_pair.temp_public_key.id}"
@@ -312,7 +312,7 @@ EOF
 #resource "aws_instance" "ishttp" {
 #  count         = "2"
 #  tags { Name = "${var.vm_name_prefix}-ishttp-${ count.index }.${var.vm_domain}" }
-#  instance_type = "m4.large"
+#  instance_type = "m4.2xlarge"
 #  ami           = "${var.aws_image}"
 #  subnet_id     = "${data.aws_subnet.selected.id}"
 #  key_name      = "${aws_key_pair.temp_public_key.id}"
@@ -364,7 +364,7 @@ EOF
 #resource "aws_instance" "iswasnd" {
 #  count         = "2"
 #  tags { Name = "${var.vm_name_prefix}-iswasnd-${ count.index }.${var.vm_domain}" }
-#  instance_type = "m4.large"
+#  instance_type = "m4.2xlarge"
 #  ami           = "${var.aws_image}"
 #  subnet_id     = "${data.aws_subnet.selected.id}"
 #  key_name      = "${aws_key_pair.temp_public_key.id}"
@@ -415,7 +415,7 @@ EOF
 #resource "aws_instance" "isdb2" {
 #  count         = "2"
 #  tags { Name = "${var.vm_name_prefix}-isdb2-${ count.index }.${var.vm_domain}" }
-#  instance_type = "m4.large"
+#  instance_type = "m4.2xlarge"
 #  ami           = "${var.aws_image}"
 #  subnet_id     = "${data.aws_subnet.selected.id}"
 #  key_name      = "${aws_key_pair.temp_public_key.id}"
@@ -469,7 +469,7 @@ EOF
 #resource "aws_instance" "isds" {
 #  count         = "1"
 #  tags { Name = "${var.vm_name_prefix}-isds.${var.vm_domain}" }
-#  instance_type = "m4.large"
+#  instance_type = "m4.2xlarge"
 #  ami           = "${var.aws_image}"
 #  subnet_id     = "${data.aws_subnet.selected.id}"
 #  key_name      = "${aws_key_pair.temp_public_key.id}"
@@ -521,7 +521,7 @@ EOF
 resource "aws_instance" "haproxy" {
   count         = "1"
   tags { Name = "${var.vm_name_prefix}-haproxy.${var.vm_domain}" }
-  instance_type = "m4.large"
+  instance_type = "m4.2xlarge"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
   key_name      = "${aws_key_pair.temp_public_key.id}"
@@ -573,7 +573,7 @@ EOF
 resource "aws_instance" "hdp-mgmtnodes" {
   count         = "4"
   tags { Name = "${var.vm_name_prefix}-mn-${ count.index }.${var.vm_domain}" }
-  instance_type = "m4.large"
+  instance_type = "m4.2xlarge"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
   key_name      = "${aws_key_pair.temp_public_key.id}"
@@ -627,7 +627,7 @@ EOF
 resource "aws_instance" "hdp-datanodes" {
   count         = "${var.num_datanodes}"
   tags { Name = "${var.vm_name_prefix}-dn-${ count.index }.${var.vm_domain}" }
-  instance_type = "m4.large"
+  instance_type = "m4.2xlarge"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
   key_name      = "${aws_key_pair.temp_public_key.id}"
@@ -684,7 +684,7 @@ EOF
 resource "aws_instance" "hdp-bigsql" {
   count         = "1"
   tags { Name = "${var.vm_name_prefix}-bigsql-${ count.index }.${var.vm_domain}" }
-  instance_type = "m4.large"
+  instance_type = "m4.2xlarge"
   ami           = "${var.aws_image}"
   subnet_id     = "${data.aws_subnet.selected.id}"
   key_name      = "${aws_key_pair.temp_public_key.id}"
