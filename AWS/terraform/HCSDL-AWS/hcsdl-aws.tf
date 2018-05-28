@@ -580,7 +580,6 @@ resource "aws_instance" "hdp-mgmtnodes" {
   root_block_device = { "volume_type" = "gp2", "volume_size" = "100", "delete_on_termination" = true }  
   ebs_block_device = { "device_name" = "/dev/sdf", "volume_type" = "gp2", "volume_size" = "1000", "delete_on_termination" = true, "encrypted" = true }
   ebs_block_device = { "device_name" = "/dev/sdg", "volume_type" = "gp2", "volume_size" = "1000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdh", "volume_type" = "gp2", "volume_size" = "1000", "delete_on_termination" = true, "encrypted" = true }
   
   connection {
     user        = "ec2-user"
@@ -637,12 +636,6 @@ resource "aws_instance" "hdp-datanodes" {
   ebs_block_device = { "device_name" = "/dev/sdg", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
   ebs_block_device = { "device_name" = "/dev/sdh", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
   ebs_block_device = { "device_name" = "/dev/sdi", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdj", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdk", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdl", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdm", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdn", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdo", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
   
   connection {
     user        = "ec2-user"
@@ -700,12 +693,6 @@ resource "aws_instance" "hdp-bigsql" {
   ebs_block_device = { "device_name" = "/dev/sdg", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
   ebs_block_device = { "device_name" = "/dev/sdh", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
   ebs_block_device = { "device_name" = "/dev/sdi", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdj", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdk", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdl", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdm", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdn", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
-  ebs_block_device = { "device_name" = "/dev/sdo", "volume_type" = "gp2", "volume_size" = "4000", "delete_on_termination" = true, "encrypted" = true }
   
   connection {
     user        = "ec2-user"
