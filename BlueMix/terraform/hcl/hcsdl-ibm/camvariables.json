@@ -48,11 +48,11 @@
           },
           {
               "value": "dal10",
-              "label": "Dallas 10, USA",
+              "label": "Dallas 10, USA"
           },
           {
               "value": "dal12",
-              "label": "Dallas 12, USA",
+              "label": "Dallas 12, USA"
           },
           {
               "value": "fra02",
@@ -104,7 +104,7 @@
           },
           {
               "value": "sjc04",
-              "label": "San Jose 04, USA"
+              "label": "San Jose 04, USA",
               "default": "true"
           },
           {
