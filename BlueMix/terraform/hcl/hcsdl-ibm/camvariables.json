@@ -388,7 +388,7 @@
       "default": "6"
     },
         {
-      "name": "num_edgeodes",
+      "name": "num_edgenodes",
       "type": "string",
       "description": "Number of Edge Nodes",
       "hidden": false,
