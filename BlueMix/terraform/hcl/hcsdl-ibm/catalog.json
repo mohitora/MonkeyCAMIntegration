@@ -25,7 +25,7 @@
    "metadata": {
      "displayName": "IBM Hosted Analytics with Hortonworks",
      "providerDisplayName": "IBM",
-     "longDescription": "Deploys a Hybrid Cloud Secure Data Lake (HDP, BigSQL, BigIntegrate, IDM) on IBM Cloud.",
+     "longDescription": "Deploys IBM Hosted Analytics with Hortonworks.on Cloud",
      "bullets": [
        {
          "title": "Clouds",
@@ -49,7 +49,7 @@
        },
        {
          "title": "Usage and special notes",
-         "description": "<ul><li>1. Creates VMs.</li><li>2. Downloads software from Monkey mirror.</li><li>3. Installs HDP, BigSQL, BigIntegrate and IDM on the hcsdl VMs.</li><li>4. Enables cluster with Kerberos and SSL.</li></ul>"
+         "description": "<ul><li>1. Creates VMs.</li><li>2. Downloads software from Monkey mirror.</li><li>3. Installs HDP, BigSQL and IDM on the hcsdl VMs.</li><li>4. Enables cluster with Kerberos and SSL.</li></ul>"
        }
      ],
      "featuredImageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_50.png",

@@ -387,6 +387,18 @@
       "group_name": "HDP Data Nodes",
       "default": "6"
     },
+        {
+      "name": "num_edgeodes",
+      "type": "string",
+      "description": "Number of Edge Nodes",
+      "hidden": false,
+      "label": "Number of HDP Edge nodes to create",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "HDP Edge Nodes",
+      "default": "2"
+    },
     
     {
       "name": "datanode_num_cpus",
