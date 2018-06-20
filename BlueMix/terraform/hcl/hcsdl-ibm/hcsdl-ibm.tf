@@ -496,17 +496,17 @@ resource "null_resource" "start_install" {
       "echo  export cam_idm_name=${join(",",ibm_compute_vm_instance.idm.*.hostname)} >> /opt/monkey_cam_vars.txt",
     
     
-      "echo  export cam_ishttp_ip=${join(",",ibm_compute_vm_instance.ishttp.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
-      "echo  export cam_ishttp_name=${join(",",ibm_compute_vm_instance.ishttp.*.hostname)} >> /opt/monkey_cam_vars.txt",
+      #"echo  export cam_ishttp_ip=${join(",",ibm_compute_vm_instance.ishttp.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
+      #"echo  export cam_ishttp_name=${join(",",ibm_compute_vm_instance.ishttp.*.hostname)} >> /opt/monkey_cam_vars.txt",
     
-      "echo  export cam_iswasnd_ip=${join(",",ibm_compute_vm_instance.iswasnd.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
-      "echo  export cam_iswasnd_name=${join(",",ibm_compute_vm_instance.iswasnd.*.hostname)} >> /opt/monkey_cam_vars.txt",
+      #"echo  export cam_iswasnd_ip=${join(",",ibm_compute_vm_instance.iswasnd.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
+      #"echo  export cam_iswasnd_name=${join(",",ibm_compute_vm_instance.iswasnd.*.hostname)} >> /opt/monkey_cam_vars.txt",
     
-      "echo  export cam_isdb2_ip=${join(",",ibm_compute_vm_instance.isdb2.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
-      "echo  export cam_isdb2_name=${join(",",ibm_compute_vm_instance.isdb2.*.hostname)} >> /opt/monkey_cam_vars.txt",
+      #"echo  export cam_isdb2_ip=${join(",",ibm_compute_vm_instance.isdb2.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
+      #"echo  export cam_isdb2_name=${join(",",ibm_compute_vm_instance.isdb2.*.hostname)} >> /opt/monkey_cam_vars.txt",
     
-      "echo  export cam_isds_ip=${join(",",ibm_compute_vm_instance.isds.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
-      "echo  export cam_isds_name=${join(",",ibm_compute_vm_instance.isds.*.hostname)} >> /opt/monkey_cam_vars.txt",
+      #"echo  export cam_isds_ip=${join(",",ibm_compute_vm_instance.isds.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
+      #"echo  export cam_isds_name=${join(",",ibm_compute_vm_instance.isds.*.hostname)} >> /opt/monkey_cam_vars.txt",
     
       "echo  export cam_haproxy_ip=${join(",",ibm_compute_vm_instance.haproxy.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_haproxy_name=${join(",",ibm_compute_vm_instance.haproxy.*.hostname)} >> /opt/monkey_cam_vars.txt",
@@ -517,8 +517,8 @@ resource "null_resource" "start_install" {
       "echo  export cam_hdp_datanodes_ip=${join(",",ibm_compute_vm_instance.hdp-datanodes.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
       "echo  export cam_hdp_datanodes_name=${join(",",ibm_compute_vm_instance.hdp-datanodes.*.hostname)} >> /opt/monkey_cam_vars.txt",
     
-      "echo  export cam_bigsql_head_ip=${join(",",ibm_compute_vm_instance.bigsql-head.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
-      "echo  export cam_bigsql_head_name=${join(",",ibm_compute_vm_instance.bigsql-head.*.hostname)} >> /opt/monkey_cam_vars.txt",
+      #"echo  export cam_bigsql_head_ip=${join(",",ibm_compute_vm_instance.bigsql-head.*.ipv4_address_private)} >> /opt/monkey_cam_vars.txt",
+      #"echo  export cam_bigsql_head_name=${join(",",ibm_compute_vm_instance.bigsql-head.*.hostname)} >> /opt/monkey_cam_vars.txt",
     
     
       "chmod 755 /opt/installation.sh",

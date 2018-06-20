@@ -399,6 +399,42 @@
       "group_name": "HDP Edge Nodes",
       "default": "2"
     },
+      {
+      "name": "edgenode_num_cpus",
+      "type": "string",
+      "description": "Number of CPUs for HDP Data Nodes",
+      "hidden": false,
+      "label": "Number of CPUs for HDP Edge Nodes",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "HDP Data Nodes",
+      "default": "8"
+    },
+        {
+      "name": "edgenode_mem",
+      "type": "string",
+      "description": "Memory (MBs) for Edge Nodes",
+      "hidden": false,
+      "label": "Memory (MBs) for HDP Edge Nodes",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "HDP Data Nodes",
+      "default": "32768"
+    },
+        {
+      "name": "edgenode_disks",
+      "type": "list",
+      "description": "Edge node disk sizes for HDP Edge Nodes",
+      "hidden": false,
+      "label": "Data disk sizes for HDP Edge Nodes",
+      "secured": false,
+      "required": false,
+      "immutable": false,
+      "group_name": "HDP Management Nodes",
+      "default": [ "100","100","100","100" ]
+    },
     
     {
       "name": "datanode_num_cpus",
