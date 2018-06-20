@@ -113,10 +113,6 @@ variable "num_edgenodes" {
   description = "num_edgenodes"
 }
 
-variable "edgenode_mem" {
-  description = "edgenode_mem"
-}
-
 variable "edgenode_num_cpus" {
   description = "edgenode_num_cpus"
 }
