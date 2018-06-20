@@ -388,7 +388,7 @@ resource "ibm_compute_vm_instance" "hdp-edgenodes" {
   private_vlan_id          = "${data.ibm_network_vlan.cluster_vlan.id}"
   network_speed            = 1000
   hourly_billing           = true
-  private_network_only     = true
+  private_network_only     = false
   cores                    = "${var.edgenode_num_cpus}"
   memory                   = "${var.edgenode_mem}"
   disks                    = "${var.edgenode_disks}"
