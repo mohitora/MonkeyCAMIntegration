@@ -49,12 +49,10 @@
           {
               "value": "dal10",
               "label": "Dallas 10, USA",
-              "default": "true"
           },
           {
               "value": "dal12",
               "label": "Dallas 12, USA",
-              "default": "true"
           },
           {
               "value": "fra02",
@@ -107,6 +105,7 @@
           {
               "value": "sjc04",
               "label": "San Jose 04, USA"
+              "default": "true"
           },
           {
               "value": "sao01",
@@ -156,7 +155,7 @@
         "secured": false, 
         "type": "string",
         "group_name": "Cloud", 
-        "default": "1457"
+        "default": "1158"
     },
     {
         "description": "VLAN Router", 
@@ -168,7 +167,7 @@
         "secured": false, 
         "type": "string",
         "group_name": "Cloud", 
-        "default": "bcr01a.dal10"
+        "default": "bcr01a.sjc04"
     },
     {
         "description": "Private Subnet", 
@@ -180,7 +179,7 @@
         "secured": false, 
         "type": "string",
         "group_name": "Cloud", 
-        "default": "10.93.254.128/25"
+        "default": "10.87.93.128/26"
     },
     
     {
@@ -217,7 +216,7 @@
       "required": true,
       "immutable": false,
       "group_name": "Cloud",
-      "default": [ "jlerm.com" ]
+      "default": [ "ihah.ibm" ]
     },
     
     {
@@ -230,7 +229,7 @@
       "required": false,
       "immutable": false,
       "group_name": "Cloud",
-      "default": "10.176.112.137"
+      "default": "10.87.93.138"
     },
     {
       "name": "cloud_install_tar_file_name",
@@ -242,7 +241,7 @@
       "required": true,
       "immutable": false,
       "group_name": "Cloud",
-      "default": "cloud_install.tar"
+      "default": "cloud_install_mohit.tar"
     },
     
     {
@@ -256,7 +255,7 @@
         "type": "string",
         "regex": "^ssh-rsa AAAA[0-9A-Za-z+/]+[=]{0,3}( [^@]+@[^@]+| [^@]+){0,1}$",
         "group_name": "Cluster",
-        "default": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDsfV/fqVGIN+vb3OLnu0b8Tu0SEcAyKyPoilPLWhI0BzkT5PPUeutAKf0StAkXQHCCG2ktkDGzBh01zz0cKK6AuqocsdirAoqOOMHtBBvfqfFbktZpskDtTzRCe4f0klXv8VbCJNDhk1gGvljOfb04cYc7b9VG2l/DAGwyQwuYWWODtyFfc5zdxfVT/Zb7tHwE6OpWCT3TIzNtUkRooon+ZZkajD+tXvzEdHoPuinSsePseOfAyuCYcHjRTg5kb4I6E5i3eg7oyyAQ8lBCgkCM32kjy3qPpUTbWIzzeTFQ5KlR1nD6tSvRNLUo9CZ2nK3/sdAk+VZn+UdckSIy/E/vY4v2oXscoibTu2sgDf8MsKH4kwejL/bGMcQSRA6b/oRNmT9wkIPEjpdT+UPHxWWcAVWal1yHx2rMiMpxptX5z+jvv/vABA9al98Ug5Gtqnal8JzF5SY91mB0epr4Lx8eDT8ZcpulGe02sAdMPYVgiMkByt0l82BYPdcdTvXfvOkm1z0GSmhSG8jeQHhtKjWAYkaLzEwTT6zqmQGiJbNBABQhClmtqacyc0N+ZnJ4ypNjbM3lmrAXCNAKCLB67NkmowusJcgGLH89YmPcArDo5ljqe07eIpLD1mmOlX+0P43Y08qK6xSyGCd+m5KYDzQJ5Bwh9uA2x9TiUTZonzlOLQ== jlerm@us.ibm.com"
+        "default": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDg68Gtz7iKDmqvBpjHh4lMQ7m2XuwEc7qVBqg4CLb6w9RPPHHJ/9ZwJ09dUtWUEsNJ8MDc/OdYX0pIdLuVFtY8lOTj1QM0Hc1UNZgfhwhoPtO/zH7EMpkAPgJ4+sxj9/ly/cBhYjaknTPNxhabP4MNFicNCR24RSBBiPwyUK400IoMVbaOnyrlJmRddCgK4OUEheq6z3dVjpvupJWY11i8G1tXICO0bH6xo1e4JZDKpsf5wS+0ne82pJB1HhEkqOr+mTva1WceDzoYP8rQT2vZyQtyCf077ZsHVGK0WB7DBZ79aJs/r72p+FgEBuiWfwyDv+gBcxNdbt9e8bmOUKYZ mohit@ihah.local"
     },
      
     {
@@ -269,7 +268,7 @@
       "required": true,
       "immutable": false,
       "group_name": "Cluster",
-      "default": "sudo1"
+      "default": "ibmsudo"
     },
     {
       "name": "sudo_password",
@@ -294,13 +293,13 @@
       "required": true,
       "immutable": false,
       "group_name": "Cluster",
-      "default": "jlerm.com"
+      "default": "ihah.ibm"
     },
     {
       "name": "vm_name_prefix",
       "type": "string",
       "description": "Prefix for vm names",
-      "default": "hcsdl",
+      "default": "ihah",
       "hidden": false,
       "label": "Prefix for vm names",
       "secured": false,
@@ -320,7 +319,7 @@
       "required": true,
       "immutable": false,
       "group_name": "Cluster",
-      "default": "ens192"
+      "default": "eth0"
     },
     
     {
@@ -333,7 +332,7 @@
       "required": true,
       "immutable": false,
       "group_name": "Cluster",
-      "default": "MYCLUSTER"
+      "default": "IBMCLUSTER"
     },
     
     
