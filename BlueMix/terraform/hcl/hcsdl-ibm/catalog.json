@@ -1,6 +1,6 @@
 {
-   "name": "Hybrid Cloud Secure Data Lake on IBM Cloud",
-   "description": "Hybrid Cloud Secure Data Lake on IBM Cloud",
+   "name": "IBM Hosted Analytics with Hortonworks",
+   "description": "IBM Hosted Analytics with Hortonworks",
    "version": "2.0.0",
    "imageUrl": "./assets/svg/IBM_WebSphere_Standalone.svg",
    "image": "tp_WAS_standalone.png",
@@ -23,7 +23,7 @@
      }
    },
    "metadata": {
-     "displayName": "Hybrid Cloud Secure Data Lake on IBM Cloud",
+     "displayName": "IBM Hosted Analytics with Hortonworks",
      "providerDisplayName": "IBM",
      "longDescription": "Deploys a Hybrid Cloud Secure Data Lake (HDP, BigSQL, BigIntegrate, IDM) on IBM Cloud.",
      "bullets": [
