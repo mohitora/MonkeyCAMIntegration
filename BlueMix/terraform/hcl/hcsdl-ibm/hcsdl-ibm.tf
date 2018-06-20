@@ -109,6 +109,26 @@ variable "mgmtnode_disks" {
 variable "num_datanodes" {
   description = "num_datanodes"
 }
+variable "num_edgenodes" {
+  description = "num_edgenodes"
+}
+
+variable "edgenode_mem" {
+  description = "edgenode_mem"
+}
+
+variable "edgenode_num_cpus" {
+  description = "edgenode_num_cpus"
+}
+
+variable "edgenode_mem" {
+  description = "edgenode_mem"
+}
+
+variable "edgenode_disks" {
+  type = "list"
+  description = "edgenode_disks"
+}
 
 variable "datanode_num_cpus" {
   description = "datanode_num_cpus"
